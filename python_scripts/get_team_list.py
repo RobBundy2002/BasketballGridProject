@@ -12,17 +12,25 @@ Ask me for the password
 n = len(sys.argv)
 if n == 1:
     print("<confrence abbr>" "proxy password")
+
     sys.exit()
 confrence = sys.argv[1].lower()
+confrence = confrence[:-5]
 global password
 password = sys.argv[2]
+if ".txt" in password:
+    with open(f"{password}","r") as file:
+        password = file.readline().strip()
+
+print()
+
 def teams_getter(url,year,data):
     proxies = get_proxy.get_proxies(password)
     response=requests.get(url,proxies=proxies)
     if response.status_code == 200:
         html = response.text
     else:
-        print(response.status_code)
+        print(response.status_code,"why?")
         return data
     data[year] = []
     soup = BeautifulSoup(html,'html.parser')
@@ -38,6 +46,7 @@ def teams_getter(url,year,data):
 year = 2023
 url = f"https://www.sports-reference.com/cbb/conferences/{confrence}/men/{year}.html"
 data = {}
+print(url)
 teams_getter(url,year,data)
 with open(f"{confrence}.json","w") as json_file:
     json.dump(data,json_file)
