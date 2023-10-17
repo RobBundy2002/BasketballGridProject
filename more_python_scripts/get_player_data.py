@@ -3,7 +3,7 @@ import time
 from bs4 import BeautifulSoup
 import get_proxy
 
-password = "PaSsWoRd_GoEs_HeRe" #change to real proxy password b4 running
+password = "OXJesus4Me" #change to real proxy password b4 running
 
 def get_power_5_teams(starting_year):
     proxies = get_proxy.get_proxies(password)
@@ -101,10 +101,10 @@ def get_players_for_team(url):
 def get_player_data(url):
     proxies = get_proxy.get_proxies(password)
     try:
-        response = requests.get(url, proxies=proxies) #requesting webpage
+        response = requests.get(url) #requesting webpage
     except Exception as e:
         proxies = get_proxy.get_proxies(password)
-        response = requests.get(url, proxies=proxies) #requesting webpage
+        response = requests.get(url) #requesting webpage
     while response.status_code != 200: #keep retrying until we get a 200 status
         if response.status_code == 404:
             print(time.ctime() + "; Status Code: 404; Webpage doesn't exist")
@@ -135,6 +135,16 @@ def get_player_data(url):
 
     if "jersey_numbers" not in player:
         player['jersey_numbers'] = []
+    
+    if "conferences" not in player:
+        player['conferences'] = []
+
+    if "years-played" not in player:
+        player['years-played'] = []
+
+    if "awards" not in player:
+        player['awards'] = {}
+
 
     # Name
     name = soup.find('h1')
@@ -143,7 +153,9 @@ def get_player_data(url):
     else:
         print(time.ctime() + "; Couldn't find name")
 
+
     # Height and weight
+
 
     # Image?
     top_area = soup.find('div', {'id': 'meta'})
@@ -151,15 +163,9 @@ def get_player_data(url):
     if picture:
         link = picture.get('src')
         player['image'] = link
+    else:
+        player['image'] = 'none'
 
-    # List of Teams
-    schools = top_area.find_all('a')
-    if schools:
-        for link in schools:
-            team = link.text.replace(' (Men)', '') if ' (Men)' in link.text else link.text
-            player['teams'].append(team)
-
-    # Years played (ex: "2019-20")
 
     # List of Jersey Numbers
     uniforms = soup.find('div', {'class': 'uni_holder'})
@@ -169,6 +175,7 @@ def get_player_data(url):
             num = int(number.text)
             if num not in player["jersey_numbers"]:
                 player["jersey_numbers"].append(num)
+
 
     # Career Totals  
     total_stats_table = soup.find('table', {'id': "players_totals"})
@@ -322,6 +329,17 @@ def get_player_data(url):
             for row in rows:
                 columns = row.find_all('td')
                 for column in columns:
+                    
+                    # List of Schools
+                    if column['data-stat'] == "school_name":
+                        if column.text not in player["teams"]:
+                            player["teams"].append(column.text)
+
+                    # Conferences
+                    if column['data-stat'] == "conf_abbr":
+                        if column.text not in player["conferences"]:
+                            player["conferences"].append(column.text)
+
                     try:
                         stat = int(column.text)
                         
@@ -532,11 +550,71 @@ def get_player_data(url):
             player["season_averages"]['turnovers_per_game'] = tov
             player["season_averages"]['fouls_per_game'] = pf
 
-    # Game Highs
-    #   Might not be possible with the current database
+
+    # Years played (ex: "2019-20")
+    if total_stats_table:
+        middle_area = per_game_stats_table.find('tbody')
+        if middle_area:
+            rows = middle_area.find_all('tr')
+            for row in rows:
+                left_column = row.find('th')
+                link = left_column.find('a')
+                if link.text not in player["years-played"]:
+                    player["years-played"].append(link.text)
+
 
     # Awards
+    # National Champion
+    champion =  soup.find('li', {'class': "important special"})
+    if champion:
+        player['awards']['national-champion'] = True
+    else:
+        player["awards"]['national-champion'] = False
+    
+    leaderboards_div = soup.find('div', {'id': 'all_leaderboard'})
+    print(leaderboards_div)
+    if leaderboards_div:
+        awards_div = leaderboards_div.find('div', {'id': 'leaderboard_awards'})
+        if awards_div:
+            awards_table = awards_div.find('table')
+            if awards_table:
+                body = awards_table.find('tbody')
+                if body:
+                    rows = body.find_all('tr')
+                    for row in rows:
+                        links = row.find_all('a')
+                        for link in links:
 
+                            if link.get('href') == "https://www.sports-reference.com/cbb/awards/men/naismith.html":
+                                player["awards"]['naismith_award'] = True
+
+    #   NCAA Tournament Most Outstanding Player
+
+    #   All NCAA Tournament Team
+    #   All NCAA Tournament All-Region
+
+    #   All Conference 1st Team
+    #   All Conference 2nd Team
+    #   All Conference 3rd Team
+    #   All Conference Defense
+    #   All Conference Freshman
+    #   Conference Player of the Year
+    #   Conference Freshman of the Year
+
+    #   All Conference Tournament 1st Team
+    #   All Conference Tournament 2nd Team
+    #   All Conference Tournament MVP
+
+    #   Naismith Award
+    #   Naismith Award Finalist
+    #   AP Player of the Year
+    #   Consensus All America 1st Team
+    #   Consensus All America 2nd Team
+    #   Wooden Award
+    #   Wooden Award Finalist
+
+
+    # Drafted to NBA
 
     print(player)
     response.close()
@@ -550,7 +628,9 @@ def main():
     #         print(time.ctime() + "; Team: " + line.strip())
     #         get_players_for_team(line.strip())
 
-    get_player_data("https://www.sports-reference.com/cbb/players/armaan-franklin-1.html")
+    #get_player_data("https://www.sports-reference.com/cbb/players/deandre-hunter-1.html")
+    get_player_data("https://www.sports-reference.com/cbb/players/zion-williamson-1.html")
+
 
 if __name__ == "__main__":
     main()
