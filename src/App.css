@@ -24,24 +24,33 @@
   margin-left: 50px;
   top: 50px; 
   text-align: left;
- 
 }
 
 .box {
   background-color: #09c758;
   padding: 2px;
   text-align: center; 
+  border-radius: 20%;
 }
 .box-button {
-  background-color: #09c758;
+  background-color: #000000;
   padding: 10px;
   text-align: center;
   border: none; 
   color: white; 
   cursor: pointer; 
+  border-radius: 5%;
 }
-
-
 .box-button:hover {
-  background-color: #09c758;
+  background-color: #41a472;
+}
+.search-bar-container {
+  background-color: #ffffff;
+  padding: 1px;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  position: fixed;
+  top: 135px; /* Stick to the top of the page */
+  left: 673.5px;
+  width: 10%; /* Make it full width */
 }
