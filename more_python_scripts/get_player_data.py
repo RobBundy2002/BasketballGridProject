@@ -157,7 +157,7 @@ def get_player_data(url):
     # Height and weight
 
 
-    # Image?
+    # Image
     top_area = soup.find('div', {'id': 'meta'})
     picture = top_area.find('img')
     if picture:
@@ -245,7 +245,8 @@ def get_player_data(url):
                 # Points
                 if stat['data-stat'] == "pts":
                     player["career_totals"]["points"] = int(stat.text)
-                    
+
+
     # Career Averages 
     per_game_stats_table = soup.find('table', {'id': "players_per_game"})
     if per_game_stats_table:
@@ -318,6 +319,7 @@ def get_player_data(url):
                 #Fouls per Game
                 if stat['data-stat'] == "pf_per_g":
                     player["career_averages"]["fouls_per_game"] = float(stat.text) 
+
 
     # Season Totals
     games, games_started, minutes_played, field_goals_made, three_point_made, free_throws_made = 0, 0, 0, 0, 0, 0
@@ -564,57 +566,157 @@ def get_player_data(url):
 
 
     # Awards
-    # National Champion
     champion =  soup.find('li', {'class': "important special"})
     if champion:
+        # National Champion
         player['awards']['national-champion'] = True
     else:
         player["awards"]['national-champion'] = False
     
-    leaderboards_div = soup.find('div', {'id': 'all_leaderboard'})
-    print(leaderboards_div)
-    if leaderboards_div:
-        awards_div = leaderboards_div.find('div', {'id': 'leaderboard_awards'})
-        if awards_div:
-            awards_table = awards_div.find('table')
-            if awards_table:
-                body = awards_table.find('tbody')
-                if body:
-                    rows = body.find_all('tr')
-                    for row in rows:
-                        links = row.find_all('a')
-                        for link in links:
+    player["awards"]['ncaa-tournament-mop'] = False
+    player["awards"]['ncaa-all-tournament'] = False
+    player["awards"]['ncaa-all-region'] = False
+    player["awards"]["ap-poy"] = False
+    player["awards"]["consensus-all-america"] = False
+    player["awards"]['wooden-award'] = False
+    player["awards"]['naismith-award'] = False
+    player["awards"]['conference-poy'] = False
+    player["awards"]['all-conference-team'] = False
+    player["awards"]['conference-dpoy'] = False
+    player["awards"]['all-conference-defense'] = False
+    player["awards"]['conference-roy'] = False
+    player["awards"]['all-conference-tournament'] = False
+    player["awards"]['conference-tournament-mvp'] = False
+    awards = soup.find('ul', {'id': 'bling'})
+    if awards:
+        awards_list = awards.find_all('li')
+        for award in awards_list:
+            link = award.find('a')
 
-                            if link.get('href') == "https://www.sports-reference.com/cbb/awards/men/naismith.html":
-                                player["awards"]['naismith_award'] = True
+            # NCAA Tournament Most Outstanding Player
+            if "NCAA Tourney MOP" in link.text:
+                player["awards"]['ncaa-tournament-mop'] = True
 
-    #   NCAA Tournament Most Outstanding Player
+            # All NCAA Tournament
+            if "NCAA All-Tourney" in link.text:
+                player["awards"]['ncaa-all-tournament'] = True
 
-    #   All NCAA Tournament Team
-    #   All NCAA Tournament All-Region
+            # All NCAA Tournament All-Region
+            if "NCAA All-Region" in link.text:
+                player["awards"]['ncaa-all-region'] = True
 
-    #   All Conference 1st Team
-    #   All Conference 2nd Team
-    #   All Conference 3rd Team
-    #   All Conference Defense
-    #   All Conference Freshman
-    #   Conference Player of the Year
-    #   Conference Freshman of the Year
+            # AP Player of the Year
+            if "AP POY" in link.text:
+                player["awards"]["ap-poy"] = True
 
-    #   All Conference Tournament 1st Team
-    #   All Conference Tournament 2nd Team
-    #   All Conference Tournament MVP
+            # Consensus All America
+            if "Consensus AA" in link.text:
+                player["awards"]["consensus-all-america"] = True
+            
+            # Wooden Award
+            if "Wooden Award" in link.text:
+                player["awards"]['wooden-award'] = True
 
-    #   Naismith Award
-    #   Naismith Award Finalist
-    #   AP Player of the Year
-    #   Consensus All America 1st Team
-    #   Consensus All America 2nd Team
-    #   Wooden Award
-    #   Wooden Award Finalist
+            # Naismith Award
+            if "Naismith Award" in link.text:
+                player["awards"]['naismith-award'] = True
 
+            # Conference POY
+            if "ACC POY" in link.text:
+                player["awards"]['conference-poy'] = True
+            if "Big 12 POY" in link.text:
+                player["awards"]['conference-poy'] = True
+            if "Big Ten POY" in link.text:
+                player["awards"]['conference-poy'] = True
+            if "Pac-12 POY" in link.text:
+                player["awards"]['conference-poy'] = True
+            if "Pac-10 POY" in link.text:
+                player["awards"]['conference-poy'] = True
+            if "SEC POY" in link.text:
+                player["awards"]['conference-poy'] = True
+            
+            # Conference All-Team
+            if "All-ACC" in link.text and "Tourney" not in link.text:
+                player["awards"]['all-conference-team'] = True
+            if "All-Big 12" in link.text and "Tourney" not in link.text:
+                player["awards"]['all-conference-team'] = True
+            if "All-Big Ten" in link.text and "Tourney" not in link.text:
+                player["awards"]['all-conference-team'] = True
+            if "All-Pac-12" in link.text and "Tourney" not in link.text:
+                player["awards"]['all-conference-team'] = True
+            if "All-SEC" in link.text and "Tourney" not in link.text:
+                player["awards"]['all-conference-team'] = True
 
-    # Drafted to NBA
+            # Conference DPOY
+            if "ACC DPOY" in link.text:
+                player["awards"]['conference-dpoy'] = True
+            if "Big 12 DPOY" in link.text:
+                player["awards"]['conference-dpoy'] = True
+            if "Big Ten DPOY" in link.text:
+                player["awards"]['conference-dpoy'] = True
+            if "Pac-12 DPOY" in link.text:
+                player["awards"]['conference-dpoy'] = True
+            if "SEC DPOY" in link.text:
+                player["awards"]['conference-dpoy'] = True
+
+            # Conference All-Defense
+            if "ACC All-Defense" in link.text:
+                player["awards"]['all-conference-defense'] = True
+            if "Big 12 All-Defense" in link.text:
+                player["awards"]['all-conference-defense'] = True
+            if "Big Ten All-Defense" in link.text:
+                player["awards"]['all-conference-defense'] = True
+            if "Pac-12 All-Defense" in link.text:
+                player["awards"]['all-conference-defense'] = True
+            if "SEC All-Defense" in link.text:
+                player["awards"]['all-conference-defense'] = True
+            
+            # Conference ROY
+            if "ACC ROY" in link.text:
+                player["awards"]['conference-roy'] = True
+            if "Big 12 ROY" in link.text:
+                player["awards"]['conference-roy'] = True
+            if "Big Ten ROY" in link.text:
+                player["awards"]['conference-roy'] = True
+            if "Pac-12 ROY" in link.text:
+                player["awards"]['conference-roy'] = True
+            if "Pac-10 ROY" in link.text:
+                player["awards"]['conference-roy'] = True
+            if "SEC ROY" in link.text:
+                player["awards"]['conference-roy'] = True
+            
+            # Conference All-Tourney
+            if "All-ACC Tourney" in link.text:
+                player["awards"]['all-conference-tournament'] = True
+            if "All-Big 12 Tourney" in link.text:
+                player["awards"]['all-conference-tournament'] = True
+            if "All-Big Ten Tourney" in link.text:
+                player["awards"]['all-conference-tournament'] = True
+            if "All-Pac-12 Tourney" in link.text:
+                player["awards"]['all-conference-tournament'] = True
+            if "All-SEC Tourney" in link.text:
+                player["awards"]['all-conference-tournament'] = True
+
+            # Conference Tourney MVP
+            if "ACC Tourney MVP" in link.text:
+                player["awards"]['conference-tournament-mvp'] = True
+            if "Big 12 Tourney MVP" in link.text:
+                player["awards"]['conference-tournament-mvp'] = True
+            if "Big Ten Tourney MVP" in link.text:
+                player["awards"]['conference-tournament-mvp'] = True
+            if "Pac-12 Tourney MVP" in link.text:
+                player["awards"]['conference-tournament-mvp'] = True
+            if "SEC Tourney MVP" in link.text:
+                player["awards"]['conference-tournament-mvp'] = True
+
+    
+    player["drafted"] = False
+    strong_tags = top_area.find_all('strong')
+    for tag in strong_tags:
+        if "Draft" in tag.text:
+            player["drafted"] = True
+
+    # TODO Make program work with black spaces in table
 
     print(player)
     response.close()
@@ -629,7 +731,9 @@ def main():
     #         get_players_for_team(line.strip())
 
     #get_player_data("https://www.sports-reference.com/cbb/players/deandre-hunter-1.html")
-    get_player_data("https://www.sports-reference.com/cbb/players/zion-williamson-1.html")
+    #get_player_data("https://www.sports-reference.com/cbb/players/zion-williamson-1.html")
+    get_player_data("https://www.sports-reference.com/cbb/players/malcolm-brogdon-1.html")
+    #get_player_data("https://www.sports-reference.com/cbb/players/zach-edey-1.html")
 
 
 if __name__ == "__main__":
