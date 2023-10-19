@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import get_proxy
 import json
 
-password = "OXJesus4Me" #change to real proxy password b4 running
+password = "OXjesus4me" #change to real proxy password b4 running
 
 def get_power_5_teams(starting_year):
     proxies = get_proxy.get_proxies(password)
@@ -166,7 +166,10 @@ def get_player_data(url):
         bottom_area = total_stats_table.find('tfoot')
         if bottom_area:
             rows = bottom_area.find_all('tr')
-            career_stats = rows[0].find_all('td') 
+            try:
+                career_stats = rows[0].find_all('td') 
+            except Exception:
+                return -1
             for stat in career_stats:
 
                 # Games played
@@ -283,7 +286,10 @@ def get_player_data(url):
         bottom_area = per_game_stats_table.find('tfoot')
         if bottom_area:
             rows = bottom_area.find_all('tr')
-            career_stats = rows[0].find_all('td') 
+            try:
+                career_stats = rows[0].find_all('td') 
+            except Exception:
+                return -1
             for stat in career_stats:
 
                 # Minutes per Game
@@ -806,6 +812,7 @@ def get_player_data(url):
         json_file.write(',')
 
     response.close()
+    return 0
 
 
 def get_all_player_urls():
@@ -840,7 +847,7 @@ def getting_all_player_data():
 
     with open("player_data.json", 'a') as json_file:
         json_file.write('\n]')
-
+        
 
 def main():
     getting_all_player_data()
