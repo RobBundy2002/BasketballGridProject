@@ -50,31 +50,37 @@ function App() {
     setSelectedImages(randomImageFilenames);
   }, []);
   const handleBoxClick = (index) => {
-    setClickedBoxIndex(index);
-    setSelectedSearchTerm('');
+    if (![0, 1, 2, 3, 4, 8, 12].includes(index)) {
+      setClickedBoxIndex(index);
+      setSelectedSearchTerm('');
+    }
   };
-
+  
   const handleBoxMouseEnter = (index) => {
-    if (index !== clickedBoxIndex) {
-      setClickedBoxIndex(null); // Reset clicked box when hovering over another box
+    if (index !== clickedBoxIndex && ![0, 1, 2, 3, 4, 8, 12].includes(index)) {
+      setClickedBoxIndex(null);
     }
   };
-
+  
   const handleBoxMouseLeave = () => {
-    if (clickedBoxIndex !== null) {
-      setClickedBoxIndex(null); // Reset clicked box when leaving the box area
+    if (clickedBoxIndex !== null && ![0, 1, 2, 3, 4, 8, 12].includes(clickedBoxIndex)) {
+      setClickedBoxIndex(null);
     }
   };
-
+  
+  
   return (
     <div className="App">
       <div className="grid">
+        <div className="top-bar">
+          {/* Content for the top bar */}
+        </div>
         <div className="grid-container">
           {Array.from({ length: 16 }, (_, index) => (
             <div
               key={index}
               className={`grid-box 
-                ${index === 0 ? 'box-1' : ''} 
+                ${index === 0 ? 'image-boxes' : ''} 
                 ${index === 4 ? 'image-boxes' : ''} 
                 ${index === 1 || index === 2 || index === 3 ? 'image-boxes' : ''}
                 ${index === 8 || index === 12 ? 'image-boxes' : ''}
@@ -90,7 +96,7 @@ function App() {
                 <p>8+ Rebounds Per Game</p>
               ) : index === 3 ? (
                 <p>1+ Blocks Per Game</p>
-              )  : index === 4 ? (
+              ) : index === 4 ? (
                 <img
                   src={selectedImages[0]}
                   alt={`Box ${index + 1}`}
@@ -134,6 +140,5 @@ function App() {
       </div>
     </div>
   );
-}
-
-export default App;
+        }
+        export default App;

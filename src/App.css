@@ -47,19 +47,17 @@
   flex-direction: column;
   align-items: flex-start; 
 }
-
-
 .grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 7px;
   height: 550px;
   width: 550px;
-  margin-left: 450px;
+  margin-left: 550px;
+  margin-top: 3000 px;
   justify-content: center;
   border-radius: 5%;
 }
-
 .grid-box {
   display: flex;
   align-items: center;
@@ -71,23 +69,44 @@
   font-weight: bold;
   justify-content: center;
   border-radius: 5%;
+  cursor: pointer;
+  transition: .3s;
+}
+.grid-box:hover {
+  background-color: rgb(155, 243, 180); 
 }
 .team-image{
 height: 100px;
 background-color: #ffffff;
 border-color: #ffffff;
 }
-.box-1{
-  background-color: #ffffff;
-  border-color: #ffffff;
-}
+
 .image-boxes{
   background-color: #ffffff;
 border-color: #ffffff;
+pointer-events: none;
 }
-.box-button{
-background-color: #00ffbf;
-border-color: #00ffbf;
-height: 120px;
-width: 120px;
+.grid-box1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00ffbf;
+  border: 1px solid #00ffbf;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  justify-content: center;
+  border-radius: 5%;
+}
+.top-bar{
+  display: flex;
+  margin-top: -110px;
+  padding-top: 100px;
+  height: 50px;
+  width: 1700px;
+  background-color: #00ffbf;
+  border: 1px solid #00ffbf;
+}
+.grid{
+  margin-top: -168px;
 }
