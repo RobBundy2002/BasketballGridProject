@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [selectedImages, setSelectedImages] = useState([]);
-  const [isSearchBarVisible, setSearchBarVisible] = useState(false);
+  const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
   const [selectedSearchTerm, setSelectedSearchTerm] = useState('');
-  const searchTerms = [/* Your array of search terms */];
+  const searchTerms = [/* Array */];
  
   const numberList = [
     2000, 2005, 2006, 333, 2010, 2011, 399, 2016, 44, 2026, 12, 9, 8, 2032, 2029, 349, 2, 2046,
@@ -30,7 +30,9 @@ function App() {
     250, 2630, 292, 2638, 2636, 254, 328, 3084, 2670, 2678, 2674, 238, 261, 222, 258, 259, 2681, 154,
     264, 265, 2692, 277, 2717, 2710, 98, 2711, 2724, 2729, 2737, 275, 2747, 2750, 2751, 2752, 43, 2754
   ];
-
+  const handleBoxClick = () => {
+    setIsSearchBarVisible(!isSearchBarVisible);
+  };
   useEffect(() => {
     // Function to get a random image filename
     const getRandomImage = () => {
@@ -55,9 +57,15 @@ function App() {
           {Array.from({ length: 16 }, (_, index) => (
             <div
               key={index}
-              className={`grid-box ${index === 0 ? 'box-1' : ''} ${index === 4 ? 'image-boxes' : ''} ${index === 8 ? 'image-boxes' : ''} ${index === 12 ? 'image-boxes' : ''} ${index === 1 ? 'image-boxes' : ''}${index === 2 ? 'image-boxes' : ''}${index === 3 ? 'image-boxes' : ''}`}
+              className={`grid-box ${index === 0 ? 'box-1' : ''} ${index === 4 ? 'image-boxes' : ''} ${index === 1 ? 'image-boxes' : ''}${index === 2 ? 'image-boxes' : ''}${index === 3 ? 'image-boxes' : ''} ${index === 8 ? 'image-boxes' : ''} ${index === 12 ? 'image-boxes' : ''}`}
             >
-              {index === 4 ? (
+              {index === 1 ? (
+                <p>12+ Points Per Game</p>
+              ) : index === 2 ? (
+                <p>8+ Rebounds Per Game</p>
+              ) : index === 3 ? (
+                <p>1+ Blocks Per Game</p>
+              )  : index === 4 ? (
                 <img
                   src={selectedImages[0]}
                   alt={`Box ${index + 1}`}
@@ -75,14 +83,14 @@ function App() {
                   alt={`Box ${index + 1}`}
                   className="team-image"
                 />
-              ) : index === 123 ? (
-                <img
-                  src={selectedImages[3]} 
-                  alt={`Box ${index + 1}`}
-                  className="team-image"
-                />
-              ) : null
-              }
+              ) : null}
+              {(index === 5 || index === 6 || index === 7 || index === 9 || index === 10 || index === 11 || index === 13 || index === 14 || index === 15) ? (
+                <button
+                  onClick={() => handleBoxClick(index)}
+                  className="box-button"
+                >
+                </button>
+              ) : null}
             </div>
           ))}
         </div>
@@ -108,5 +116,6 @@ function App() {
       </div>
     </div>
   );
-        }
-        export default App; 
+}
+
+export default App;
