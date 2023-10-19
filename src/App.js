@@ -49,10 +49,12 @@ function App() {
     // Set the selected images
     setSelectedImages(randomImageFilenames);
   }, []);
+
   const handleBoxClick = (index) => {
     if (![0, 1, 2, 3, 4, 8, 12].includes(index)) {
       setClickedBoxIndex(index);
       setSelectedSearchTerm('');
+      setIsSearchBarVisible(true);
     }
   };
   
@@ -68,7 +70,18 @@ function App() {
     }
   };
   
-  
+  const handleOutsideClick = (e) => {
+    if (!e.target.closest('.grid-box') && !e.target.closest('.search-bar')) {
+      setIsSearchBarVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('click', handleOutsideClick);
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);   
   return (
     <div className="App">
       <div className="grid">
@@ -127,17 +140,18 @@ function App() {
         ))}
       </div>
       <div className="search-bar-container">
-        {clickedBoxIndex !== null && (
-          <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Search..."
-              value={selectedSearchTerm}
-              onChange={(e) => setSelectedSearchTerm(e.target.value)}
-            />
-          </div>
-        )}
-      </div>
+  {isSearchBarVisible && (
+    <div className="search-bar">
+      <input
+        type="text"
+        placeholder="Search..."
+        value={selectedSearchTerm}
+        onChange={(e) => setSelectedSearchTerm(e.target.value)}
+      />
+    </div>
+  )}
+</div>
+
     </div>
   );
         }
