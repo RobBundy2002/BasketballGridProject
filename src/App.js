@@ -8,6 +8,8 @@ function App() {
   const [clickedBoxIndex, setClickedBoxIndex] = useState(null);
   const [selectedSearchTerm, setSelectedSearchTerm] = useState('');
   const [matchedTermImage, setMatchedTermImage] = useState(null);
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
 
   const searchTerms = ["Malcolm Brogdon"];
  
@@ -120,11 +122,11 @@ function App() {
               onMouseLeave={handleBoxMouseLeave}
             >
               {index === 1 ? (
-                <p>12+ Points Per Game</p>   /*Adjust this for Non-Hard Coding*/
-              ) : index === 2 ? (
-                <p>8+ Rebounds Per Game</p>  /*Adjust this for Non-Hard Coding*/
+                <p>12+ Points Per Game</p>  
+                ) : index === 2 ? (
+                <p>8+ Rebounds Per Game</p>  
               ) : index === 3 ? (
-                <p>1+ Blocks Per Game</p>    /*Adjust this for Non-Hard Coding*/
+                <p>1+ Blocks Per Game</p>   
               ) : index === 4 ? (
                 <img
                   src={selectedImages[0]}
@@ -132,10 +134,10 @@ function App() {
                   className="team-image"
                 />
               ) : index === 5 && matchedTermImage ? (
-              <img
-              src={matchedTermImage}
-              className="guess-image"
-            />
+                <img
+                  src={matchedTermImage}
+                  className="guess-image"
+                />
               ) : index === 8 ? (
                 <img
                   src={selectedImages[1]}
@@ -161,19 +163,37 @@ function App() {
         ))}
       </div>
       <div className="search-bar-container">
-  {isSearchBarVisible && (
-    <div className="search-bar">
-      <input
-        type="text"
-        placeholder="Search..."
-        value={selectedSearchTerm}
-        onChange={(e) => setSelectedSearchTerm(e.target.value)}
-      />
+        {isSearchBarVisible && (
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Search..."
+              value={selectedSearchTerm}
+              onChange={(e) => {
+                const searchTerm = e.target.value;
+                setSelectedSearchTerm(searchTerm);
+                const results = searchTerms.filter((term) =>
+                  term.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+                setSearchResults(results);
+              }}
+              onFocus={() => setIsDropdownVisible(true)}
+              onBlur={() => setIsDropdownVisible(false)}
+            />
+            {/* Dropdown for search suggestions */}
+            {isDropdownVisible && searchResults.length > 0 && (
+              <div className="dropdown">
+                {searchResults.map((result, index) => (
+                  <div key={index} className="dropdown-item" onClick={() => setSelectedSearchTerm(result)}>
+                    {result}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
-  )}
-</div>
-
-    </div>
-  );
+  );  
         }
         export default App;
