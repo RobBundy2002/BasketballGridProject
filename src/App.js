@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [selectedImages, setSelectedImages] = useState([]);
-  const [isSearchBarVisible, setSearchBarVisible] = useState(false);
+  const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
+  const [clickedBoxIndex, setClickedBoxIndex] = useState(null);
   const [selectedSearchTerm, setSelectedSearchTerm] = useState('');
-  const searchTerms = [/* Your array of search terms */];
+  const searchTerms = [/* Array */];
  
   const numberList = [
     2000, 2005, 2006, 333, 2010, 2011, 399, 2016, 44, 2026, 12, 9, 8, 2032, 2029, 349, 2, 2046,
@@ -48,6 +49,23 @@ function App() {
     // Set the selected images
     setSelectedImages(randomImageFilenames);
   }, []);
+  const handleBoxClick = (index) => {
+    setClickedBoxIndex(index);
+    setSelectedSearchTerm('');
+  };
+
+  const handleBoxMouseEnter = (index) => {
+    if (index !== clickedBoxIndex) {
+      setClickedBoxIndex(null); // Reset clicked box when hovering over another box
+    }
+  };
+
+  const handleBoxMouseLeave = () => {
+    if (clickedBoxIndex !== null) {
+      setClickedBoxIndex(null); // Reset clicked box when leaving the box area
+    }
+  };
+
   return (
     <div className="App">
       <div className="grid">
@@ -55,9 +73,24 @@ function App() {
           {Array.from({ length: 16 }, (_, index) => (
             <div
               key={index}
-              className={`grid-box ${index === 0 ? 'box-1' : ''} ${index === 4 ? 'image-boxes' : ''} ${index === 8 ? 'image-boxes' : ''} ${index === 12 ? 'image-boxes' : ''} ${index === 1 ? 'image-boxes' : ''}${index === 2 ? 'image-boxes' : ''}${index === 3 ? 'image-boxes' : ''}`}
+              className={`grid-box 
+                ${index === 0 ? 'box-1' : ''} 
+                ${index === 4 ? 'image-boxes' : ''} 
+                ${index === 1 || index === 2 || index === 3 ? 'image-boxes' : ''}
+                ${index === 8 || index === 12 ? 'image-boxes' : ''}
+                ${clickedBoxIndex === index ? 'clicked-box' : ''}`
+              }
+              onClick={() => handleBoxClick(index)}
+              onMouseEnter={() => handleBoxMouseEnter(index)}
+              onMouseLeave={handleBoxMouseLeave}
             >
-              {index === 4 ? (
+              {index === 1 ? (
+                <p>12+ Points Per Game</p>
+              ) : index === 2 ? (
+                <p>8+ Rebounds Per Game</p>
+              ) : index === 3 ? (
+                <p>1+ Blocks Per Game</p>
+              )  : index === 4 ? (
                 <img
                   src={selectedImages[0]}
                   alt={`Box ${index + 1}`}
@@ -75,14 +108,7 @@ function App() {
                   alt={`Box ${index + 1}`}
                   className="team-image"
                 />
-              ) : index === 123 ? (
-                <img
-                  src={selectedImages[3]} 
-                  alt={`Box ${index + 1}`}
-                  className="team-image"
-                />
-              ) : null
-              }
+              ) : null}
             </div>
           ))}
         </div>
@@ -95,7 +121,7 @@ function App() {
         ))}
       </div>
       <div className="search-bar-container">
-        {isSearchBarVisible && (
+        {clickedBoxIndex !== null && (
           <div className="search-bar">
             <input
               type="text"
@@ -108,5 +134,6 @@ function App() {
       </div>
     </div>
   );
-        }
-        export default App; 
+}
+
+export default App;
