@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 function App() {
   const [selectedImages, setSelectedImages] = useState([]);
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
+  const [clickedBoxIndex, setClickedBoxIndex] = useState(null);
   const [selectedSearchTerm, setSelectedSearchTerm] = useState('');
   const searchTerms = [/* Array */];
  
@@ -30,9 +31,7 @@ function App() {
     250, 2630, 292, 2638, 2636, 254, 328, 3084, 2670, 2678, 2674, 238, 261, 222, 258, 259, 2681, 154,
     264, 265, 2692, 277, 2717, 2710, 98, 2711, 2724, 2729, 2737, 275, 2747, 2750, 2751, 2752, 43, 2754
   ];
-  const handleBoxClick = () => {
-    setIsSearchBarVisible(!isSearchBarVisible);
-  };
+
   useEffect(() => {
     // Function to get a random image filename
     const getRandomImage = () => {
@@ -50,6 +49,23 @@ function App() {
     // Set the selected images
     setSelectedImages(randomImageFilenames);
   }, []);
+  const handleBoxClick = (index) => {
+    setClickedBoxIndex(index);
+    setSelectedSearchTerm('');
+  };
+
+  const handleBoxMouseEnter = (index) => {
+    if (index !== clickedBoxIndex) {
+      setClickedBoxIndex(null); // Reset clicked box when hovering over another box
+    }
+  };
+
+  const handleBoxMouseLeave = () => {
+    if (clickedBoxIndex !== null) {
+      setClickedBoxIndex(null); // Reset clicked box when leaving the box area
+    }
+  };
+
   return (
     <div className="App">
       <div className="grid">
@@ -57,7 +73,16 @@ function App() {
           {Array.from({ length: 16 }, (_, index) => (
             <div
               key={index}
-              className={`grid-box ${index === 0 ? 'box-1' : ''} ${index === 4 ? 'image-boxes' : ''} ${index === 1 ? 'image-boxes' : ''}${index === 2 ? 'image-boxes' : ''}${index === 3 ? 'image-boxes' : ''} ${index === 8 ? 'image-boxes' : ''} ${index === 12 ? 'image-boxes' : ''}`}
+              className={`grid-box 
+                ${index === 0 ? 'box-1' : ''} 
+                ${index === 4 ? 'image-boxes' : ''} 
+                ${index === 1 || index === 2 || index === 3 ? 'image-boxes' : ''}
+                ${index === 8 || index === 12 ? 'image-boxes' : ''}
+                ${clickedBoxIndex === index ? 'clicked-box' : ''}`
+              }
+              onClick={() => handleBoxClick(index)}
+              onMouseEnter={() => handleBoxMouseEnter(index)}
+              onMouseLeave={handleBoxMouseLeave}
             >
               {index === 1 ? (
                 <p>12+ Points Per Game</p>
@@ -84,13 +109,6 @@ function App() {
                   className="team-image"
                 />
               ) : null}
-              {(index === 5 || index === 6 || index === 7 || index === 9 || index === 10 || index === 11 || index === 13 || index === 14 || index === 15) ? (
-                <button
-                  onClick={() => handleBoxClick(index)}
-                  className="box-button"
-                >
-                </button>
-              ) : null}
             </div>
           ))}
         </div>
@@ -103,7 +121,7 @@ function App() {
         ))}
       </div>
       <div className="search-bar-container">
-        {isSearchBarVisible && (
+        {clickedBoxIndex !== null && (
           <div className="search-bar">
             <input
               type="text"
