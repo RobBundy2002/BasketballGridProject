@@ -7,7 +7,7 @@ function App() {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
   const [clickedBoxIndex, setClickedBoxIndex] = useState(null);
   const [selectedSearchTerm, setSelectedSearchTerm] = useState('');
-  const searchTerms = [/* Array */];
+  const searchTerms = ["Malcolm Brogdon"];
  
   const numberList = [
     2000, 2005, 2006, 333, 2010, 2011, 399, 2016, 44, 2026, 12, 9, 8, 2032, 2029, 349, 2, 2046,
@@ -104,11 +104,11 @@ function App() {
               onMouseLeave={handleBoxMouseLeave}
             >
               {index === 1 ? (
-                <p>12+ Points Per Game</p>
+                <p>12+ Points Per Game</p>   /*Adjust this for Non-Hard Coding*/
               ) : index === 2 ? (
-                <p>8+ Rebounds Per Game</p>
+                <p>8+ Rebounds Per Game</p>  /*Adjust this for Non-Hard Coding*/
               ) : index === 3 ? (
-                <p>1+ Blocks Per Game</p>
+                <p>1+ Blocks Per Game</p>    /*Adjust this for Non-Hard Coding*/
               ) : index === 4 ? (
                 <img
                   src={selectedImages[0]}
