@@ -7,8 +7,11 @@ function App() {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
   const [clickedBoxIndex, setClickedBoxIndex] = useState(null);
   const [selectedSearchTerm, setSelectedSearchTerm] = useState('');
+  const [matchedTermImage, setMatchedTermImage] = useState(null);
+
   const searchTerms = ["Malcolm Brogdon"];
  
+
   const numberList = [
     2000, 2005, 2006, 333, 2010, 2011, 399, 2016, 44, 2026, 12, 9, 8, 2032, 2029, 349, 2, 2046,
     252, 2050, 239, 91, 2057, 2065, 2066, 68, 103, 104, 189, 71, 225, 2803, 2083, 2084, 2086, 2934,
@@ -81,7 +84,20 @@ function App() {
     return () => {
       window.removeEventListener('click', handleOutsideClick);
     };
-  }, []);   
+  }, []);
+
+  useEffect(() => {
+    const termMatch = searchTerms.find((term) => term.toLowerCase() === selectedSearchTerm.toLowerCase());
+
+    
+    if (termMatch) {
+
+      setMatchedTermImage('/logos/Brogdon_Malcolm.jpg'); 
+    } else {
+      setMatchedTermImage(null);
+    }
+  }, [selectedSearchTerm]);
+
   return (
     <div className="App">
       <div className="grid">
@@ -115,6 +131,11 @@ function App() {
                   alt={`Box ${index + 1}`}
                   className="team-image"
                 />
+              ) : index === 5 && matchedTermImage ? (
+              <img
+              src={matchedTermImage}
+              className="guess-image"
+            />
               ) : index === 8 ? (
                 <img
                   src={selectedImages[1]}

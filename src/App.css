@@ -79,8 +79,10 @@
 }
 .team-image{
 height: 100px;
+
 background-color: #ffffff;
 border-color: #ffffff;
+object-fit: cover;
 }
 
 .image-boxes{
@@ -131,6 +133,11 @@ pointer-events: none;
  /* color: #ffffff;*/
   font-size: 16px;
 }
-
+.guess-image{
+ 
+    height: 100px;
+    z-index: 999;
+    width: 500 px;
+}
 
 
