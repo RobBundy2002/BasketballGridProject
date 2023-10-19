@@ -118,34 +118,6 @@ def get_player_data(url):
     
     player = {}
 
-    if "career_totals" not in player:
-        player['career_totals'] = {}
-
-    if "career_averages" not in player:
-        player['career_averages'] = {}
-
-    if "season_totals" not in player:
-        player['season_totals'] = {}
-
-    if "season_averages" not in player:
-        player['season_averages'] = {}
-
-    if "teams" not in player:
-        player['teams'] = []
-
-    if "jersey_numbers" not in player:
-        player['jersey_numbers'] = []
-    
-    if "conferences" not in player:
-        player['conferences'] = []
-
-    if "years-played" not in player:
-        player['years-played'] = []
-
-    if "awards" not in player:
-        player['awards'] = {}
-
-
     # Name
     name = soup.find('h1')
     if name:
@@ -153,9 +125,20 @@ def get_player_data(url):
     else:
         print(time.ctime() + "; Couldn't find name")
 
+    if "teams" not in player:
+        player['teams'] = []
 
-    # Height and weight
+    if "conferences" not in player:
+        player['conferences'] = []
+    
+    if "years-played" not in player:
+        player['years-played'] = []
+    
+    if "jersey_numbers" not in player:
+        player['jersey_numbers'] = []
 
+
+    # TODO Height and weight
 
     # Image
     top_area = soup.find('div', {'id': 'meta'})
@@ -177,7 +160,9 @@ def get_player_data(url):
                 player["jersey_numbers"].append(num)
 
 
-    # Career Totals  
+    # Career Totals 
+    if "career_totals" not in player:
+        player['career_totals'] = {} 
     total_stats_table = soup.find('table', {'id': "players_totals"})
     if total_stats_table:
         bottom_area = total_stats_table.find('tfoot')
@@ -248,6 +233,8 @@ def get_player_data(url):
 
 
     # Career Averages 
+    if "career_averages" not in player:
+        player['career_averages'] = {}
     per_game_stats_table = soup.find('table', {'id': "players_per_game"})
     if per_game_stats_table:
         bottom_area = per_game_stats_table.find('tfoot')
@@ -322,6 +309,8 @@ def get_player_data(url):
 
 
     # Season Totals
+    if "season_totals" not in player:
+        player['season_totals'] = {}
     games, games_started, minutes_played, field_goals_made, three_point_made, free_throws_made = 0, 0, 0, 0, 0, 0
     offensive_rebounds, defensive_rebounds, total_rebounds, assists, steals, blocks, turnovers, fouls, points = 0, 0, 0, 0, 0, 0, 0, 0, 0
     if total_stats_table:
@@ -441,6 +430,8 @@ def get_player_data(url):
 
 
     # Season Averages
+    if "season_averages" not in player:
+        player['season_averages'] = {}
     mpg, ppg, fg, fgp, tfg, tfgp, ft, ftp, orb, drb, trb, ast, blk, stl, tov, pf = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     if per_game_stats_table:
         middle_area = per_game_stats_table.find('tbody')
@@ -566,6 +557,8 @@ def get_player_data(url):
 
 
     # Awards
+    if "awards" not in player:
+        player['awards'] = {}
     champion =  soup.find('li', {'class': "important special"})
     if champion:
         # National Champion
