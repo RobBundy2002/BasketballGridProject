@@ -137,9 +137,6 @@ def get_player_data(url):
     if "jersey_numbers" not in player:
         player['jersey_numbers'] = []
 
-
-    # TODO Height and weight
-
     # Image
     top_area = soup.find('div', {'id': 'meta'})
     picture = top_area.find('img')
@@ -173,63 +170,108 @@ def get_player_data(url):
 
                 # Games played
                 if stat['data-stat'] == "games":
-                    player["career_totals"]["games_played"] = int(stat.text)
+                    try:
+                        player["career_totals"]["games_played"] = int(stat.text)
+                    except Exception:
+                        player["career_totals"]["games_played"] = 0
 
                 # Games Started
                 if stat['data-stat'] == "games_started":
-                    player["career_totals"]["games_started"] = int(stat.text)
+                    try:
+                        player["career_totals"]["games_started"] = int(stat.text)
+                    except Exception:
+                        player["career_totals"]["games_started"] = 0
 
                 # Minutes Played
                 if stat['data-stat'] == "mp":
-                    player["career_totals"]["minutes_played"] = int(stat.text)
+                    try:
+                        player["career_totals"]["minutes_played"] = int(stat.text)
+                    except Exception:
+                        player["career_totals"]["minutes_played"] = 0
 
                 # Field Goals Made
                 if stat['data-stat'] == "fg":
-                    player["career_totals"]["field_goals_made"] = int(stat.text)
+                    try:
+                        player["career_totals"]["field_goals_made"] = int(stat.text)
+                    except Exception:
+                        player["career_totals"]["field_goals_made"] = 0
                 
                 # 3 Pointers Made
                 if stat['data-stat'] == "fg3":
-                    player["career_totals"]["3_point_made"] = int(stat.text)
+                    try:
+                        player["career_totals"]["3_point_made"] = int(stat.text)
+                    except Exception:
+                        player["career_totals"]["3_point_made"] = 0
 
                 # Free Throws Made
                 if stat['data-stat'] == "ft":
-                    player["career_totals"]["free_throws_made"] = int(stat.text)
+                    try:
+                        player["career_totals"]["free_throws_made"] = int(stat.text)
+                    except Exception:
+                        player["career_totals"]["free_throws_made"] = 0
                 
                 # Offensive Rebounds
                 if stat['data-stat'] == "orb":
-                    player["career_totals"]["offensive_rebounds"] = int(stat.text)
+                    try:
+                        player["career_totals"]["offensive_rebounds"] = int(stat.text)
+                    except Exception:
+                        player["career_totals"]["offensive_rebounds"] = 0
                 
                 # Defensive Rebounds
                 if stat['data-stat'] == "drb":
-                    player["career_totals"]["defensive_rebounds"] = int(stat.text)
+                    try:
+                        player["career_totals"]["defensive_rebounds"] = int(stat.text)
+                    except Exception:
+                        player["career_totals"]["defensive_rebounds"] = 0
 
                 # Total Rebounds
                 if stat['data-stat'] == "trb":
-                    player["career_totals"]["rebounds"] = int(stat.text)
+                    try:
+                        player["career_totals"]["rebounds"] = int(stat.text)
+                    except Exception:
+                        player["career_totals"]["rebounds"] = 0
                 
                 # Assists
                 if stat['data-stat'] == "ast":
-                    player["career_totals"]["assists"] = int(stat.text)
+                    try:
+                        player["career_totals"]["assists"] = int(stat.text)
+                    except Exception:
+                        player["career_totals"]["assists"] = 0
                 
                 # Steals
                 if stat['data-stat'] == "stl":
-                    player["career_totals"]["steals"] = int(stat.text)
+                    try:
+                        player["career_totals"]["steals"] = int(stat.text)
+                    except Exception:
+                        player["career_totals"]["steals"] = 0
                 
                 # Blocks
                 if stat['data-stat'] == "blk":
-                    player["career_totals"]["blocks"] = int(stat.text)
+                    try:
+                        player["career_totals"]["blocks"] = int(stat.text)
+                    except Exception:
+                        player["career_totals"]["blocks"] = 0
                 
                 # Turnovers
                 if stat['data-stat'] == "tov":
-                    player["career_totals"]["turnovers"] = int(stat.text)
+                    try:
+                        player["career_totals"]["turnovers"] = int(stat.text)
+                    except Exception:
+                        player["career_totals"]["turnovers"] = 0
                 
                 # Fouls
                 if stat['data-stat'] == "pf":
-                    player["career_totals"]["fouls"] = int(stat.text)
+                    try:
+                        player["career_totals"]["fouls"] = int(stat.text)
+                    except Exception:
+                        player["career_totals"]["fouls"] = 0
                 
                 # Points
                 if stat['data-stat'] == "pts":
-                    player["career_totals"]["points"] = int(stat.text)
+                    try:
+                        player["career_totals"]["points"] = int(stat.text)
+                    except Exception:
+                        player["career_totals"]["points"] = 0
 
 
     # Career Averages 
@@ -245,67 +287,115 @@ def get_player_data(url):
 
                 # Minutes per Game
                 if stat['data-stat'] == "mp_per_g":
-                    player["career_averages"]["minutes_per_game"] = float(stat.text)
+                    try:
+                        player["career_averages"]["minutes_per_game"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["minutes_per_game"] = 0
 
                 # Points per Game
                 if stat['data-stat'] == "pts_per_g":
-                    player["career_averages"]["points_per_game"] = float(stat.text)
+                    try:
+                        player["career_averages"]["points_per_game"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["points_per_game"] = 0
                 
                 # FG per Game
                 if stat['data-stat'] == "fg_per_g":
-                    player["career_averages"]["fg_per_game"] = float(stat.text)
+                    try:
+                        player["career_averages"]["fg_per_game"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["fg_per_game"] = 0
                 
                 # FG%
                 if stat['data-stat'] == "fg_pct":
-                    player["career_averages"]["fg_percentage"] = float(stat.text)
+                    try:
+                        player["career_averages"]["fg_percentage"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["fg_percentage"] = 0
                 
                 # 3FG per Game
                 if stat['data-stat'] == "fg3_per_g":
-                    player["career_averages"]["3_point_per_game"] = float(stat.text)
+                    try:
+                        player["career_averages"]["3_point_per_game"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["3_point_per_game"] = 0
                 
                 # 3FG%
                 if stat['data-stat'] == "fg3_pct":
-                    player["career_averages"]["3_point_percentage"] = float(stat.text)
+                    try:
+                        player["career_averages"]["3_point_percentage"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["3_point_percentage"] = 0
                 
                 # FT per Game
                 if stat['data-stat'] == "ft_per_g":
-                    player["career_averages"]["ft_per_game"] = float(stat.text)
+                    try:
+                        player["career_averages"]["ft_per_game"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["ft_per_game"] = 0
                 
                 # FT%
                 if stat['data-stat'] == "ft_pct":
-                    player["career_averages"]["ft_percentage"] = float(stat.text)
+                    try:
+                        player["career_averages"]["ft_percentage"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["ft_percentage"] = 0
 
                 # Offensive Rebounds per Game
                 if stat['data-stat'] == "orb_per_g":
-                    player["career_averages"]["o_rebounds_per_game"] = float(stat.text)
+                    try:
+                        player["career_averages"]["o_rebounds_per_game"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["o_rebounds_per_game"] = 0
                 
                 # Defensive Rebounds per Game
                 if stat['data-stat'] == "drb_per_g":
-                    player["career_averages"]["d_rebounds_per_game"] = float(stat.text)
+                    try:
+                        player["career_averages"]["d_rebounds_per_game"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["d_rebounds_per_game"] = 0
 
                 # Total Rebounds per Game
                 if stat['data-stat'] == "trb_per_g":
-                    player["career_averages"]["rebounds_per_game"] = float(stat.text)
+                    try:
+                        player["career_averages"]["rebounds_per_game"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["rebounds_per_game"] = 0
                 
                 # Assists per Game
                 if stat['data-stat'] == "ast_per_g":
-                    player["career_averages"]["assists_per_game"] = float(stat.text)
+                    try:
+                        player["career_averages"]["assists_per_game"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["assists_per_game"] = 0
 
                 # Blocks per Game
                 if stat['data-stat'] == "blk_per_g":
-                    player["career_averages"]["blocks_per_game"] = float(stat.text)
+                    try:
+                        player["career_averages"]["blocks_per_game"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["blocks_per_game"] = 0
                 
                 # Steals per Game
                 if stat['data-stat'] == "stl_per_g":
-                    player["career_averages"]["steals_per_game"] = float(stat.text)
+                    try:
+                        player["career_averages"]["steals_per_game"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["steals_per_game"] = 0
                 
                 # Turnovers per Game
                 if stat['data-stat'] == "tov_per_g":
-                    player["career_averages"]["turnovers_per_game"] = float(stat.text)
+                    try:
+                        player["career_averages"]["turnovers_per_game"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["turnovers_per_game"] = 0
                 
                 #Fouls per Game
                 if stat['data-stat'] == "pf_per_g":
-                    player["career_averages"]["fouls_per_game"] = float(stat.text) 
+                    try:
+                        player["career_averages"]["fouls_per_game"] = float(stat.text)
+                    except Exception:
+                        player["career_averages"]["fouls_per_game"] = 0
 
 
     # Season Totals
@@ -725,8 +815,8 @@ def main():
 
     #get_player_data("https://www.sports-reference.com/cbb/players/deandre-hunter-1.html")
     #get_player_data("https://www.sports-reference.com/cbb/players/zion-williamson-1.html")
-    get_player_data("https://www.sports-reference.com/cbb/players/malcolm-brogdon-1.html")
-    #get_player_data("https://www.sports-reference.com/cbb/players/zach-edey-1.html")
+    #get_player_data("https://www.sports-reference.com/cbb/players/malcolm-brogdon-1.html")
+    get_player_data("https://www.sports-reference.com/cbb/players/zach-edey-1.html")
 
 
 if __name__ == "__main__":
