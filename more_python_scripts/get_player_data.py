@@ -2,6 +2,7 @@ import requests #if not working do pip install requests in terminal
 import time
 from bs4 import BeautifulSoup
 import get_proxy
+import json
 
 password = "OXJesus4Me" #change to real proxy password b4 running
 
@@ -792,31 +793,57 @@ def get_player_data(url):
             if "SEC Tourney MVP" in link.text:
                 player["awards"]['conference-tournament-mvp'] = True
 
-    
+
+    # Drafted to NBA
     player["drafted"] = False
     strong_tags = top_area.find_all('strong')
     for tag in strong_tags:
         if "Draft" in tag.text:
             player["drafted"] = True
 
-    # TODO Make program work with black spaces in table
+    with open("player_data.json", 'a') as json_file:
+        json.dump(player, json_file, indent=2)
+        json_file.write(',')
 
-    print(player)
     response.close()
 
 
-def main():
-    # with open("players_urls.txt", 'w') as file:
-    #     print("Clearing contents of players_urls") #clearing current file contents
-    # with open("teams_urls.txt", 'r') as file:
-    #     for line in file:
-    #         print(time.ctime() + "; Team: " + line.strip())
-    #         get_players_for_team(line.strip())
+def get_all_player_urls():
+    with open("players_urls.txt", 'w') as file:
+        print("Clearing contents of players_urls")
+    with open("teams_urls.txt", 'r') as file:
+        for line in file:
+            print(time.ctime() + "; Team: " + line.strip())
+            get_players_for_team(line.strip())
 
-    #get_player_data("https://www.sports-reference.com/cbb/players/deandre-hunter-1.html")
-    #get_player_data("https://www.sports-reference.com/cbb/players/zion-williamson-1.html")
-    #get_player_data("https://www.sports-reference.com/cbb/players/malcolm-brogdon-1.html")
-    get_player_data("https://www.sports-reference.com/cbb/players/zach-edey-1.html")
+
+def getting_all_player_data():
+    with open("player_data.json", 'w') as json_file:
+        json_file.truncate()
+        print("Clearing contents of player_data")
+
+    with open("player_data.json", 'a') as json_file:
+        json_file.write('[\n')
+    
+    with open("players_urls_no_duplicates.txt", 'r') as file:
+        i = 0
+        for line in file:
+            i += 1
+            print(time.ctime() + "; Player " + str(i) + ": "  + line.strip())
+            get_player_data(line.strip())
+
+    with open("player_data.json", 'r+') as json_file:
+            json_file.seek(0, 2)
+            end_position = json_file.tell()
+            json_file.seek(end_position - 1)
+            json_file.truncate()
+
+    with open("player_data.json", 'a') as json_file:
+        json_file.write('\n]')
+
+
+def main():
+    getting_all_player_data()
 
 
 if __name__ == "__main__":
