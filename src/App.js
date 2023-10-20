@@ -7,10 +7,11 @@ function App() {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
   const [clickedBoxIndex, setClickedBoxIndex] = useState(null);
   const [selectedSearchTerm, setSelectedSearchTerm] = useState('');
+  const [isMatchedTerm, setIsMatchedTerm] = useState(false); // Define the state variable
   const [matchedTermImage, setMatchedTermImage] = useState(null);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-
+  const [isDropdownTermSelected, setIsDropdownTermSelected] = useState(false);
   const searchTerms = ["Malcolm Brogdon"];
  
 
@@ -90,47 +91,55 @@ function App() {
 
   useEffect(() => {
     const termMatch = searchTerms.find((term) => term.toLowerCase() === selectedSearchTerm.toLowerCase());
-
-    
+  
     if (termMatch) {
-
-      setMatchedTermImage('/logos/Brogdon_Malcolm.jpg'); 
+      setMatchedTermImage('/logos/Brogdon_Malcolm.jpg');
+      setIsMatchedTerm(true);
     } else {
       setMatchedTermImage(null);
+      setIsMatchedTerm(false);
     }
   }, [selectedSearchTerm]);
 
+  const handleDropdownTermSelect = (selectedTerm) => {
+    setSelectedSearchTerm(selectedTerm);
+    setIsDropdownTermSelected(true);
+  };
   return (
     <div className="App">
       <div className="grid">
         <div className="top-bar">
           {/* Content for the top bar */}
+          <div className="top-text">
+            Patrick, Grant, and Rob- The Side Project
+          </div>
         </div>
+
         <div className="grid-container">
           {Array.from({ length: 16 }, (_, index) => (
             <div
               key={index}
               className={`grid-box 
                 ${index === 0 ? 'image-boxes' : ''} 
-                ${index === 4 ? 'image-boxes' : ''} 
                 ${index === 1 || index === 2 || index === 3 ? 'image-boxes' : ''}
                 ${index === 8 || index === 12 ? 'image-boxes' : ''}
+                ${index === 5 || index === 6 || index === 7 || index === 9 || index === 10 || index === 11 || index === 13 || index === 14 || index === 15 ? 'your-element' : ''}
                 ${clickedBoxIndex === index ? 'clicked-box' : ''}`
               }
+              
               onClick={() => handleBoxClick(index)}
               onMouseEnter={() => handleBoxMouseEnter(index)}
               onMouseLeave={handleBoxMouseLeave}
             >
-              {index === 1 ? (
-                <p>12+ Points Per Game</p>  
+             {index === 1 ? (
+                <p style={{ background: 'linear-gradient(45deg, #ff6b6b, #3569cf)', WebkitBackgroundClip: 'text', color: 'transparent' }}>12+ Points Per Game</p>
                 ) : index === 2 ? (
-                <p>8+ Rebounds Per Game</p>  
-              ) : index === 3 ? (
-                <p>1+ Blocks Per Game</p>   
-              ) : index === 4 ? (
+                <p style={{ background: 'linear-gradient(45deg, #ff6b6b, #3569cf)', WebkitBackgroundClip: 'text', color: 'transparent' }}>8+ Rebounds Per Game</p>
+                ) : index === 3 ? (
+                <p style={{ background: 'linear-gradient(45deg, #ff6b6b, #3569cf)', WebkitBackgroundClip: 'text', color: 'transparent' }}>1+ Blocks Per Game</p>
+                ) : index === 4 ? (
                 <img
                   src={selectedImages[0]}
-                  alt={`Box ${index + 1}`}
                   className="team-image"
                 />
               ) : index === 5 && matchedTermImage ? (
@@ -196,4 +205,4 @@ function App() {
     </div>
   );  
         }
-        export default App;
+        export default App;          
