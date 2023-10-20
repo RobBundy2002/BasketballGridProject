@@ -37,7 +37,7 @@ Washington, 264
 Washington State, 265
 Iowa State, 66
 West Virginia, 277
-Kansas Athletics, Home of the Jayhawks, 140
+Kansas, 2305
 Kansas State, 2306
 Oklahoma, 201
 Oklahoma State, 197
@@ -56,7 +56,7 @@ Florida, 57
 Georgia, 61
 Kentucky, 96
 Missouri, 142
-South Carolina, 257
+South Carolina, 2579
 Tennessee, 2633
 Vanderbilt, 238
 Boston College, 103
