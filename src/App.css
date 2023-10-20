@@ -85,6 +85,8 @@ object-fit: cover;
 background-color: #ffffff;
 border-color: #ffffff;
 pointer-events: none;
+height: 122px;
+padding: 10px;
 }
 .grid-box1{
   display: flex;
@@ -108,7 +110,6 @@ pointer-events: none;
   width: 1700px;
   background-color: #ffffff;
   border: 1px solid #000000;
-  
 }
 .grid{
   margin-top: -168px;

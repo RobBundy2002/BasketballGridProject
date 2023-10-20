@@ -14,8 +14,11 @@ function App() {
   const [isDropdownTermSelected, setIsDropdownTermSelected] = useState(false);
   const searchTerms = ["Malcolm Brogdon"];
  
-
-  const numberList = [
+  const categoriesList = [
+    "12+ Points a Game", "8+ Rebounds a Game", "1+ Blocks a Game", "All-Conference", "National Champion","NCAA Tournament MVP","National Champion","Conference Player of the Year",
+  ];
+  
+  const oldNumberList = [
     2000, 2005, 2006, 333, 2010, 2011, 399, 2016, 44, 2026, 12, 9, 8, 2032, 2029, 349, 2, 2046,
     252, 2050, 239, 91, 2057, 2065, 2066, 68, 103, 104, 189, 71, 225, 2803, 2083, 2084, 2086, 2934,
     2239, 2463, 13, 25, 2856, 2097, 2099, 2110, 2115, 2117, 232, 2127, 2429, 236, 2130, 2132, 228,
@@ -38,6 +41,12 @@ function App() {
     264, 265, 2692, 277, 2717, 2710, 98, 2711, 2724, 2729, 2737, 275, 2747, 2750, 2751, 2752, 43, 2754
   ];
 
+  const numberList = [52, 59, 97, 2390, 153, 152, 87, 221, 258, 259, 154, 84, 66, 120, 130, 127, 135, 158, 
+    77, 194, 213, 2509, 164, 275, 12, 9, 25, 26, 30, 24, 38, 254, 2483, 204, 264, 265, 66, 277, 140, 2306, 
+    201, 197, 2641, 251, 2628, 239, 333, 8, 2, 99, 145, 344, 245, 57, 61, 96, 142, 257, 2633, 238, 103, 183,
+     228, 150]
+
+
   useEffect(() => {
     // Function to get a random image filename
     const getRandomImage = () => {
@@ -51,11 +60,13 @@ function App() {
       const randomNumber = getRandomImage();
       randomImageFilenames.push(`/logos/${randomNumber}.png`);
     }
+   
 
     // Set the selected images
     setSelectedImages(randomImageFilenames);
   }, []);
 
+    
   const handleBoxClick = (index) => {
     if (![0, 1, 2, 3, 4, 8, 12].includes(index)) {
       setClickedBoxIndex(index);
@@ -105,47 +116,71 @@ function App() {
     setSelectedSearchTerm(selectedTerm);
     setIsDropdownTermSelected(true);
   };
+
+  const usedCategories = [];
+
+  const getRandomCategory = () => {
+    
+    const availableCategories = categoriesList.filter(category => !usedCategories.includes(category));
+  
+    
+    if (availableCategories.length > 0) {
+      const randomIndex = Math.floor(Math.random() * availableCategories.length);
+      const category = availableCategories[randomIndex];
+      
+      
+      usedCategories.push(category);
+  
+      return category;
+    }
+    
+    return "No more categories"; //Not Needed
+  }
+
   return (
     <div className="App">
       <div className="grid">
         <div className="top-bar">
           {/* Content for the top bar */}
           <div className="top-text">
-            Patrick, Grant, and Rob- The Side Project
+            Patrick, Grant, and Rob - The Side Project
           </div>
         </div>
-
-        <div className="grid-container">
-          {Array.from({ length: 16 }, (_, index) => (
+        <div className={`grid-container
+        `}
+          >
+            {Array.from({ length: 16 }, (_, index) => (
             <div
               key={index}
-              className={`grid-box 
-                ${index === 0 ? 'image-boxes' : ''} 
-                ${index === 1 || index === 2 || index === 3 ? 'image-boxes' : ''}
-                ${index === 8 || index === 12 ? 'image-boxes' : ''}
-                ${index === 5 || index === 6 || index === 7 || index === 9 || index === 10 || index === 11 || index === 13 || index === 14 || index === 15 ? 'your-element' : ''}
-                ${clickedBoxIndex === index ? 'clicked-box' : ''}`
-              }
-              
-              onClick={() => handleBoxClick(index)}
-              onMouseEnter={() => handleBoxMouseEnter(index)}
-              onMouseLeave={handleBoxMouseLeave}
-            >
-             {index === 1 ? (
-                <p style={{ background: 'linear-gradient(45deg, #ff6b6b, #3569cf)', WebkitBackgroundClip: 'text', color: 'transparent' }}>12+ Points Per Game</p>
-                ) : index === 2 ? (
-                <p style={{ background: 'linear-gradient(45deg, #ff6b6b, #3569cf)', WebkitBackgroundClip: 'text', color: 'transparent' }}>8+ Rebounds Per Game</p>
-                ) : index === 3 ? (
-                <p style={{ background: 'linear-gradient(45deg, #ff6b6b, #3569cf)', WebkitBackgroundClip: 'text', color: 'transparent' }}>1+ Blocks Per Game</p>
-                ) : index === 4 ? (
+              className={`grid-box
+              ${index === 0 ? 'image-boxes' : ''}
+              ${index === 1 || index === 2 || index === 3 ? 'image-boxes' : ''}
+              ${index === 8 || index === 12 ? 'image-boxes' : ''}
+              ${index === 5 || index === 6 || index === 7 || index === 9 || index === 10 || index === 11 || index === 13 || index === 14 || index === 15 ? 'your-element' : ''}
+              ${clickedBoxIndex === index ? 'clicked-box' : ''}`}
+            onClick={() => handleBoxClick(index)}
+            onMouseEnter={() => handleBoxMouseEnter(index)}
+            onMouseLeave={handleBoxMouseLeave}
+          >
+            {index === 1 || index === 2 || index === 3 ? (
+              <p style={{
+                background: 'linear-gradient(45deg, #ff6b6b, #3569cf)',
+                WebkitBackgroundClip: 'text',
+                color: 'transparent'
+              }}>
+                {getRandomCategory(index)} 
+                </p>
+            ) : index === 4 ? (
                 <img
                   src={selectedImages[0]}
                   className="team-image"
+                 /* alt={`Box ${index + 1}`}*/
                 />
-              ) : index === 5 && matchedTermImage ? (
+                ) : index === 5 && matchedTermImage ? (
                 <img
                   src={matchedTermImage}
                   className="guess-image"
+                  alt={`Box ${index + 1}`}
                 />
               ) : index === 8 ? (
                 <img
@@ -203,6 +238,7 @@ function App() {
         )}
       </div>
     </div>
-  );  
-        }
-        export default App;          
+  );
+}
+
+export default App;       
