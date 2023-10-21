@@ -102,8 +102,8 @@ def get_players_for_team(url):
 def get_player_data(url):
     proxies = get_proxy.get_proxies(password)
     try:
-        response = requests.get(url) #requesting webpage
-    except Exception as e:
+        response = requests.get(url, proxies=proxies) #requesting webpage
+    except Exception:
         proxies = get_proxy.get_proxies(password)
         response = requests.get(url) #requesting webpage
     while response.status_code != 200: #keep retrying until we get a 200 status
@@ -114,7 +114,7 @@ def get_player_data(url):
             response = requests.get(url, proxies=proxies)
         except Exception as e:
             proxies = get_proxy.get_proxies(password)
-            response = requests.get(url, proxies=proxies) #requesting webpage
+            response = requests.get(url) #requesting webpage
     soup = BeautifulSoup(response.text, 'html.parser') #get html code as "soup"
     
     player = {}
@@ -276,6 +276,8 @@ def get_player_data(url):
                         player["career_totals"]["points"] = int(stat.text)
                     except Exception:
                         player["career_totals"]["points"] = 0
+    else:
+        return -1
 
 
     # Career Averages 
@@ -403,7 +405,8 @@ def get_player_data(url):
                         player["career_averages"]["fouls_per_game"] = float(stat.text)
                     except Exception:
                         player["career_averages"]["fouls_per_game"] = 0
-
+    else:
+        return -1
 
     # Season Totals
     if "season_totals" not in player:
@@ -524,6 +527,8 @@ def get_player_data(url):
             player["season_totals"]["turnovers"] = turnovers
             player["season_totals"]["fouls"] = fouls
             player["season_totals"]["points"] = points
+    else:
+        return -1
 
 
     # Season Averages
@@ -639,6 +644,8 @@ def get_player_data(url):
             player["season_averages"]['steals_per_game'] = stl
             player["season_averages"]['turnovers_per_game'] = tov
             player["season_averages"]['fouls_per_game'] = pf
+    else:
+        return -1
 
 
     # Years played (ex: "2019-20")
@@ -651,6 +658,8 @@ def get_player_data(url):
                 link = left_column.find('a')
                 if link.text not in player["years-played"]:
                     player["years-played"].append(link.text)
+    else:
+        return -1
 
 
     # Awards
@@ -850,8 +859,7 @@ def getting_all_player_data():
         
 
 def main():
-    getting_all_player_data()
-
+    print("Hello World")
 
 if __name__ == "__main__":
     main()
