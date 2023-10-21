@@ -64,8 +64,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #00ffbf;
-  border: 1px solid #00ffbf;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
   padding: 10px;
   font-size: 18px;
   font-weight: bold;
@@ -74,26 +74,28 @@
   cursor: pointer;
   transition: .3s;
 }
-.grid-box:hover {
-  background-color: rgb(155, 243, 180); 
-}
 .team-image{
 height: 100px;
 background-color: #ffffff;
 border-color: #ffffff;
+object-fit: cover;
 }
 
 .image-boxes{
-  background-color: #ffffff;
+background-color: #ffffff;
 border-color: #ffffff;
 pointer-events: none;
+height: 122px;
+padding: 10px;
 }
 .grid-box1{
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center;/*
   background-color: #00ffbf;
-  border: 1px solid #00ffbf;
+  border: 1px solid #00ffbf;*/
+  background: linear-gradient(45deg, #ff6b6b, #3569cf);
+  border: 1px solid linear-gradient(45deg, #ff6b6b, #3569cf);
   padding: 10px;
   font-size: 18px;
   font-weight: bold;
@@ -106,19 +108,18 @@ pointer-events: none;
   padding-top: 100px;
   height: 50px;
   width: 1700px;
-  background-color: #00ffbf;
-  border: 1px solid #00ffbf;
+  background-color: #ffffff;
+  border: 1px solid #000000;
 }
 .grid{
   margin-top: -168px;
-  background-color: transparent;
 }
 .search-bar {
   position: absolute;
   top: 10px; 
   left: 680px; 
-  background-color: #ffffff;
-  border: 2px solid #ffffff;
+  background: linear-gradient(45deg, #ff6b6b, #3569cf);
+  border: 1px solid linear-gradient(45deg, #ff6b6b, #3569cf);
   border-radius: 5px;
   padding: 10px;
   transition: background-color 0.3s, border 0.3s;
@@ -128,10 +129,50 @@ pointer-events: none;
   border: none;
   outline: none;
   width: 100%;
-  background-color: transparent;
-  color: #ffffff;
+ /* background-color: transparent;*/
+ /* color: #ffffff;*/
   font-size: 16px;
 }
+.guess-image{
+ 
+    height: 100px;
+    z-index: 999;
+    width: 500 px;
+}
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+}
 
+.dropdown-item {
+  padding: 8px;
+  cursor: pointer;
+}
 
-
+.dropdown-item:hover {
+  background-color: #f2f2f2;
+}
+.top-text {
+  position: absolute;
+  top: 20px;
+  left: 70px;
+  font: italic;
+  font-family: Georgia;
+  font-size: 28px;
+  font-weight: bold;
+  color: transparent; 
+  background-image: linear-gradient(45deg, #ff6b6b, #3569cf);
+  background-clip: text; 
+  -webkit-background-clip: text; 
+  color: transparent;
+}
+.your-element {
+  background: linear-gradient(45deg, #ff6b6b, #3569cf);
+  border: 1px solid linear-gradient(45deg, #ff6b6b, #3569cf);
+}
