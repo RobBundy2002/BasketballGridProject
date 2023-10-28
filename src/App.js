@@ -19,10 +19,6 @@ function App() {
   const [isDropdownTermSelected, setIsDropdownTermSelected] = useState(false);
   const searchTerms = ["Malcolm Brogdon"];
 
-  const categoriesList = [
-    "12+ Points a Game", "8+ Rebounds a Game", "1+ Blocks a Game", "All-Conference", "National Champion", "NCAA Tournament MVP", "National Champion", "Conference Player of the Year",
-  ];
-
   const schoolNames = ["Alabama", "Arizona State", "Arizona", "Arkansas", "Auburn", "Baylor", "Boston College", "California", "Clemson",
     "Colorado", "Duke", "Florida State", "Florida", "Georgia Tech", "Georgia", "Illinois", "Indiana", "Iowa State", "Iowa", "Kansas State",
     "Kansas", "Kentucky", "Louisville", "LSU", "Maryland", "Miami (FL)", "Michigan State", "Michigan", "Minnesota", "Mississippi State",
@@ -31,9 +27,13 @@ function App() {
     "Tennessee", "Texas A&M", "Texas Tech", "Texas", "UCLA", "UNC", "USC", "Utah", "Vanderbilt", "Virginia Tech", "Virginia", "Wake Forest", 
     "Washington State", "Washington", "West Virginia", "Wisconsin", "ACC"]; 
 
-  const playerAttributes = ["season_points_per_game", "season_rebounds_per_game", "season_assists_per_game"];
+  const categoriesList = ["+ Points Per Game (Season)", "+ Rebounds Per Game (Season)", "+ Assists Per Game (Season)",
+    "+ Blocks Per Game (Season)", "+ Steals Per Game (Season)"];
 
   const gridAnswers = [];
+
+  // TODO: ADD BIG12, BIG10, SEC, PAC12 LOGOS 500 X 500px
+  // TODO: ADD REST OF CATEGORIES TO GENERATE GRID FUNCTION
 
   useEffect(() => {
     let grid = generateGrid();
@@ -55,7 +55,7 @@ function App() {
     console.log(schools);
 
     //GET 3 RANDOM ATTRIBUTES
-    const shuffledAttributes = playerAttributes.sort(() => Math.random() - 0.5);
+    const shuffledAttributes = categoriesList.sort(() => Math.random() - 0.5);
     const attributes = shuffledAttributes.slice(0, 3);
     console.log(attributes);
     const numbers = [null, null, null];
@@ -63,7 +63,7 @@ function App() {
     //CROSS CHECK EACH TEAM WITH ATTRIBUTE
     for(let i=0; i<3; i++){
       let attribute = attributes[i];
-      if (attribute === "season_points_per_game"){
+      if (attribute === "+ Points Per Game (Season)"){
         //GENERATE A RANDOM NUMBER BETWEEN 5 AND 20
         const random = Math.floor(Math.random() * (16)) + 5;
         numbers[i] = random;
@@ -85,7 +85,7 @@ function App() {
           }
         }
       }
-      else if (attribute === "season_rebounds_per_game"){
+      else if (attribute === "+ Rebounds Per Game (Season)"){
         //GENERATE A RANDOM NUMBER BETWEEN 5 AND 10
         const random = Math.floor(Math.random() * (6)) + 5;
         numbers[i] = random;
@@ -107,7 +107,7 @@ function App() {
           }
         }
       }
-      else if (attribute === "season_assists_per_game"){
+      else if (attribute === "+ Assists Per Game (Season)"){
         //GENERATE A RANDOM NUMBER BETWEEN 4 AND 10
         const random = Math.floor(Math.random() * (7)) + 4;
         numbers[i] = random;
@@ -118,6 +118,50 @@ function App() {
             const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
             const hasASTS = player.season_averages.assists_per_game;
             return hasSchool && hasASTS >= random
+          })
+          if (playerOptions.length < 3) {
+            //INVALID GRID
+            return false;
+          }
+          else {
+            //ADD CORRECT PLAYERS TO ARRAY
+            gridAnswers[i][j] = playerOptions;
+          }
+        }
+      }
+      else if (attribute === "+ Blocks Per Game (Season)"){
+        //GENERATE A RANDOM NUMBER BETWEEN 1 AND 3
+        const random = Math.floor(Math.random() * (3)) + 1;
+        numbers[i] = random;
+        for(let j=0; j<3; j++){
+          let school = schools[j]
+          //FILTER THROUGH JSON DATA
+          const playerOptions = jsonData.filter(player => {
+            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
+            const hasBLKS = player.season_averages.blocks_per_game;
+            return hasSchool && hasBLKS >= random
+          })
+          if (playerOptions.length < 3) {
+            //INVALID GRID
+            return false;
+          }
+          else {
+            //ADD CORRECT PLAYERS TO ARRAY
+            gridAnswers[i][j] = playerOptions;
+          }
+        }
+      }
+      else if (attribute === "+ Steals Per Game (Season)"){
+        //GENERATE A RANDOM NUMBER BETWEEN 1 AND 3
+        const random = Math.floor(Math.random() * (3)) + 1;
+        numbers[i] = random;
+        for(let j=0; j<3; j++){
+          let school = schools[j]
+          //FILTER THROUGH JSON DATA
+          const playerOptions = jsonData.filter(player => {
+            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
+            const hasSTLS = player.season_averages.steals_per_game;
+            return hasSchool && hasSTLS >= random
           })
           if (playerOptions.length < 3) {
             //INVALID GRID
@@ -140,6 +184,20 @@ function App() {
       images.push(`/logos/${name}.png`);
     }
     setSelectedImages(images);
+
+    //UPDATE CATEGORIES
+    const categories = [];
+    for (let i=0; i<3; i++){
+      const cat = attributes[i];
+      const num = numbers[i];
+      if (num === null){
+        categories.push(cat);
+      }
+      else {
+        categories.push(num + cat);
+      }
+    }
+    setSelectedCategories(categories);
 
     return true;
   }
@@ -194,25 +252,6 @@ function App() {
     setIsDropdownTermSelected(true);
   };
 
-  const usedCategories = [];
-
-  const getRandomCategory = () => {
-    
-    const availableCategories = categoriesList.filter(category => !usedCategories.includes(category));
-  
-    
-    if (availableCategories.length > 0) {
-      const randomIndex = Math.floor(Math.random() * availableCategories.length);
-      const category = availableCategories[randomIndex];
-      
-      usedCategories.push(category);
-  
-      return category;
-    }
-    
-    return "No more categories"; //Not Needed
-  }
-
   return (
     <div className="App">
       <div className="grid">
@@ -223,51 +262,49 @@ function App() {
           </div>
         </div>
         <div className={`grid-container`}>
-            {Array.from({ length: 16 }, (_, index) => (
+          {Array.from({ length: 16 }, (_, index) => (
             <div
               key={index}
               className={`grid-box
-              ${index === 0 ? 'image-boxes' : ''}
-              ${index === 1 || index === 2 || index === 3 ? 'image-boxes' : ''}
-              ${index === 4 || index === 8 || index === 12 ? 'image-boxes' : ''}
-              ${index === 5 || index === 6 || index === 7 || index === 9 || index === 10 || index === 11 || index === 13 || index === 14 || index === 15 ? 'your-element' : ''}
-              ${clickedBoxIndex === index ? 'clicked-box' : ''}`}
+                ${index === 0 ? 'image-boxes' : ''}
+                ${index === 1 || index === 2 || index === 3 ? 'image-boxes' : ''}
+                ${index === 4 || index === 8 || index === 12 ? 'image-boxes' : ''}
+                ${index === 5 || index === 6 || index === 7 || index === 9 || index === 10 || index === 11 || index === 13 || index === 14 || index === 15 ? 'your-element' : ''}
+                ${clickedBoxIndex === index ? 'clicked-box' : ''}`
+              } 
               onClick={() => handleBoxClick(index)}
               onMouseEnter={() => handleBoxMouseEnter(index)}
               onMouseLeave={handleBoxMouseLeave}
             >
-            {index === 1 || index === 2 || index === 3 ? (
-              <p style={{
-                background: 'linear-gradient(45deg, #ff6b6b, #3569cf)',
-                WebkitBackgroundClip: 'text',
-                color: 'transparent'
-              }}>
-                {getRandomCategory(index)} 
-                </p>
-            ) : index === 4 ? (
-                <img
-                  src={selectedImages[0]}
-                  className="team-image"
-                />
-                ) : index === 5 && matchedTermImage ? (
-                <img
-                  src={matchedTermImage}
-                  className="guess-image"
-                  alt={`Box ${index + 1}`}
-                />
-              ) : index === 8 ? (
-                <img
-                  src={selectedImages[1]}
-                  alt={`Box ${index + 1}`}
-                  className="team-image"
-                />
-              ) : index === 12 ? (
-                <img
-                  src={selectedImages[2]}
-                  alt={`Box ${index + 1}`}
-                  className="team-image"
-                />
-              ) : null}
+            {index === 1 ? (
+              <p style={{background: 'linear-gradient(45deg, #ff6b6b, #3569cf)', WebkitBackgroundClip: 'text', color: 'transparent'}}>
+                {selectedCategories[0]} 
+              </p>
+            ) 
+            : index === 2 ? (
+              <p style={{background: 'linear-gradient(45deg, #ff6b6b, #3569cf)', WebkitBackgroundClip: 'text', color: 'transparent'}}>
+                {selectedCategories[1]} 
+              </p>
+            )
+            : index === 3 ? (
+              <p style={{background: 'linear-gradient(45deg, #ff6b6b, #3569cf)', WebkitBackgroundClip: 'text', color: 'transparent'}}>
+                {selectedCategories[2]} 
+              </p>
+            )
+            : index === 4 ? (
+                // eslint-disable-next-line jsx-a11y/alt-text
+                <img src={selectedImages[0]} className="team-image"/>
+            ) 
+            : index === 8 ? (
+              <img src={selectedImages[1]} alt={`Box ${index + 1}`} className="team-image"/>
+            ) 
+            : index === 12 ? (
+              <img src={selectedImages[2]} alt={`Box ${index + 1}`} className="team-image"/>
+            )
+            : index === 5 && matchedTermImage ? (
+              <img src={matchedTermImage} className="guess-image" alt={`Box ${index + 1}`}/>
+            ) : null
+            }
             </div>
           ))}
         </div>
