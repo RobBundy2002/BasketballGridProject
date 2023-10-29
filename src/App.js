@@ -33,7 +33,9 @@ function App() {
     "%+ FT Percentage (Season)", "+ Turnovers Per Game (Season)", "+ Fouls Per Game (Season)"];
 
   const gridAnswers = [];
+  let numbers = [];
 
+  // TODO: CONSOLIDATE GRID FUNCTION
   // TODO: ADD REST OF CATEGORIES TO GENERATE GRID FUNCTION
   // TODO: MAKE ONE USEEFFECT METHOD
   // TODO: MERGE ROB'S CODE TO THIS BRANCH
@@ -61,318 +63,66 @@ function App() {
     const shuffledAttributes = categoriesList.sort(() => Math.random() - 0.5);
     const attributes = shuffledAttributes.slice(0, 3);
     console.log(attributes);
-    const numbers = [null, null, null];
+    numbers = [null, null, null];
 
     //CROSS CHECK EACH TEAM WITH ATTRIBUTE
     for(let i=0; i<3; i++){
       let attribute = attributes[i];
       if (attribute === "+ Points Per Game (Season)"){
-        //GENERATE A RANDOM NUMBER BETWEEN 5 AND 20
-        const random = Math.floor(Math.random() * (16)) + 5;
-        numbers[i] = random;
-        for(let j=0; j<3; j++){
-          let school = schools[j]
-          //FILTER THROUGH JSON DATA
-          const playerOptions = jsonData.filter(player => {
-            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
-            const hasPPG = player.season_averages.points_per_game;
-            return hasSchool && hasPPG >= random
-          })
-          if (playerOptions.length < 3) {
-            //INVALID GRID
-            return false;
-          }
-          else {
-            //ADD CORRECT PLAYERS TO ARRAY
-            gridAnswers[i][j] = playerOptions;
-          }
-        }
+        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'points_per_game', 10, 20, schools, i, 3);
+        if (!valid){ return false; }
       }
       else if (attribute === "+ Rebounds Per Game (Season)"){
-        //GENERATE A RANDOM NUMBER BETWEEN 5 AND 10
-        const random = Math.floor(Math.random() * (6)) + 5;
-        numbers[i] = random;
-        for(let j=0; j<3; j++){
-          let school = schools[j]
-          //FILTER THROUGH JSON DATA
-          const playerOptions = jsonData.filter(player => {
-            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
-            const hasREBS = player.season_averages.rebounds_per_game;
-            return hasSchool && hasREBS >= random
-          })
-          if (playerOptions.length < 3) {
-            //INVALID GRID
-            return false;
-          }
-          else {
-            //ADD CORRECT PLAYERS TO ARRAY
-            gridAnswers[i][j] = playerOptions;
-          }
-        }
+        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'rebounds_per_game', 5, 10, schools, i, 3);
+        if (!valid){ return false; }
       }
       else if (attribute === "+ Assists Per Game (Season)"){
-        //GENERATE A RANDOM NUMBER BETWEEN 4 AND 10
-        const random = Math.floor(Math.random() * (7)) + 4;
-        numbers[i] = random;
-        for(let j=0; j<3; j++){
-          let school = schools[j]
-          //FILTER THROUGH JSON DATA
-          const playerOptions = jsonData.filter(player => {
-            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
-            const hasASTS = player.season_averages.assists_per_game;
-            return hasSchool && hasASTS >= random
-          })
-          if (playerOptions.length < 3) {
-            //INVALID GRID
-            return false;
-          }
-          else {
-            //ADD CORRECT PLAYERS TO ARRAY
-            gridAnswers[i][j] = playerOptions;
-          }
-        }
+        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'assists_per_game', 4, 10, schools, i, 3);
+        if (!valid){ return false; }
       }
       else if (attribute === "+ Blocks Per Game (Season)"){
-        //GENERATE A RANDOM NUMBER BETWEEN 1 AND 3
-        const random = Math.floor(Math.random() * (3)) + 1;
-        numbers[i] = random;
-        for(let j=0; j<3; j++){
-          let school = schools[j]
-          //FILTER THROUGH JSON DATA
-          const playerOptions = jsonData.filter(player => {
-            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
-            const hasBLKS = player.season_averages.blocks_per_game;
-            return hasSchool && hasBLKS >= random
-          })
-          if (playerOptions.length < 3) {
-            //INVALID GRID
-            return false;
-          }
-          else {
-            //ADD CORRECT PLAYERS TO ARRAY
-            gridAnswers[i][j] = playerOptions;
-          }
-        }
+        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'blocks_per_game', 1, 3, schools, i, 3);
+        if (!valid){ return false; }
       }
       else if (attribute === "+ Steals Per Game (Season)"){
-        //GENERATE A RANDOM NUMBER BETWEEN 1 AND 3
-        const random = Math.floor(Math.random() * (3)) + 1;
-        numbers[i] = random;
-        for(let j=0; j<3; j++){
-          let school = schools[j]
-          //FILTER THROUGH JSON DATA
-          const playerOptions = jsonData.filter(player => {
-            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
-            const hasSTLS = player.season_averages.steals_per_game;
-            return hasSchool && hasSTLS >= random
-          })
-          if (playerOptions.length < 3) {
-            //INVALID GRID
-            return false;
-          }
-          else {
-            //ADD CORRECT PLAYERS TO ARRAY
-            gridAnswers[i][j] = playerOptions;
-          }
-        }
+        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'steals_per_game', 1, 3, schools, i, 3);
+        if (!valid){ return false; }
       }
       else if (attribute === "+ Minutes Per Game (Season)"){
-        //GENERATE A RANDOM NUMBER BETWEEN 25 AND 40
-        const random = Math.floor(Math.random() * (16)) + 25;
-        numbers[i] = random;
-        for(let j=0; j<3; j++){
-          let school = schools[j]
-          //FILTER THROUGH JSON DATA
-          const playerOptions = jsonData.filter(player => {
-            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
-            const hasMINS = player.season_averages.minutes_per_game;
-            return hasSchool && hasMINS >= random
-          })
-          if (playerOptions.length < 3) {
-            //INVALID GRID
-            return false;
-          }
-          else {
-            //ADD CORRECT PLAYERS TO ARRAY
-            gridAnswers[i][j] = playerOptions;
-          }
-        }
+        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'minutes_per_game', 25, 40, schools, i, 3);
+        if (!valid){ return false; }
       }
       else if (attribute === "+ FG Made Per Game (Season)"){
-        //GENERATE A RANDOM NUMBER BETWEEN 4 AND 8
-        const random = Math.floor(Math.random() * (5)) + 4;
-        numbers[i] = random;
-        for(let j=0; j<3; j++){
-          let school = schools[j]
-          //FILTER THROUGH JSON DATA
-          const playerOptions = jsonData.filter(player => {
-            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
-            const hasFGS = player.season_averages.fg_per_game;
-            return hasSchool && hasFGS >= random
-          })
-          if (playerOptions.length < 3) {
-            //INVALID GRID
-            return false;
-          }
-          else {
-            //ADD CORRECT PLAYERS TO ARRAY
-            gridAnswers[i][j] = playerOptions;
-          }
-        }
+        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'fg_per_game', 4, 8, schools, i, 3);
+        if (!valid){ return false; }
       }
       else if (attribute === "%+ FG Percentage (Season)"){
-        //GENERATE A RANDOM NUMBER BETWEEN 45 AND 60
-        const random = Math.floor(Math.random() * (16)) + 45;
-        numbers[i] = random;
-        for(let j=0; j<3; j++){
-          let school = schools[j]
-          //FILTER THROUGH JSON DATA
-          const playerOptions = jsonData.filter(player => {
-            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
-            const hasFGP = player.season_averages.fg_percentage;
-            return hasSchool && hasFGP*100 >= random
-          })
-          if (playerOptions.length < 3) {
-            //INVALID GRID
-            return false;
-          }
-          else {
-            //ADD CORRECT PLAYERS TO ARRAY
-            gridAnswers[i][j] = playerOptions;
-          }
-        }
+        let valid = checkValidCategoryPercentage(attribute, 'season_averages', 'fg_percentage', 45, 60, schools, i, 3);
+        if (!valid){ return false; }
       }
       else if (attribute === "+ 3PT Made Per Game (Season)"){
-        //GENERATE A RANDOM NUMBER BETWEEN 2 AND 5
-        const random = Math.floor(Math.random() * (4)) + 2;
-        numbers[i] = random;
-        for(let j=0; j<3; j++){
-          let school = schools[j]
-          //FILTER THROUGH JSON DATA
-          const playerOptions = jsonData.filter(player => {
-            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
-            const has3FG = player.season_averages.three_point_per_game;
-            return hasSchool && has3FG >= random
-          })
-          if (playerOptions.length < 3) {
-            //INVALID GRID
-            return false;
-          }
-          else {
-            //ADD CORRECT PLAYERS TO ARRAY
-            gridAnswers[i][j] = playerOptions;
-          }
-        }
+        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'three_point_per_game', 2, 5, schools, i, 3);
+        if (!valid){ return false; }
       }
       else if (attribute === "%+ 3PT Percentage (Season)"){
-        //GENERATE A RANDOM NUMBER BETWEEN 35 AND 45
-        const random = Math.floor(Math.random() * (11)) + 35;
-        numbers[i] = random;
-        for(let j=0; j<3; j++){
-          let school = schools[j]
-          //FILTER THROUGH JSON DATA
-          const playerOptions = jsonData.filter(player => {
-            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
-            const has3FGP = player.season_averages.three_point_percentage;
-            return hasSchool && has3FGP*100 >= random
-          })
-          if (playerOptions.length < 3) {
-            //INVALID GRID
-            return false;
-          }
-          else {
-            //ADD CORRECT PLAYERS TO ARRAY
-            gridAnswers[i][j] = playerOptions;
-          }
-        }
+        let valid = checkValidCategoryPercentage(attribute, 'season_averages', 'three_point_percentage', 35, 45, schools, i, 3);
+        if (!valid){ return false; }
       }
       else if (attribute === "+ FT Made Per Game (Season)"){
-        //GENERATE A RANDOM NUMBER BETWEEN 4 AND 10
-        const random = Math.floor(Math.random() * (7)) + 4;
-        numbers[i] = random;
-        for(let j=0; j<3; j++){
-          let school = schools[j]
-          //FILTER THROUGH JSON DATA
-          const playerOptions = jsonData.filter(player => {
-            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
-            const hasFTM = player.season_averages.ft_per_game;
-            return hasSchool && hasFTM >= random
-          })
-          if (playerOptions.length < 3) {
-            //INVALID GRID
-            return false;
-          }
-          else {
-            //ADD CORRECT PLAYERS TO ARRAY
-            gridAnswers[i][j] = playerOptions;
-          }
-        }
+        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'ft_per_game', 4, 10, schools, i, 3);
+        if (!valid){ return false; }
       }
       else if (attribute === "%+ FT Percentage (Season)"){
-        //GENERATE A RANDOM NUMBER BETWEEN 75 AND 90
-        const random = Math.floor(Math.random() * (16)) + 75;
-        numbers[i] = random;
-        for(let j=0; j<3; j++){
-          let school = schools[j]
-          //FILTER THROUGH JSON DATA
-          const playerOptions = jsonData.filter(player => {
-            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
-            const hasFTP = player.season_averages.ft_percentage;
-            return hasSchool && hasFTP*100 >= random
-          })
-          if (playerOptions.length < 3) {
-            //INVALID GRID
-            return false;
-          }
-          else {
-            //ADD CORRECT PLAYERS TO ARRAY
-            gridAnswers[i][j] = playerOptions;
-          }
-        }
+        let valid = checkValidCategoryPercentage(attribute, 'season_averages', 'ft_percentage', 75, 90, schools, i, 3);
+        if (!valid){ return false; }
       }
       else if (attribute === "+ Turnovers Per Game (Season)"){
-        //GENERATE A RANDOM NUMBER BETWEEN 1 AND 3
-        const random = Math.floor(Math.random() * (3)) + 1;
-        numbers[i] = random;
-        for(let j=0; j<3; j++){
-          let school = schools[j]
-          //FILTER THROUGH JSON DATA
-          const playerOptions = jsonData.filter(player => {
-            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
-            const hasTOV = player.season_averages.turnovers_per_game;
-            return hasSchool && hasTOV >= random
-          })
-          if (playerOptions.length < 3) {
-            //INVALID GRID
-            return false;
-          }
-          else {
-            //ADD CORRECT PLAYERS TO ARRAY
-            gridAnswers[i][j] = playerOptions;
-          }
-        }
+        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'turnovers_per_game', 1, 3, schools, i, 3);
+        if (!valid){ return false; }
       }
       else if (attribute === "+ Fouls Per Game (Season)"){
-        //GENERATE A RANDOM NUMBER BETWEEN 2 AND 4
-        const random = Math.floor(Math.random() * (3)) + 2;
-        numbers[i] = random;
-        for(let j=0; j<3; j++){
-          let school = schools[j]
-          //FILTER THROUGH JSON DATA
-          const playerOptions = jsonData.filter(player => {
-            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
-            const hasPF = player.season_averages.fouls_per_game;
-            return hasSchool && hasPF >= random
-          })
-          if (playerOptions.length < 3) {
-            //INVALID GRID
-            return false;
-          }
-          else {
-            //ADD CORRECT PLAYERS TO ARRAY
-            gridAnswers[i][j] = playerOptions;
-          }
-        }
+        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'fouls_per_game', 2, 4, schools, i, 3);
+        if (!valid){ return false; }
       }
     }
     console.log(numbers);
@@ -400,6 +150,54 @@ function App() {
     }
     setSelectedCategories(categories);
 
+    return true;
+  }
+
+  function checkValidCategoryInteger(category, dataField1, dataField2, start, end, schools, i, needed){
+    //GENERATE A RANDOM NUMBER BETWEEN START AND END
+    const random = Math.floor(Math.random() * (end - start + 1)) + start;
+    numbers[i] = random;
+    for(let j=0; j<3; j++){
+      let school = schools[j]
+      //FILTER THROUGH JSON DATA
+      const playerOptions = jsonData.filter(player => {
+        const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
+        const hasCategory = player[dataField1][dataField2];
+        return hasSchool && hasCategory >= random
+      })
+      if (playerOptions.length < needed) {
+        //INVALID GRID
+        return false;
+      }
+      else {
+        //ADD CORRECT PLAYERS TO ARRAY
+        gridAnswers[i][j] = playerOptions;
+      }
+    }
+    return true;
+  }
+
+  function checkValidCategoryPercentage(category, dataField1, dataField2, start, end, schools, i, needed){
+    //GENERATE A RANDOM NUMBER BETWEEN START AND END
+    const random = Math.floor(Math.random() * (end - start + 1)) + start;
+    numbers[i] = random;
+    for(let j=0; j<3; j++){
+      let school = schools[j]
+      //FILTER THROUGH JSON DATA
+      const playerOptions = jsonData.filter(player => {
+        const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
+        const hasCategory = player[dataField1][dataField2];
+        return hasSchool && hasCategory*100 >= random
+      })
+      if (playerOptions.length < needed) {
+        //INVALID GRID
+        return false;
+      }
+      else {
+        //ADD CORRECT PLAYERS TO ARRAY
+        gridAnswers[i][j] = playerOptions;
+      }
+    }
     return true;
   }
     
