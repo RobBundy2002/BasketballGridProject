@@ -42,7 +42,9 @@ function App() {
     "+ Steals (Season)", "+ Blocks (Season)", "+ Turnovers (Season)", "+ Fouls (Season)", "+ Points (Season)", "+ Games Played (Career)",
     "+ Games Started (Career)", "+ Minutes Played (Career)", "+ Field Goals Made (Career)", "+ 3pt Made (Career)", "+ Free Throws Made (Career)",
     "+ Rebounds (Career)", "+ Assists (Career)", "+ Steals (Career)", "+ Blocks (Career)", "+ Turnovers (Career)", "+ Fouls (Career)",
-    "+ Points (Career)", "Played in 1980s", "Played in 1990s", "Played in 2000s", "Played in 2010s", "Played in 2020s", "Jersey Number "
+    "+ Points (Career)", "Played in 1980s", "Played in 1990s", "Played in 2000s", "Played in 2010s", "Played in 2020s", "Jersey Number ",
+    "Drafted to NBA", "National Champion", "NCAA Tournament Most Outstanding Player", "NCAA All-Tournament Team", "NCAA All-Region Team",
+    "AP Player of the Year", "Consensus All American", "Wooden Award Winner", "Naismith Award Winner", "Conference Player of the Year",
   ];
 
   const gridAnswers = [];
@@ -425,6 +427,65 @@ function App() {
           }
         }
       }
+      // DRAFTED TO NBA
+      else if (attribute === "Drafted to NBA"){
+        numbers[i] = null;
+        for(let j=0; j<3; j++){
+          let school = schools[j]
+          //FILTER THROUGH JSON DATA
+          const playerOptions = jsonData.filter(player => {
+            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
+            const hasDraft = player['drafted'];
+            return hasSchool && hasDraft;
+          })
+          if (playerOptions.length < 5) {
+            //INVALID GRID
+            return false;
+          }
+          else {
+            //ADD CORRECT PLAYERS TO ARRAY
+            gridAnswers[i][j] = playerOptions;
+          }
+        }
+      }
+      // AWARDS
+      else if (attribute === "National Champion"){
+        let valid = checkValidAwardsCategory(attribute, 'national-champion', schools, i, 10);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "NCAA Tournament Most Outstanding Player"){
+        let valid = checkValidAwardsCategory(attribute, 'ncaa-tournament-mop', schools, i, 1);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "NCAA All-Tournament Team"){
+        let valid = checkValidAwardsCategory(attribute, 'ncaa-all-tournament', schools, i, 3);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "NCAA All-Region Team"){
+        let valid = checkValidAwardsCategory(attribute, 'ncaa-all-region', schools, i, 3);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "AP Player of the Year"){
+        let valid = checkValidAwardsCategory(attribute, 'ap-poy', schools, i, 1);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "Consensus All American"){
+        let valid = checkValidAwardsCategory(attribute, 'consensus-all-american', schools, i, 1);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "Wooden Award Winner"){
+        let valid = checkValidAwardsCategory(attribute, 'wooden-award', schools, i, 1);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "Naismith Award Winner"){
+        let valid = checkValidAwardsCategory(attribute, 'naismith-award', schools, i, 1);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "Conference Player of the Year"){
+        let valid = checkValidAwardsCategory(attribute, 'conference-poy', schools, i, 3);
+        if (!valid){ return false; }
+      }
+
     }
     console.log(numbers);
     console.log(gridAnswers);
@@ -492,6 +553,28 @@ function App() {
         const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
         const hasCategory = player[dataField1][dataField2];
         return hasSchool && hasCategory*100 >= random
+      })
+      if (playerOptions.length < needed) {
+        //INVALID GRID
+        return false;
+      }
+      else {
+        //ADD CORRECT PLAYERS TO ARRAY
+        gridAnswers[i][j] = playerOptions;
+      }
+    }
+    return true;
+  }
+
+  function checkValidAwardsCategory(category, dataField, schools, i, needed){
+    numbers[i] = null;
+    for(let j=0; j<3; j++){
+      let school = schools[j]
+      //FILTER THROUGH JSON DATA
+      const playerOptions = jsonData.filter(player => {
+        const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
+        const hasAward = player['awards'][dataField];
+        return hasSchool && hasAward;
       })
       if (playerOptions.length < needed) {
         //INVALID GRID
