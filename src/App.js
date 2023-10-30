@@ -45,12 +45,13 @@ function App() {
     "+ Points (Career)", "Played in 1980s", "Played in 1990s", "Played in 2000s", "Played in 2010s", "Played in 2020s", "Jersey Number ",
     "Drafted to NBA", "National Champion", "NCAA Tournament Most Outstanding Player", "NCAA All-Tournament Team", "NCAA All-Region Team",
     "AP Player of the Year", "Consensus All American", "Wooden Award Winner", "Naismith Award Winner", "Conference Player of the Year",
+    "All-Conference Team", "Conference Defensive Player of the Year", "All-Conference Defensive Team", "Conference Rookie/Freshman of the Year",
+    "All-Conference Tournament Team", "Conference Tournament Most Valuable Player"
   ];
 
   const gridAnswers = [];
   let numbers = [];
 
-  // TODO: ADD REST OF CATEGORIES TO GENERATE GRID FUNCTION
   // TODO: MERGE ROB'S CODE TO THIS BRANCH
 
   const generateGrid = () => {
@@ -485,7 +486,34 @@ function App() {
         let valid = checkValidAwardsCategory(attribute, 'conference-poy', schools, i, 3);
         if (!valid){ return false; }
       }
-
+      else if (attribute === "All-Conference Team"){
+        let valid = checkValidAwardsCategory(attribute, 'all-conference-team', schools, i, 3);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "Conference Defensive Player of the Year"){
+        let valid = checkValidAwardsCategory(attribute, 'conference-dpoy', schools, i, 3);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "All-Conference Defensive Team"){
+        let valid = checkValidAwardsCategory(attribute, 'all-conference-defense', schools, i, 3);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "Conference Rookie/Freshman of the Year"){
+        let valid = checkValidAwardsCategory(attribute, 'conference-roy', schools, i, 3);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "Conference Defensive Player of the Year"){
+        let valid = checkValidAwardsCategory(attribute, 'conference-dpoy', schools, i, 3);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "All-Conference Tournament Team"){
+        let valid = checkValidAwardsCategory(attribute, 'all-conference-tournament', schools, i, 3);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "Conference Tournament Most Valuable Player"){
+        let valid = checkValidAwardsCategory(attribute, 'conference-dpoy', schools, i, 1);
+        if (!valid){ return false; }
+      }
     }
     console.log(numbers);
     console.log(gridAnswers);
