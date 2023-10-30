@@ -42,7 +42,7 @@ function App() {
     "+ Steals (Season)", "+ Blocks (Season)", "+ Turnovers (Season)", "+ Fouls (Season)", "+ Points (Season)", "+ Games Played (Career)",
     "+ Games Started (Career)", "+ Minutes Played (Career)", "+ Field Goals Made (Career)", "+ 3pt Made (Career)", "+ Free Throws Made (Career)",
     "+ Rebounds (Career)", "+ Assists (Career)", "+ Steals (Career)", "+ Blocks (Career)", "+ Turnovers (Career)", "+ Fouls (Career)",
-    "+ Points (Career)", "Played in 1980s", "Played in 1990s", "Played in 2000s", "Played in 2010s", "Played in 2020s"
+    "+ Points (Career)", "Played in 1980s", "Played in 1990s", "Played in 2000s", "Played in 2010s", "Played in 2020s", "Jersey Number "
   ];
 
   const gridAnswers = [];
@@ -291,6 +291,7 @@ function App() {
         let valid = checkValidStatsCategoryInteger(attribute, 'career_totals', 'points', 300, 1000, schools, i, 100);
         if (!valid){ return false; }
       }
+      // DECADE PLAYED
       else if (attribute === "Played in 1980s"){
         numbers[i] = null;
         for(let j=0; j<3; j++){
@@ -401,6 +402,29 @@ function App() {
           }
         }
       }
+      // JERSEY NUMBER
+      else if (attribute === "Jersey Number "){
+        // GENERATE JERSEY NUMBER 0-35
+        const random = Math.floor(Math.random() * (36));
+        numbers[i] = random;
+        for(let j=0; j<3; j++){
+          let school = schools[j]
+          //FILTER THROUGH JSON DATA
+          const playerOptions = jsonData.filter(player => {
+            const hasSchool = player.teams.includes(school) || player.conferences.includes(school);
+            const hasNumbers = player['jersey_numbers'];
+            return hasSchool && hasNumbers.includes(random);
+          })
+          if (playerOptions.length < 3) {
+            //INVALID GRID
+            return false;
+          }
+          else {
+            //ADD CORRECT PLAYERS TO ARRAY
+            gridAnswers[i][j] = playerOptions;
+          }
+        }
+      }
     }
     console.log(numbers);
     console.log(gridAnswers);
@@ -418,7 +442,10 @@ function App() {
     for (let i=0; i<3; i++){
       const cat = attributes[i];
       const num = numbers[i];
-      if (num === null){
+      if (cat === "Jersey Number "){
+        categories.push(cat + num);
+      }
+      else if (num === null){
         categories.push(cat);
       }
       else {
