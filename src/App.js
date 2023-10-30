@@ -27,14 +27,21 @@ function App() {
     "Tennessee", "Texas A&M", "Texas Tech", "Texas", "UCLA", "UNC", "USC", "Utah", "Vanderbilt", "Virginia Tech", "Virginia", "Wake Forest", 
     "Washington State", "Washington", "West Virginia", "Wisconsin", "ACC", "Big 12", "Big Ten", "Pac-12", "SEC"]; 
 
-  const categoriesList = ["+ Points Per Game (Season)", "+ Rebounds Per Game (Season)", "+ Assists Per Game (Season)",
+  const categoriesList = [
+    "+ Points Per Game (Season)", "+ Rebounds Per Game (Season)", "+ Assists Per Game (Season)",
     "+ Blocks Per Game (Season)", "+ Steals Per Game (Season)", "+ Minutes Per Game (Season)", "+ FG Made Per Game (Season)",
     "%+ FG Percentage (Season)", "+ 3PT Made Per Game (Season)", "%+ 3PT Percentage (Season)", "+ FT Made Per Game (Season)",
     "%+ FT Percentage (Season)", "+ Turnovers Per Game (Season)", "+ Fouls Per Game (Season)", "+ Minutes Per Game (Career)",
     "+ FG Made Per Game (Career)", "%+ FG Percentage (Career)", "+ 3PT Made Per Game (Career)", "%+ 3PT Percentage (Career)",
     "+ FT Made Per Game (Career)", "%+ FT Percentage (Career)", "+ Turnovers Per Game (Career)", "+ Fouls Per Game (Career)",
     "+ Points Per Game (Career)", "+ Rebounds Per Game (Career)", "+ Assists Per Game (Career)", "+ Blocks Per Game (Career)",
-    "+ Steals Per Game (Career)"];
+    "+ Steals Per Game (Career)", "+ Games Played (Season)", "+ Games Started (Season)", "+ Minutes Played (Season)",
+    "+ Field Goals Made (Season)", "+ 3pt Made (Season)", "+ Free Throws Made (Season)", "+ Rebounds (Season)", "+ Assists (Season)",
+    "+ Steals (Season)", "+ Blocks (Season)", "+ Turnovers (Season)", "+ Fouls (Season)", "+ Points (Season)", "+ Games Played (Career)",
+    "+ Games Started (Career)", "+ Minutes Played (Career)", "+ Field Goals Made (Career)", "+ 3pt Made (Career)", "+ Free Throws Made (Career)",
+    "+ Rebounds (Career)", "+ Assists (Career)", "+ Steals (Career)", "+ Blocks (Career)", "+ Turnovers (Career)", "+ Fouls (Career)",
+    "+ Points (Career)"
+  ];
 
   const gridAnswers = [];
   let numbers = [];
@@ -71,8 +78,9 @@ function App() {
     //CROSS CHECK EACH TEAM WITH ATTRIBUTE
     for(let i=0; i<3; i++){
       let attribute = attributes[i];
+      // SEASON AVERAGES
       if (attribute === "+ Points Per Game (Season)"){
-        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'points_per_game', 10, 20, schools, i, 3);
+        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'points_per_game', 10, 20, schools, i, 3, 5);
         if (!valid){ return false; }
       }
       else if (attribute === "+ Rebounds Per Game (Season)"){
@@ -92,7 +100,7 @@ function App() {
         if (!valid){ return false; }
       }
       else if (attribute === "+ Minutes Per Game (Season)"){
-        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'minutes_per_game', 25, 40, schools, i, 3);
+        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'minutes_per_game', 25, 40, schools, i, 3, 5);
         if (!valid){ return false; }
       }
       else if (attribute === "+ FG Made Per Game (Season)"){
@@ -100,7 +108,7 @@ function App() {
         if (!valid){ return false; }
       }
       else if (attribute === "%+ FG Percentage (Season)"){
-        let valid = checkValidCategoryPercentage(attribute, 'season_averages', 'fg_percentage', 45, 60, schools, i, 3);
+        let valid = checkValidCategoryPercentage(attribute, 'season_averages', 'fg_percentage', 45, 60, schools, i, 3, 5);
         if (!valid){ return false; }
       }
       else if (attribute === "+ 3PT Made Per Game (Season)"){
@@ -108,15 +116,15 @@ function App() {
         if (!valid){ return false; }
       }
       else if (attribute === "%+ 3PT Percentage (Season)"){
-        let valid = checkValidCategoryPercentage(attribute, 'season_averages', 'three_point_percentage', 35, 45, schools, i, 3);
+        let valid = checkValidCategoryPercentage(attribute, 'season_averages', 'three_point_percentage', 35, 45, schools, i, 3, 5);
         if (!valid){ return false; }
       }
       else if (attribute === "+ FT Made Per Game (Season)"){
-        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'ft_per_game', 4, 10, schools, i, 3);
+        let valid = checkValidCategoryInteger(attribute, 'season_averages', 'ft_per_game', 4, 10, schools, i, 3, 2);
         if (!valid){ return false; }
       }
       else if (attribute === "%+ FT Percentage (Season)"){
-        let valid = checkValidCategoryPercentage(attribute, 'season_averages', 'ft_percentage', 75, 90, schools, i, 3);
+        let valid = checkValidCategoryPercentage(attribute, 'season_averages', 'ft_percentage', 75, 90, schools, i, 3, 5);
         if (!valid){ return false; }
       }
       else if (attribute === "+ Turnovers Per Game (Season)"){
@@ -127,8 +135,9 @@ function App() {
         let valid = checkValidCategoryInteger(attribute, 'season_averages', 'fouls_per_game', 2, 4, schools, i, 3);
         if (!valid){ return false; }
       }
+      // CAREER AVERAGES
       else if (attribute === "+ Minutes Per Game (Career)"){
-        let valid = checkValidCategoryInteger(attribute, 'career_averages', 'minutes_per_game', 25, 40, schools, i, 3);
+        let valid = checkValidCategoryInteger(attribute, 'career_averages', 'minutes_per_game', 25, 40, schools, i, 3, 5);
         if (!valid){ return false; }
       }
       else if (attribute === "+ FG Made Per Game (Career)"){
@@ -136,7 +145,7 @@ function App() {
         if (!valid){ return false; }
       }
       else if (attribute === "%+ FG Percentage (Career)"){
-        let valid = checkValidCategoryPercentage(attribute, 'career_averages', 'fg_percentage', 45, 60, schools, i, 3);
+        let valid = checkValidCategoryPercentage(attribute, 'career_averages', 'fg_percentage', 45, 60, schools, i, 3, 5);
         if (!valid){ return false; }
       }
       else if (attribute === "+ 3PT Made Per Game (Career)"){
@@ -144,15 +153,15 @@ function App() {
         if (!valid){ return false; }
       }
       else if (attribute === "%+ 3PT Percentage (Career)"){
-        let valid = checkValidCategoryPercentage(attribute, 'career_averages', 'three_point_percentage', 35, 45, schools, i, 3);
+        let valid = checkValidCategoryPercentage(attribute, 'career_averages', 'three_point_percentage', 35, 45, schools, i, 3, 5);
         if (!valid){ return false; }
       }
       else if (attribute === "+ FT Made Per Game (Career)"){
-        let valid = checkValidCategoryInteger(attribute, 'career_averages', 'ft_per_game', 4, 10, schools, i, 3);
+        let valid = checkValidCategoryInteger(attribute, 'career_averages', 'ft_per_game', 4, 10, schools, i, 3, 2);
         if (!valid){ return false; }
       }
       else if (attribute === "%+ FT Percentage (Career)"){
-        let valid = checkValidCategoryPercentage(attribute, 'career_averages', 'ft_percentage', 75, 90, schools, i, 3);
+        let valid = checkValidCategoryPercentage(attribute, 'career_averages', 'ft_percentage', 75, 90, schools, i, 3, 5);
         if (!valid){ return false; }
       }
       else if (attribute === "+ Turnovers Per Game (Career)"){
@@ -164,7 +173,7 @@ function App() {
         if (!valid){ return false; }
       }
       else if (attribute === "+ Points Per Game (Career)"){
-        let valid = checkValidCategoryInteger(attribute, 'career_averages', 'points_per_game', 10, 20, schools, i, 3);
+        let valid = checkValidCategoryInteger(attribute, 'career_averages', 'points_per_game', 10, 20, schools, i, 3, 5);
         if (!valid){ return false; }
       }
       else if (attribute === "+ Rebounds Per Game (Career)"){
@@ -181,6 +190,112 @@ function App() {
       }
       else if (attribute === "+ Steals Per Game (Career)"){
         let valid = checkValidCategoryInteger(attribute, 'career_averages', 'steals_per_game', 1, 3, schools, i, 3);
+        if (!valid){ return false; }
+      }
+      // SEASON TOTALS
+      else if (attribute === "+ Games Played (Season)"){
+        let valid = checkValidCategoryInteger(attribute, 'season_totals', 'games_played', 30, 40, schools, i, 3, 5);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Games Started (Season)"){
+        let valid = checkValidCategoryInteger(attribute, 'season_totals', 'games_started', 30, 40, schools, i, 3, 5);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Minutes Played (Season)"){
+        let valid = checkValidCategoryInteger(attribute, 'season_totals', 'minutes_played', 800, 1200, schools, i, 3, 100);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Field Goals Made (Season)"){
+        let valid = checkValidCategoryInteger(attribute, 'season_totals', 'field_goals_made', 100, 500, schools, i, 3, 100);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ 3pt Made (Season)"){
+        let valid = checkValidCategoryInteger(attribute, 'season_totals', 'three_point_made', 50, 100, schools, i, 3, 10);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Free Throws Made (Season)"){
+        let valid = checkValidCategoryInteger(attribute, 'season_totals', 'free_throws_made', 50, 150, schools, i, 3, 50);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Rebounds (Season)"){
+        let valid = checkValidCategoryInteger(attribute, 'season_totals', 'rebounds', 150, 300, schools, i, 3, 25);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Assists (Season)"){
+        let valid = checkValidCategoryInteger(attribute, 'season_totals', 'assists', 150, 300, schools, i, 3, 25);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Steals (Season)"){
+        let valid = checkValidCategoryInteger(attribute, 'season_totals', 'steals', 40, 100, schools, i, 3, 20);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Blocks (Season)"){
+        let valid = checkValidCategoryInteger(attribute, 'season_totals', 'blocks', 40, 100, schools, i, 3, 20);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Turnovers (Season)"){
+        let valid = checkValidCategoryInteger(attribute, 'season_totals', 'turnovers', 50, 100, schools, i, 3, 25);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Fouls (Season)"){
+        let valid = checkValidCategoryInteger(attribute, 'season_totals', 'fouls', 50, 150, schools, i, 3, 25);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Points (Season)"){
+        let valid = checkValidCategoryInteger(attribute, 'season_totals', 'points', 300, 1000, schools, i, 3, 100);
+        if (!valid){ return false; }
+      }
+      // CAREER TOTALS
+      else if (attribute === "+ Games Played (Career)"){
+        let valid = checkValidCategoryInteger(attribute, 'career_totals', 'games_played', 30, 40, schools, i, 3, 5);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Games Started (Career)"){
+        let valid = checkValidCategoryInteger(attribute, 'career_totals', 'games_started', 30, 40, schools, i, 3, 5);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Minutes Played (Career)"){
+        let valid = checkValidCategoryInteger(attribute, 'career_totals', 'minutes_played', 800, 1200, schools, i, 3, 100);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Field Goals Made (Career)"){
+        let valid = checkValidCategoryInteger(attribute, 'career_totals', 'field_goals_made', 100, 500, schools, i, 3, 100);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ 3pt Made (Career)"){
+        let valid = checkValidCategoryInteger(attribute, 'career_totals', 'three_point_made', 50, 100, schools, i, 3, 10);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Free Throws Made (Career)"){
+        let valid = checkValidCategoryInteger(attribute, 'career_totals', 'free_throws_made', 50, 150, schools, i, 3, 50);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Rebounds (Career)"){
+        let valid = checkValidCategoryInteger(attribute, 'career_totals', 'rebounds', 150, 300, schools, i, 3, 25);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Assists (Career)"){
+        let valid = checkValidCategoryInteger(attribute, 'career_totals', 'assists', 150, 300, schools, i, 3, 25);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Steals (Career)"){
+        let valid = checkValidCategoryInteger(attribute, 'career_totals', 'steals', 40, 100, schools, i, 3, 20);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Blocks (Career)"){
+        let valid = checkValidCategoryInteger(attribute, 'career_totals', 'blocks', 40, 100, schools, i, 3, 20);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Turnovers (Career)"){
+        let valid = checkValidCategoryInteger(attribute, 'career_totals', 'turnovers', 50, 100, schools, i, 3, 25);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Fouls (Career)"){
+        let valid = checkValidCategoryInteger(attribute, 'career_totals', 'fouls', 50, 150, schools, i, 3, 25);
+        if (!valid){ return false; }
+      }
+      else if (attribute === "+ Points (Career)"){
+        let valid = checkValidCategoryInteger(attribute, 'career_totals', 'points', 300, 1000, schools, i, 100);
         if (!valid){ return false; }
       }
     }
@@ -212,9 +327,9 @@ function App() {
     return true;
   }
 
-  function checkValidCategoryInteger(category, dataField1, dataField2, start, end, schools, i, needed){
+  function checkValidCategoryInteger(category, dataField1, dataField2, start, end, schools, i, needed, jump = 1){
     //GENERATE A RANDOM NUMBER BETWEEN START AND END
-    const random = Math.floor(Math.random() * (end - start + 1)) + start;
+    const random = Math.floor(Math.random() * ((end - start) / jump + 1)) * jump + start;
     numbers[i] = random;
     for(let j=0; j<3; j++){
       let school = schools[j]
@@ -236,9 +351,9 @@ function App() {
     return true;
   }
 
-  function checkValidCategoryPercentage(category, dataField1, dataField2, start, end, schools, i, needed){
+  function checkValidCategoryPercentage(category, dataField1, dataField2, start, end, schools, i, needed, jump = 1){
     //GENERATE A RANDOM NUMBER BETWEEN START AND END
-    const random = Math.floor(Math.random() * (end - start + 1)) + start;
+    const random = Math.floor(Math.random() * ((end - start) / jump + 1)) * jump + start;
     numbers[i] = random;
     for(let j=0; j<3; j++){
       let school = schools[j]
