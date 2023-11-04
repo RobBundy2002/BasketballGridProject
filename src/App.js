@@ -1,7 +1,11 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import jsonData from './data/player_data.json';
-import InputBox from './components/InputBox';
+import InputGrid from './components/InputGrid';
+import SchoolGrid from './components/SchoolGrid';
+import CategoryGrid from './components/CategoryGrid';
+import RarityBox from './components/RarityBox';
+import HoopGrid from './components/HoopGrid';
 
 function App() {
   //ARRAY OF IMAGE LINKS
@@ -9,16 +13,6 @@ function App() {
 
   //ARRAY OF CATEGORIES
   const [selectedCategories, setSelectedCategories] = useState([]);
-
-  const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
-  const [clickedBoxIndex, setClickedBoxIndex] = useState(null);
-  const [selectedSearchTerm, setSelectedSearchTerm] = useState('');
-  const [isMatchedTerm, setIsMatchedTerm] = useState(false); // Define the state variable
-  const [matchedTermImage, setMatchedTermImage] = useState(null);
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const [searchResults, setSearchResults] = useState([]);
-  const [isDropdownTermSelected, setIsDropdownTermSelected] = useState(false);
-  const searchTerms = ["Malcolm Brogdon"];
 
   const schoolNames = [
     "Alabama", "Arizona State", "Arizona", "Arkansas", "Auburn", "Baylor", "Boston College", "California", "Clemson",
@@ -52,8 +46,6 @@ function App() {
 
   const gridAnswers = [];
   let numbers = [];
-
-  // TODO: MERGE ROB'S CODE TO THIS BRANCH
 
   const generateGrid = () => {
     //GENERATING A VALID GRID
@@ -616,37 +608,6 @@ function App() {
     }
     return true;
   }
-    
-  const handleBoxClick = (index) => {
-    if (![0, 1, 2, 3, 4, 8, 12].includes(index)) {
-      setClickedBoxIndex(index);
-      setSelectedSearchTerm('');
-      setIsSearchBarVisible(true);
-    }
-  };
-  
-  const handleBoxMouseEnter = (index) => {
-    if (index !== clickedBoxIndex && ![0, 1, 2, 3, 4, 8, 12].includes(index)) {
-      setClickedBoxIndex(null);
-    }
-  };
-  
-  const handleBoxMouseLeave = () => {
-    if (clickedBoxIndex !== null && ![0, 1, 2, 3, 4, 8, 12].includes(clickedBoxIndex)) {
-      setClickedBoxIndex(null);
-    }
-  };
-  
-  const handleOutsideClick = (e) => {
-    if (!e.target.closest('.grid-box') && !e.target.closest('.search-bar')) {
-      setIsSearchBarVisible(false);
-    }
-  };
-
-  const handleDropdownTermSelect = (selectedTerm) => {
-    setSelectedSearchTerm(selectedTerm);
-    setIsDropdownTermSelected(true);
-  };
 
   useEffect(() => {
     let grid = generateGrid();
@@ -655,82 +616,17 @@ function App() {
     }
     console.log(grid)
 
-    const termMatch = searchTerms.find((term) => term.toLowerCase() === selectedSearchTerm.toLowerCase());
-    if (termMatch) {
-      setMatchedTermImage('/logos/Brogdon_Malcolm.jpg');
-      setIsMatchedTerm(true);
-    } else {
-      setMatchedTermImage(null);
-      setIsMatchedTerm(false);
-    }
-
-    window.addEventListener('click', handleOutsideClick);
-    return () => {
-      window.removeEventListener('click', handleOutsideClick);
-    };
-
-  }, [selectedSearchTerm])
+  }, [])
 
   return (
     <div className="App">
-      <div className="grid">
-        <div className="top-bar">
-          {/* Content for the top bar */}
-          <div className="top-text">
-            Patrick, Grant, and Rob - The Side Project
-          </div>
-        </div>
-        <div className={`grid-container`}>
-          {Array.from({ length: 16 }, (_, index) => (
-            <div
-              key={index}
-              className={`grid-box
-                ${index === 0 ? 'image-boxes' : ''}
-                ${index === 1 || index === 2 || index === 3 ? 'image-boxes' : ''}
-                ${index === 4 || index === 8 || index === 12 ? 'image-boxes' : ''}
-                ${index === 5 || index === 6 || index === 7 || index === 9 || index === 10 || index === 11 || index === 13 || index === 14 || index === 15 ? 'your-element' : ''}
-                ${clickedBoxIndex === index ? 'clicked-box' : ''}`
-              } 
-              onClick={() => handleBoxClick(index)}
-              onMouseEnter={() => handleBoxMouseEnter(index)}
-              onMouseLeave={handleBoxMouseLeave}
-            >
-            {index === 1 ? (
-              <p style={{background: 'linear-gradient(45deg, #ff6b6b, #3569cf)', WebkitBackgroundClip: 'text', color: 'transparent'}}>
-                {selectedCategories[0]} 
-              </p>
-            ) 
-            : index === 2 ? (
-              <p style={{background: 'linear-gradient(45deg, #ff6b6b, #3569cf)', WebkitBackgroundClip: 'text', color: 'transparent'}}>
-                {selectedCategories[1]} 
-              </p>
-            )
-            : index === 3 ? (
-              <p style={{background: 'linear-gradient(45deg, #ff6b6b, #3569cf)', WebkitBackgroundClip: 'text', color: 'transparent'}}>
-                {selectedCategories[2]} 
-              </p>
-            )
-            : index === 4 ? (
-                // eslint-disable-next-line jsx-a11y/alt-text
-                <img src={selectedImages[0]} className="team-image"/>
-            ) 
-            : index === 8 ? (
-              <img src={selectedImages[1]} alt={`Box ${index + 1}`} className="team-image"/>
-            ) 
-            : index === 12 ? (
-              <img src={selectedImages[2]} alt={`Box ${index + 1}`} className="team-image"/>
-            )
-            : index === 5 && matchedTermImage ? (
-              <img src={matchedTermImage} className="guess-image" alt={`Box ${index + 1}`}/>
-            ) : null
-            }
-            </div>
-          ))}
+      <div  className='top-bar'>
+        {/* Content for the top bar */}
+        <div className='top-text'>
+          Patrick, Grant, and Rob - The Side Project
         </div>
       </div>
-      <div className='test'>
-        <InputBox row={1} column={1}></InputBox>
-      </div>      
+      <HoopGrid></HoopGrid>
     </div>
   );
 }
