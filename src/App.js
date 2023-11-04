@@ -1,6 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import jsonData from './data/player_data.json';
+import InputBox from './components/InputBox';
 
 function App() {
   //ARRAY OF IMAGE LINKS
@@ -727,44 +728,9 @@ function App() {
           ))}
         </div>
       </div>
-      <div className="box-container">
-        {searchTerms.map((term, index) => (
-          <button key={index} className="box-button">
-            {term}
-          </button>
-        ))}
-      </div>
-      <div className="search-bar-container">
-        {isSearchBarVisible && (
-          <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Search..."
-              value={selectedSearchTerm}
-              onChange={(e) => {
-                const searchTerm = e.target.value;
-                setSelectedSearchTerm(searchTerm);
-                const results = searchTerms.filter((term) =>
-                  term.toLowerCase().includes(searchTerm.toLowerCase())
-                );
-                setSearchResults(results);
-              }}
-              onFocus={() => setIsDropdownVisible(true)}
-              onBlur={() => setIsDropdownVisible(false)}
-            />
-            {/* Dropdown for search suggestions */}
-            {isDropdownVisible && searchResults.length > 0 && (
-              <div className="dropdown">
-                {searchResults.map((result, index) => (
-                  <div key={index} className="dropdown-item" onClick={() => setSelectedSearchTerm(result)}>
-                    {result}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-      </div>
+      <div className='test'>
+        <InputBox row={1} column={1}></InputBox>
+      </div>      
     </div>
   );
 }
