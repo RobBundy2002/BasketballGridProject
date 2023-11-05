@@ -4,9 +4,9 @@ import SchoolImage from "./SchoolBox";
 
 const SchoolGrid = ({ schools }) => (
     <StyledSchoolGrid>
-        <SchoolImage image={"/logos/ACC.png"}></SchoolImage>
-        <SchoolImage image={"/logos/ACC.png"}></SchoolImage>
-        <SchoolImage image={"/logos/ACC.png"}></SchoolImage>
+        <SchoolImage image={schools[0]}></SchoolImage>
+        <SchoolImage image={schools[1]}></SchoolImage>
+        <SchoolImage image={schools[2]}></SchoolImage>
     </StyledSchoolGrid>
 )
 

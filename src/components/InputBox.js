@@ -1,12 +1,12 @@
 import React from "react";
 import { StyledInputBox } from "./styles/StyledInputBox";
 
-const InputBox = ({ row, column }) => (
-    <StyledInputBox onClick={() => clicked(row, column)}></StyledInputBox>
+const InputBox = ({ row, column, answers }) => (
+    <StyledInputBox onClick={() => clicked(answers, row)}></StyledInputBox>
 )
 
-const clicked = (row, column) => {
-    console.log(row, column);
+const clicked = ( answers, row ) => {
+    console.log(answers[row]);
 }
 
 export default InputBox;

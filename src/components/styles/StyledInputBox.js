@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const StyledInputBox = styled.div`
     background: linear-gradient(45deg, #ff6b6b, #3569cf);
-    border: 1px solid linear-gradient(45deg, #ff6b6b, #3569cf);
     display: flex;
     align-items: center;
     justify-content: center;

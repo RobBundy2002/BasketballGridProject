@@ -4,9 +4,9 @@ import CategoryBox from "./CategoryBox";
 
 const CategoryGrid = ({ categories }) => (
     <StyledCategoryGrid>
-        <CategoryBox category={"Text"}></CategoryBox>
-        <CategoryBox category={"Text"}></CategoryBox>
-        <CategoryBox category={"Text"}></CategoryBox>
+        <CategoryBox category={categories[0]}></CategoryBox>
+        <CategoryBox category={categories[1]}></CategoryBox>
+        <CategoryBox category={categories[2]}></CategoryBox>
     </StyledCategoryGrid>
 )
 
