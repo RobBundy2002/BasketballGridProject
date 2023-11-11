@@ -7,8 +7,13 @@ import InputGrid from "./InputGrid";
 import SchoolGrid from "./SchoolGrid";
 import { generateGrid, gridAnswers, images, categories } from "./GenerateGrid";
 import { StyledContainer } from "./styles/StyledContainer";
+import { StyledSearchBar } from "./styles/StyledSearchBar";
+import TextBox from "./TextBox";
+import { generateSearchTerms } from "./GetPlayers";
 
 const HoopGrid = () => {
+
+    const searchTerms = generateSearchTerms(14000);
 
     // ARRAY OF IMAGE LINKS
     const [selectedImages, setSelectedImages] = useState([]);
@@ -35,7 +40,9 @@ const HoopGrid = () => {
 
     return (
         <StyledContainer>
-            <p>Dropdown</p>
+            <StyledSearchBar>
+                <TextBox></TextBox>
+            </StyledSearchBar>
             <StyledHoopGrid>
                 <RarityBox rarity={"Rarity"}></RarityBox>
                 <CategoryGrid categories={selectedCategories}></CategoryGrid>
