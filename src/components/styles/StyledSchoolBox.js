@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledSchoolBox = styled.div`
+    background-color: lightgray;
     display: flex;
     align-items: center;
     justify-content: center;

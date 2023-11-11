@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledRarityBox = styled.div`
+    background-color: lightgray;
     display: flex;
     align-items: center;
     justify-content: center;

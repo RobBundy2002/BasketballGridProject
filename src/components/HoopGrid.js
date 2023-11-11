@@ -6,6 +6,7 @@ import CategoryGrid from "./CategoryGrid";
 import InputGrid from "./InputGrid";
 import SchoolGrid from "./SchoolGrid";
 import { generateGrid, gridAnswers, images, categories } from "./GenerateGrid";
+import { StyledContainer } from "./styles/StyledContainer";
 
 const HoopGrid = () => {
 
@@ -33,12 +34,15 @@ const HoopGrid = () => {
     }, [])
 
     return (
-        <StyledHoopGrid>
-            <RarityBox rarity={"Rarity"}></RarityBox>
-            <CategoryGrid categories={selectedCategories}></CategoryGrid>
-            <SchoolGrid schools={selectedImages}></SchoolGrid>
-            <InputGrid answers={answers}></InputGrid>
-        </StyledHoopGrid>
+        <StyledContainer>
+            <p>Dropdown</p>
+            <StyledHoopGrid>
+                <RarityBox rarity={"Rarity"}></RarityBox>
+                <CategoryGrid categories={selectedCategories}></CategoryGrid>
+                <SchoolGrid schools={selectedImages}></SchoolGrid>
+                <InputGrid answers={answers}></InputGrid>
+            </StyledHoopGrid>
+        </StyledContainer>
     );
 }
 
