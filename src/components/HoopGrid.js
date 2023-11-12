@@ -67,7 +67,7 @@ const HoopGrid = () => {
                 <CategoryGrid categories={selectedCategories}></CategoryGrid>
                 <SchoolGrid schools={selectedImages}></SchoolGrid>
                 <StyledInputGrid>
-                    <InputBox row={0} column={0} answers={answers[0]} guess={guess00} setSearchVisible={setSearchVisible00}></InputBox>
+                    <InputBox row={0} column={0} answers={answers[0]} guess={guess00} setSearchVisible={setSearchVisible00} setSearchTerm={setSearchTerm00}></InputBox>
                     <InputBox row={0} column={1} answers={answers[1]}></InputBox>
                     <InputBox row={0} column={2} answers={answers[2]}></InputBox>
                     <InputBox row={1} column={0} answers={answers[0]}></InputBox>
