@@ -449,7 +449,7 @@ const generateGrid = () => {
             let valid = checkValidAwardsCategory(attribute, 'all-conference-defense', schools, i, 3);
             if (!valid){ return false; }
         }
-        else if (attribute === "Conference Rookie/Freshman of the Year"){
+        else if (attribute === "Conference Freshman of the Year"){
             let valid = checkValidAwardsCategory(attribute, 'conference-roy', schools, i, 3);
             if (!valid){ return false; }
         }

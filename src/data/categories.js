@@ -14,7 +14,7 @@ const categoriesList = [
     "+ Points (Career)", "Played in 1980s", "Played in 1990s", "Played in 2000s", "Played in 2010s", "Played in 2020s", "Jersey Number ",
     "Drafted to NBA", "National Champion", "NCAA Tournament Most Outstanding Player", "NCAA All-Tournament Team", "NCAA All-Region Team",
     "AP Player of the Year", "Consensus All American", "Wooden Award Winner", "Naismith Award Winner", "Conference Player of the Year",
-    "All-Conference Team", "Conference Defensive Player of the Year", "All-Conference Defensive Team", "Conference Rookie/Freshman of the Year",
+    "All-Conference Team", "Conference Defensive Player of the Year", "All-Conference Defensive Team", "Conference Freshman of the Year",
     "All-Conference Tournament Team", "Conference Tournament Most Valuable Player"
 ];
 
