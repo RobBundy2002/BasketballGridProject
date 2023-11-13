@@ -8,13 +8,21 @@ export const get_player = (name) => {
 }
 
 export const generateSearchTerms = (limit) => {
+    const searchTermsSet = new Set();
     const searchTerms = [];
+  
     for (const player of jsonData) {
-        if (searchTerms.length < limit) {
-            searchTerms.push(player.name);
-        } else {
-            break;
+      if (searchTermsSet.size < limit) {
+        const playerName = player.name;
+        if (!searchTermsSet.has(playerName)) {
+          searchTermsSet.add(playerName);
+          searchTerms.push(playerName);
         }
+      } 
+      else {
+        break;
+      }
     }
+  
     return searchTerms;
-};
+  };
