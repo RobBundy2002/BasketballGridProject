@@ -21,6 +21,7 @@ import { useInitialize21 } from "../states/row2column1";
 import { useInitialize02 } from "../states/row0column2";
 import { useInitialize12 } from "../states/row1column2";
 import { useInitialize22 } from "../states/row2column2";
+import { StyledSearchBarContainer } from "./styles/StyledSearchBarContainer";
 
 const HoopGrid = () => {
 
@@ -57,6 +58,15 @@ const HoopGrid = () => {
         setSearchVisible02(false);
         setSearchVisible12(false);
         setSearchVisible22(false);
+        setSearchResults00([]);
+        setSearchResults10([]);
+        setSearchResults20([]);
+        setSearchResults01([]);
+        setSearchResults11([]);
+        setSearchResults21([]);
+        setSearchResults02([]);
+        setSearchResults12([]);
+        setSearchResults22([]);
     }
 
     const clearAllSearches = () => {
@@ -148,60 +158,62 @@ const HoopGrid = () => {
                     <InputBox row={2} column={2} answers={answers[2]} guess={guess22} setSearchVisible={setSearchVisible22} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
                 </StyledInputGrid>
             </StyledHoopGrid>
-            {searchVisible00 && (
-                <StyledSearchBar>
-                    <TextBox value={searchTerm00} setValue={setSearchTerm00} searchTerms={searchTerms} setSearchResults={setSearchResults00} setDropdownVisible={setDropdownVisible00}></TextBox>
-                    {dropdownVisible00 && searchResults00.length > 0 && (<Dropdown searchResults={searchResults00} handleDropdownItemClicked={handleDropdownItemClicked} row={0} column={0}></Dropdown>)}
-                </StyledSearchBar>
-            )}
-            {searchVisible10 && (
-                <StyledSearchBar>
-                    <TextBox value={searchTerm10} setValue={setSearchTerm10} searchTerms={searchTerms} setSearchResults={setSearchResults10} setDropdownVisible={setDropdownVisible10}></TextBox>
-                    {dropdownVisible10 && searchResults10.length > 0 && (<Dropdown searchResults={searchResults10} handleDropdownItemClicked={handleDropdownItemClicked} row={1} column={0}></Dropdown>)}
-                </StyledSearchBar>
-            )}
-            {searchVisible20 && (
-                <StyledSearchBar>
-                    <TextBox value={searchTerm20} setValue={setSearchTerm20} searchTerms={searchTerms} setSearchResults={setSearchResults20} setDropdownVisible={setDropdownVisible20}></TextBox>
-                    {dropdownVisible20 && searchResults20.length > 0 && (<Dropdown searchResults={searchResults20} handleDropdownItemClicked={handleDropdownItemClicked} row={2} column={0}></Dropdown>)}
-                </StyledSearchBar>
-            )}
-            {searchVisible01 && (
-                <StyledSearchBar>
-                    <TextBox value={searchTerm01} setValue={setSearchTerm01} searchTerms={searchTerms} setSearchResults={setSearchResults01} setDropdownVisible={setDropdownVisible01}></TextBox>
-                    {dropdownVisible01 && searchResults01.length > 0 && (<Dropdown searchResults={searchResults01} handleDropdownItemClicked={handleDropdownItemClicked} row={0} column={1}></Dropdown>)}
-                </StyledSearchBar>
-            )}
-            {searchVisible11 && (
-                <StyledSearchBar>
-                    <TextBox value={searchTerm11} setValue={setSearchTerm11} searchTerms={searchTerms} setSearchResults={setSearchResults11} setDropdownVisible={setDropdownVisible11}></TextBox>
-                    {dropdownVisible11 && searchResults11.length > 0 && (<Dropdown searchResults={searchResults11} handleDropdownItemClicked={handleDropdownItemClicked} row={1} column={1}></Dropdown>)}
-                </StyledSearchBar>
-            )}
-            {searchVisible21 && (
-                <StyledSearchBar>
-                    <TextBox value={searchTerm21} setValue={setSearchTerm21} searchTerms={searchTerms} setSearchResults={setSearchResults21} setDropdownVisible={setDropdownVisible21}></TextBox>
-                    {dropdownVisible21 && searchResults21.length > 0 && (<Dropdown searchResults={searchResults21} handleDropdownItemClicked={handleDropdownItemClicked} row={2} column={1}></Dropdown>)}
-                </StyledSearchBar>
-            )}
-            {searchVisible02 && (
-                <StyledSearchBar>
-                    <TextBox value={searchTerm02} setValue={setSearchTerm02} searchTerms={searchTerms} setSearchResults={setSearchResults02} setDropdownVisible={setDropdownVisible02}></TextBox>
-                    {dropdownVisible02 && searchResults02.length > 0 && (<Dropdown searchResults={searchResults02} handleDropdownItemClicked={handleDropdownItemClicked} row={0} column={2}></Dropdown>)}
-                </StyledSearchBar>
-            )}
-            {searchVisible12 && (
-                <StyledSearchBar>
-                    <TextBox value={searchTerm12} setValue={setSearchTerm12} searchTerms={searchTerms} setSearchResults={setSearchResults12} setDropdownVisible={setDropdownVisible12}></TextBox>
-                    {dropdownVisible12 && searchResults12.length > 0 && (<Dropdown searchResults={searchResults12} handleDropdownItemClicked={handleDropdownItemClicked} row={1} column={2}></Dropdown>)}
-                </StyledSearchBar>
-            )}
-            {searchVisible22 && (
-                <StyledSearchBar>
-                    <TextBox value={searchTerm22} setValue={setSearchTerm22} searchTerms={searchTerms} setSearchResults={setSearchResults22} setDropdownVisible={setDropdownVisible22}></TextBox>
-                    {dropdownVisible22 && searchResults22.length > 0 && (<Dropdown searchResults={searchResults22} handleDropdownItemClicked={handleDropdownItemClicked} row={2} column={2}></Dropdown>)}
-                </StyledSearchBar>
-            )}
+            <StyledSearchBarContainer>
+                {searchVisible00 && (
+                    <StyledSearchBar>
+                        <TextBox value={searchTerm00} setValue={setSearchTerm00} searchTerms={searchTerms} setSearchResults={setSearchResults00} setDropdownVisible={setDropdownVisible00}></TextBox>
+                        {dropdownVisible00 && searchResults00.length > 0 && (<Dropdown searchResults={searchResults00} handleDropdownItemClicked={handleDropdownItemClicked} row={0} column={0}></Dropdown>)}
+                    </StyledSearchBar>
+                )}
+                {searchVisible10 && (
+                    <StyledSearchBar>
+                        <TextBox value={searchTerm10} setValue={setSearchTerm10} searchTerms={searchTerms} setSearchResults={setSearchResults10} setDropdownVisible={setDropdownVisible10}></TextBox>
+                        {dropdownVisible10 && searchResults10.length > 0 && (<Dropdown searchResults={searchResults10} handleDropdownItemClicked={handleDropdownItemClicked} row={1} column={0}></Dropdown>)}
+                    </StyledSearchBar>
+                )}
+                {searchVisible20 && (
+                    <StyledSearchBar>
+                        <TextBox value={searchTerm20} setValue={setSearchTerm20} searchTerms={searchTerms} setSearchResults={setSearchResults20} setDropdownVisible={setDropdownVisible20}></TextBox>
+                        {dropdownVisible20 && searchResults20.length > 0 && (<Dropdown searchResults={searchResults20} handleDropdownItemClicked={handleDropdownItemClicked} row={2} column={0}></Dropdown>)}
+                    </StyledSearchBar>
+                )}
+                {searchVisible01 && (
+                    <StyledSearchBar>
+                        <TextBox value={searchTerm01} setValue={setSearchTerm01} searchTerms={searchTerms} setSearchResults={setSearchResults01} setDropdownVisible={setDropdownVisible01}></TextBox>
+                        {dropdownVisible01 && searchResults01.length > 0 && (<Dropdown searchResults={searchResults01} handleDropdownItemClicked={handleDropdownItemClicked} row={0} column={1}></Dropdown>)}
+                    </StyledSearchBar>
+                )}
+                {searchVisible11 && (
+                    <StyledSearchBar>
+                        <TextBox value={searchTerm11} setValue={setSearchTerm11} searchTerms={searchTerms} setSearchResults={setSearchResults11} setDropdownVisible={setDropdownVisible11}></TextBox>
+                        {dropdownVisible11 && searchResults11.length > 0 && (<Dropdown searchResults={searchResults11} handleDropdownItemClicked={handleDropdownItemClicked} row={1} column={1}></Dropdown>)}
+                    </StyledSearchBar>
+                )}
+                {searchVisible21 && (
+                    <StyledSearchBar>
+                        <TextBox value={searchTerm21} setValue={setSearchTerm21} searchTerms={searchTerms} setSearchResults={setSearchResults21} setDropdownVisible={setDropdownVisible21}></TextBox>
+                        {dropdownVisible21 && searchResults21.length > 0 && (<Dropdown searchResults={searchResults21} handleDropdownItemClicked={handleDropdownItemClicked} row={2} column={1}></Dropdown>)}
+                    </StyledSearchBar>
+                )}
+                {searchVisible02 && (
+                    <StyledSearchBar>
+                        <TextBox value={searchTerm02} setValue={setSearchTerm02} searchTerms={searchTerms} setSearchResults={setSearchResults02} setDropdownVisible={setDropdownVisible02}></TextBox>
+                        {dropdownVisible02 && searchResults02.length > 0 && (<Dropdown searchResults={searchResults02} handleDropdownItemClicked={handleDropdownItemClicked} row={0} column={2}></Dropdown>)}
+                    </StyledSearchBar>
+                )}
+                {searchVisible12 && (
+                    <StyledSearchBar>
+                        <TextBox value={searchTerm12} setValue={setSearchTerm12} searchTerms={searchTerms} setSearchResults={setSearchResults12} setDropdownVisible={setDropdownVisible12}></TextBox>
+                        {dropdownVisible12 && searchResults12.length > 0 && (<Dropdown searchResults={searchResults12} handleDropdownItemClicked={handleDropdownItemClicked} row={1} column={2}></Dropdown>)}
+                    </StyledSearchBar>
+                )}
+                {searchVisible22 && (
+                    <StyledSearchBar>
+                        <TextBox value={searchTerm22} setValue={setSearchTerm22} searchTerms={searchTerms} setSearchResults={setSearchResults22} setDropdownVisible={setDropdownVisible22}></TextBox>
+                        {dropdownVisible22 && searchResults22.length > 0 && (<Dropdown searchResults={searchResults22} handleDropdownItemClicked={handleDropdownItemClicked} row={2} column={2}></Dropdown>)}
+                    </StyledSearchBar>
+                )}
+            </StyledSearchBarContainer>
         </StyledContainer>
     );
 }
