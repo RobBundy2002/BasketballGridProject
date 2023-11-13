@@ -12,6 +12,15 @@ import TextBox from "./TextBox";
 import { generateSearchTerms } from "./GetPlayers";
 import Dropdown from "./Dropdown";
 import { StyledInputGrid } from "./styles/StyledInputGrid";
+import { useInitialize00 } from "../states/row0column0";
+import { useInitialize10 } from "../states/row1column0";
+import { useInitialize20 } from "../states/row2column0";
+import { useInitialize01 } from "../states/row0column1";
+import { useInitialize11 } from "../states/row1column1";
+import { useInitialize21 } from "../states/row2column1";
+import { useInitialize02 } from "../states/row0column2";
+import { useInitialize12 } from "../states/row1column2";
+import { useInitialize22 } from "../states/row2column2";
 
 const HoopGrid = () => {
 
@@ -25,62 +34,19 @@ const HoopGrid = () => {
     const [answers, setAnswers] = useState([]);
     
     // LIST OF PLAYER NAMES
-    const searchTerms = generateSearchTerms(14000);
+    const searchTerms = generateSearchTerms(15000);
 
     // TODO: PUT THESE IN DIFFERENT FILES
-    const [searchVisible00, setSearchVisible00] = useState(false);
-    const [searchTerm00, setSearchTerm00] = useState('');
-    const [searchResults00, setSearchResults00] = useState([]);
-    const [dropdownVisible00, setDropdownVisible00] = useState(false);
-    const [guess00, setGuess00] = useState('');
+    const { searchVisible00, setSearchVisible00, searchTerm00, setSearchTerm00, searchResults00, setSearchResults00, dropdownVisible00, setDropdownVisible00, guess00, setGuess00 } = useInitialize00();
+    const { searchVisible10, setSearchVisible10, searchTerm10, setSearchTerm10, searchResults10, setSearchResults10, dropdownVisible10, setDropdownVisible10, guess10, setGuess10 } = useInitialize10();
+    const { searchVisible20, setSearchVisible20, searchTerm20, setSearchTerm20, searchResults20, setSearchResults20, dropdownVisible20, setDropdownVisible20, guess20, setGuess20 } = useInitialize20();
+    const { searchVisible01, setSearchVisible01, searchTerm01, setSearchTerm01, searchResults01, setSearchResults01, dropdownVisible01, setDropdownVisible01, guess01, setGuess01 } = useInitialize01();
+    const { searchVisible11, setSearchVisible11, searchTerm11, setSearchTerm11, searchResults11, setSearchResults11, dropdownVisible11, setDropdownVisible11, guess11, setGuess11 } = useInitialize11();
+    const { searchVisible21, setSearchVisible21, searchTerm21, setSearchTerm21, searchResults21, setSearchResults21, dropdownVisible21, setDropdownVisible21, guess21, setGuess21 } = useInitialize21();
+    const { searchVisible02, setSearchVisible02, searchTerm02, setSearchTerm02, searchResults02, setSearchResults02, dropdownVisible02, setDropdownVisible02, guess02, setGuess02 } = useInitialize02();
+    const { searchVisible12, setSearchVisible12, searchTerm12, setSearchTerm12, searchResults12, setSearchResults12, dropdownVisible12, setDropdownVisible12, guess12, setGuess12 } = useInitialize12();
+    const { searchVisible22, setSearchVisible22, searchTerm22, setSearchTerm22, searchResults22, setSearchResults22, dropdownVisible22, setDropdownVisible22, guess22, setGuess22 } = useInitialize22();
 
-    const [searchVisible10, setSearchVisible10] = useState(false);
-    const [searchTerm10, setSearchTerm10] = useState('');
-    const [searchResults10, setSearchResults10] = useState([]);
-    const [dropdownVisible10, setDropdownVisible10] = useState(false);
-    const [guess10, setGuess10] = useState('');
-
-    const [searchVisible20, setSearchVisible20] = useState(false);
-    const [searchTerm20, setSearchTerm20] = useState('');
-    const [searchResults20, setSearchResults20] = useState([]);
-    const [dropdownVisible20, setDropdownVisible20] = useState(false);
-    const [guess20, setGuess20] = useState('');
-
-    const [searchVisible01, setSearchVisible01] = useState(false);
-    const [searchTerm01, setSearchTerm01] = useState('');
-    const [searchResults01, setSearchResults01] = useState([]);
-    const [dropdownVisible01, setDropdownVisible01] = useState(false);
-    const [guess01, setGuess01] = useState('');
-
-    const [searchVisible11, setSearchVisible11] = useState(false);
-    const [searchTerm11, setSearchTerm11] = useState('');
-    const [searchResults11, setSearchResults11] = useState([]);
-    const [dropdownVisible11, setDropdownVisible11] = useState(false);
-    const [guess11, setGuess11] = useState('');
-
-    const [searchVisible21, setSearchVisible21] = useState(false);
-    const [searchTerm21, setSearchTerm21] = useState('');
-    const [searchResults21, setSearchResults21] = useState([]);
-    const [dropdownVisible21, setDropdownVisible21] = useState(false);
-    const [guess21, setGuess21] = useState('');
-
-    const [searchVisible02, setSearchVisible02] = useState(false);
-    const [searchTerm02, setSearchTerm02] = useState('');
-    const [searchResults02, setSearchResults02] = useState([]);
-    const [dropdownVisible02, setDropdownVisible02] = useState(false);
-    const [guess02, setGuess02] = useState('');
-
-    const [searchVisible12, setSearchVisible12] = useState(false);
-    const [searchTerm12, setSearchTerm12] = useState('');
-    const [searchResults12, setSearchResults12] = useState([]);
-    const [dropdownVisible12, setDropdownVisible12] = useState(false);
-    const [guess12, setGuess12] = useState('');
-
-    const [searchVisible22, setSearchVisible22] = useState(false);
-    const [searchTerm22, setSearchTerm22] = useState('');
-    const [searchResults22, setSearchResults22] = useState([]);
-    const [dropdownVisible22, setDropdownVisible22] = useState(false);
-    const [guess22, setGuess22] = useState('');
 
     const hideAllSearches = () => {
         setSearchVisible00(false);
@@ -137,6 +103,11 @@ const HoopGrid = () => {
             }
             // TODO: CHECK TO SEE IF ALL GUESSES ARE FILLED IN
             hideAllSearches();
+    }
+
+    // TODO: MAKE OUTSIDE FUNCTION THAT WORKS FOR INPUTBOX ON CLICK GENERALIZED FOR ANY BOX WITH ROW AND COLUMN PARAMETERS
+    const onBoxClick = (row, column) => {
+        hideAllSearches()
     }
     
     useEffect(() => {
