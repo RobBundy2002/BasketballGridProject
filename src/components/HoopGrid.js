@@ -36,7 +36,6 @@ const HoopGrid = () => {
     // LIST OF PLAYER NAMES
     const searchTerms = generateSearchTerms(15000);
 
-    // TODO: PUT THESE IN DIFFERENT FILES
     const { searchVisible00, setSearchVisible00, searchTerm00, setSearchTerm00, searchResults00, setSearchResults00, dropdownVisible00, setDropdownVisible00, guess00, setGuess00 } = useInitialize00();
     const { searchVisible10, setSearchVisible10, searchTerm10, setSearchTerm10, searchResults10, setSearchResults10, dropdownVisible10, setDropdownVisible10, guess10, setGuess10 } = useInitialize10();
     const { searchVisible20, setSearchVisible20, searchTerm20, setSearchTerm20, searchResults20, setSearchResults20, dropdownVisible20, setDropdownVisible20, guess20, setGuess20 } = useInitialize20();
@@ -58,6 +57,18 @@ const HoopGrid = () => {
         setSearchVisible02(false);
         setSearchVisible12(false);
         setSearchVisible22(false);
+    }
+
+    const clearAllSearches = () => {
+        setSearchTerm00('');
+        setSearchTerm10('');
+        setSearchTerm20('');
+        setSearchTerm01('');
+        setSearchTerm11('');
+        setSearchTerm21('');
+        setSearchTerm02('');
+        setSearchTerm12('');
+        setSearchTerm22('');
     }
 
     // TODO: CREATE HANDLE OUTSIDE CLICK FUNCTION
@@ -104,11 +115,6 @@ const HoopGrid = () => {
             // TODO: CHECK TO SEE IF ALL GUESSES ARE FILLED IN
             hideAllSearches();
     }
-
-    // TODO: MAKE OUTSIDE FUNCTION THAT WORKS FOR INPUTBOX ON CLICK GENERALIZED FOR ANY BOX WITH ROW AND COLUMN PARAMETERS
-    const onBoxClick = (row, column) => {
-        hideAllSearches()
-    }
     
     useEffect(() => {
         let grid = generateGrid();
@@ -131,15 +137,15 @@ const HoopGrid = () => {
                 <CategoryGrid categories={selectedCategories}></CategoryGrid>
                 <SchoolGrid schools={selectedImages}></SchoolGrid>
                 <StyledInputGrid>
-                    <InputBox row={0} column={0} answers={answers[0]} guess={guess00} setSearchVisible={setSearchVisible00} setSearchTerm={setSearchTerm00}></InputBox>
-                    <InputBox row={0} column={1} answers={answers[1]} guess={guess01} setSearchVisible={setSearchVisible01} setSearchTerm={setSearchTerm01}></InputBox>
-                    <InputBox row={0} column={2} answers={answers[2]} guess={guess02} setSearchVisible={setSearchVisible02} setSearchTerm={setSearchTerm02}></InputBox>
-                    <InputBox row={1} column={0} answers={answers[0]} guess={guess10} setSearchVisible={setSearchVisible10} setSearchTerm={setSearchTerm10}></InputBox>
-                    <InputBox row={1} column={1} answers={answers[1]} guess={guess11} setSearchVisible={setSearchVisible11} setSearchTerm={setSearchTerm11}></InputBox>
-                    <InputBox row={1} column={2} answers={answers[2]} guess={guess12} setSearchVisible={setSearchVisible12} setSearchTerm={setSearchTerm12}></InputBox>
-                    <InputBox row={2} column={0} answers={answers[0]} guess={guess20} setSearchVisible={setSearchVisible20} setSearchTerm={setSearchTerm20}></InputBox>
-                    <InputBox row={2} column={1} answers={answers[1]} guess={guess21} setSearchVisible={setSearchVisible21} setSearchTerm={setSearchTerm21}></InputBox>
-                    <InputBox row={2} column={2} answers={answers[2]} guess={guess22} setSearchVisible={setSearchVisible22} setSearchTerm={setSearchTerm22}></InputBox>
+                    <InputBox row={0} column={0} answers={answers[0]} guess={guess00} setSearchVisible={setSearchVisible00} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={0} column={1} answers={answers[1]} guess={guess01} setSearchVisible={setSearchVisible01} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={0} column={2} answers={answers[2]} guess={guess02} setSearchVisible={setSearchVisible02} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={1} column={0} answers={answers[0]} guess={guess10} setSearchVisible={setSearchVisible10} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={1} column={1} answers={answers[1]} guess={guess11} setSearchVisible={setSearchVisible11} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={1} column={2} answers={answers[2]} guess={guess12} setSearchVisible={setSearchVisible12} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={2} column={0} answers={answers[0]} guess={guess20} setSearchVisible={setSearchVisible20} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={2} column={1} answers={answers[1]} guess={guess21} setSearchVisible={setSearchVisible21} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={2} column={2} answers={answers[2]} guess={guess22} setSearchVisible={setSearchVisible22} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
                 </StyledInputGrid>
             </StyledHoopGrid>
             {searchVisible00 && (
