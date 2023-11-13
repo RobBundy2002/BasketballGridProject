@@ -12,7 +12,7 @@ export const StyledInputBox = styled.div`
     border-radius: 5%;
     cursor: pointer;
     transition: .3s;
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
     margin: 5px;
 `

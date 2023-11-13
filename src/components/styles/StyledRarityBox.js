@@ -11,7 +11,7 @@ export const StyledRarityBox = styled.div`
     justify-content: center;
     border-radius: 5%;
     transition: .3s;
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
     margin: 5px;
 `
