@@ -24,7 +24,6 @@ import { useInitialize22 } from "../states/row2column2";
 import { StyledSearchBarContainer } from "./styles/StyledSearchBarContainer";
 
 const HoopGrid = () => {
-
     // ARRAY OF IMAGE LINKS
     const [selectedImages, setSelectedImages] = useState([]);
     
