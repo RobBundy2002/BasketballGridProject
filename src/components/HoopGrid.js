@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 import { StyledHoopGrid } from "./styles/StyledHoopGrid";
 import RarityBox from "./RarityBox";
 import CategoryGrid from "./CategoryGrid";
@@ -32,10 +33,14 @@ const HoopGrid = () => {
     
     // 3x3 ARRAY OF ANSWERS TO THE GRID
     const [answers, setAnswers] = useState([]);
+
+    // DICTIONARY WHERE COOKIE DATA IS STORED
+    const [userCookies, setUserCookies] = useState({});
     
     // LIST OF PLAYER NAMES
     const searchTerms = generateSearchTerms(15000);
 
+    // USESTATE VARIABLES FOR EACH SEARCH BAR
     const { searchVisible00, setSearchVisible00, searchTerm00, setSearchTerm00, searchResults00, setSearchResults00, dropdownVisible00, setDropdownVisible00, guess00, setGuess00 } = useInitialize00();
     const { searchVisible10, setSearchVisible10, searchTerm10, setSearchTerm10, searchResults10, setSearchResults10, dropdownVisible10, setDropdownVisible10, guess10, setGuess10 } = useInitialize10();
     const { searchVisible20, setSearchVisible20, searchTerm20, setSearchTerm20, searchResults20, setSearchResults20, dropdownVisible20, setDropdownVisible20, guess20, setGuess20 } = useInitialize20();
@@ -46,7 +51,51 @@ const HoopGrid = () => {
     const { searchVisible12, setSearchVisible12, searchTerm12, setSearchTerm12, searchResults12, setSearchResults12, dropdownVisible12, setDropdownVisible12, guess12, setGuess12 } = useInitialize12();
     const { searchVisible22, setSearchVisible22, searchTerm22, setSearchTerm22, searchResults22, setSearchResults22, dropdownVisible22, setDropdownVisible22, guess22, setGuess22 } = useInitialize22();
 
+    // ADDS DATA TO THE COOKIES DICTIONARY WITH A KEY AND THEN SETS THE COOKIE
+    // TODO: PROBLEM IS THAT THE COOKIE IS SETTING BEFORE THE USERCOOKIES VARIABLE CAN BE SET ABOVE
+    const updateUserAndSetCookie = (key, data) => {
+        const cookies = userCookies;
+        cookies[key] = data;
 
+        const midnight = new Date();
+        midnight.setHours(24, 0, 0, 0);
+        Cookies.set('userData', JSON.stringify(userCookies), { expires: midnight });
+        console.log(userCookies);
+    };
+
+    // SET COOKIE DATA
+    const getDataFromCookie = (cookieData) => {
+        console.log("Cookies", cookieData);
+        if (cookieData.guess00){
+            setGuess00(cookieData.guess00);
+        }
+        if (cookieData.guess01){
+            setGuess01(cookieData.guess01);
+        }
+        if (cookieData.guess02){
+            setGuess02(cookieData.guess02);
+        }
+        if (cookieData.guess10){
+            setGuess10(cookieData.guess10);
+        }
+        if (cookieData.guess11){
+            setGuess11(cookieData.guess11);
+        }
+        if (cookieData.guess12){
+            setGuess12(cookieData.guess12);
+        }
+        if (cookieData.guess20){
+            setGuess20(cookieData.guess20);
+        }
+        if (cookieData.guess21){
+            setGuess21(cookieData.guess21);
+        }
+        if (cookieData.guess22){
+            setGuess22(cookieData.guess22);
+        }
+    }
+
+    // HIDES ALL SEARCH BARS
     const hideAllSearches = () => {
         setSearchVisible00(false);
         setSearchVisible10(false);
@@ -68,6 +117,7 @@ const HoopGrid = () => {
         setSearchResults22([]);
     }
 
+    // CLEARS ALL SEARCH BARS
     const clearAllSearches = () => {
         setSearchTerm00('');
         setSearchTerm10('');
@@ -82,6 +132,7 @@ const HoopGrid = () => {
 
     // TODO: CREATE HANDLE OUTSIDE CLICK FUNCTION
 
+    // CHECK IF GUESS IS CORRECT AND SET IT
     const handleDropdownItemClicked = (row, column, result) => {
         console.log(row, column, result);
         const blockAnswer = answers[column][row]
@@ -90,34 +141,43 @@ const HoopGrid = () => {
                 if (column === 0){
                     if (row === 0){
                         setGuess00(result);
+                        updateUserAndSetCookie('guess00', result);
                     }
                     else if (row === 1){
                         setGuess10(result);
+                        updateUserAndSetCookie('guess10', result);
                     }
                     else if (row === 2){
                         setGuess20(result);
+                        updateUserAndSetCookie('guess20', result);
                     }
                 }
                 else if (column === 1){
                     if (row === 0){
                         setGuess01(result);
+                        updateUserAndSetCookie('guess01', result);
                     }
                     else if (row === 1){
                         setGuess11(result);
+                        updateUserAndSetCookie('guess11', result);
                     }
                     else if (row === 2){
                         setGuess21(result);
+                        updateUserAndSetCookie('guess21', result);
                     }
                 }
                 else if (column === 2){
                     if (row === 0){
                         setGuess02(result);
+                        updateUserAndSetCookie('guess02', result);
                     }
                     else if (row === 1){
                         setGuess12(result);
+                        updateUserAndSetCookie('guess12', result);
                     }
                     else if (row === 2){
                         setGuess22(result);
+                        updateUserAndSetCookie('guess22', result);
                     }
                 }
             }
@@ -125,7 +185,9 @@ const HoopGrid = () => {
             hideAllSearches();
     }
     
+    // FUNCTION THAT RUNS ON PROJECT INITIALIZATION
     useEffect(() => {
+        //GENERATING GRID & SETTING UI
         let grid = generateGrid();
         while (!grid) {
             grid = generateGrid();
@@ -133,10 +195,19 @@ const HoopGrid = () => {
         setSelectedImages(images);
         setSelectedCategories(categories);
         setAnswers(gridAnswers);
+
+        // PRINTING INFO TO CONSOLE FOR DEBUGGING
         console.log(images);
         console.log(categories)
         console.log(gridAnswers);
         console.log(grid);
+
+        // CHECKING IF THERE ARE ANY COOKIES AND SETTING THEM
+        const storedUserCookies = Cookies.get('userData');
+        if(storedUserCookies){
+            setUserCookies(JSON.parse(storedUserCookies));
+            getDataFromCookie(JSON.parse(storedUserCookies));
+        }
     }, [])
 
     return (
