@@ -11,5 +11,4 @@ const Dropdown = ({ searchResults, handleDropdownItemClicked, row, column}) => (
         ))}
     </StyledDropdown>
 )
-
 export default Dropdown;

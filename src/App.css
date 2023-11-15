@@ -6,13 +6,21 @@
   align-items: center;
   flex: 1;
 }
+html, body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/*Removes the Scrolling For All Parts Of The Page*/
+html, body {
+  overflow: hidden;
+}
 
 .top-bar{
   display: flex;
   flex-direction: column;
-  height: 50px;
   width: 100%;
-  border: 1px solid #000000;
   align-self: flex-start;
 }
 
