@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 export const StyledInputBox = styled.div`
-    background: linear-gradient(45deg, #ff6b6b, #3569cf);
+    //background: linear-gradient(45deg, #ff6b6b, #3569cf);
+  //background: linear-gradient(45deg, #ff6b6b, #ffd700, #3569cf);
+  background-color: #ff3333;
+
+  //background: #EB8A90;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledTopText = styled.div`
     position: absolute;
     top: 20px;
-    left: 45px;
+    left: 85px;
     font-style: italic;
     font-family: Georgia, serif;
     font-size: 35px;
