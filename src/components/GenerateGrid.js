@@ -8,6 +8,7 @@ let images = [];
 let categories = [];
 
 const generateGrid = () => {
+    // TODO: MAKE GRID A DICTIONARY W TRUE/FALSE VALID PARAMETER
     //GENERATING A VALID GRID
     for (let i=0; i<3; i++) {
         gridAnswers[i] = [];
