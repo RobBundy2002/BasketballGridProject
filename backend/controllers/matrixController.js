@@ -1,5 +1,8 @@
 const Matrix = require('../models/matrixModel')
 const mongoose = require('mongoose')
+import schoolNames from '../data/schools'
+import categoriesList from '../data/categories'
+import jsonData from '../data/player_data.json'
 
 // GET ALL WORKOUTS
 const getMatrices = async (req, res) => {
@@ -29,6 +32,20 @@ const createMatrix = async (req, res) => {
     // } catch (error) {
     //     res.status(400).json({error: error.message})
     // }
+
+    const {month, day, year} = req.body
+    
+    let answers = []
+    let numbers = []
+    let images = []
+    let categories = []
+
+    for (let i=0; i<3; i++) {
+        answers[i] = []
+    }
+
+    
+
 }
 
 // DELETE A WORKOUT
