@@ -8,4 +8,4 @@ const schoolNames = [
     "Washington State", "Washington", "West Virginia", "Wisconsin", "ACC", "Big 12", "Big Ten", "Pac-12", "SEC"
 ]; 
 
-export default schoolNames;
+module.exports = schoolNames;

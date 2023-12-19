@@ -18,4 +18,4 @@ const categoriesList = [
     "All-Conference Tournament Team", "Conference Tournament Most Valuable Player"
 ];
 
-export default categoriesList;
+module.exports = categoriesList;
