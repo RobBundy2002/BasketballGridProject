@@ -32,6 +32,8 @@ const getMatrix = async (req, res) => {
 
 // CREATE NEW MATRIX
 const createMatrix = async (req, res) => {
+
+    console.log("Create Matrix Called")
     
     const {month, day, year} = req.body
     let answer = []
