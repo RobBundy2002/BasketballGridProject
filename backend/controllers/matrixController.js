@@ -10,20 +10,27 @@ const getMatrices = async (req, res) => {
     // res.status(200).json(workouts)
 }
 
-// GET A SINGLE WORKOUT
+// GET SINGLE MATRIX
 const getMatrix = async (req, res) => {
-    // const { id } = req.params
-    // if(!mongoose.Types.ObjectId.isValid(id)){
-    //     return res.status(404).json({error: 'No such workout'})
-    // }
-    // const workout = await Workout.findById(id)
-    // if(!workout) {
-    //     return res.status(400).json({error: 'No such workout'})
-    // }
-    // res.status(200).json(workout)
+    const { year, month, day } = req.params
+    try {
+        const matrix = await Matrix.findOne({
+            year: parseInt(year),
+            month: parseInt(month),
+            day: parseInt(day),
+        })
+
+        if (!matrix) {
+            return res.status(404).json({ error: 'Matrix not found' })
+        }
+
+        res.status(200).json(matrix)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
 }
 
-// CREATE NEW WORKOUT
+// CREATE NEW MATRIX
 const createMatrix = async (req, res) => {
     
     const {month, day, year} = req.body

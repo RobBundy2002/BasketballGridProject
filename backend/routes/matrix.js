@@ -13,7 +13,7 @@ const router = express.Router()
 router.get('/', getMatrices)
 
 // GET A SINGLE WORKOUT
-router.get('/:id', getMatrix)
+router.get('/:year/:month/:day', getMatrix)
 
 // POST A NEW WORKOUT
 router.post('/', createMatrix)
