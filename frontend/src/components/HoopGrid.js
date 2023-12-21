@@ -194,14 +194,17 @@ const HoopGrid = () => {
             } 
             else {
                 console.log(json)
-                setSelectedImages(json.images);
                 setSelectedCategories(json.categories);
                 setAnswers(json.answer);
+                const removeSpaces = (array) => {
+                    return array.map((str) => str.replace(/\s/g, ''));
+                };
+                setSelectedImages(removeSpaces(json.images));
             }
         }
 
-        fetchMatrix()        
-
+        fetchMatrix() 
+        
         // CHECKING IF THERE ARE ANY COOKIES AND SETTING THEM
         const storedUserCookies = Cookies.get('userData');
         if(storedUserCookies){
