@@ -57,7 +57,7 @@ const HoopGrid = () => {
 
         const midnight = new Date();
         midnight.setHours(24, 0, 0, 0);
-        Cookies.set('userData', JSON.stringify(userCookies), { expires: midnight });
+        Cookies.set('guesses', JSON.stringify(userCookies), { expires: midnight });
         console.log(userCookies);
     };
 
@@ -193,7 +193,7 @@ const HoopGrid = () => {
                 console.log("Error Fetching Matrix")
             } 
             else {
-                console.log(json)
+                console.log("Fetched Matrix", json)             
                 setSelectedCategories(json.categories);
                 setAnswers(json.answer);
                 const removeSpaces = (array) => {
@@ -201,12 +201,12 @@ const HoopGrid = () => {
                 };
                 setSelectedImages(removeSpaces(json.images));
             }
-        }
+        }  
 
-        fetchMatrix() 
+        fetchMatrix()
         
         // CHECKING IF THERE ARE ANY COOKIES AND SETTING THEM
-        const storedUserCookies = Cookies.get('userData');
+        const storedUserCookies = Cookies.get('guesses');
         if(storedUserCookies){
             setUserCookies(JSON.parse(storedUserCookies));
             getDataFromCookie(JSON.parse(storedUserCookies));
