@@ -6,7 +6,6 @@ import RarityBox from "./RarityBox";
 import CategoryGrid from "./CategoryGrid";
 import InputBox from "./InputBox";
 import SchoolGrid from "./SchoolGrid";
-import { generateGrid, gridAnswers, images, categories } from "./GenerateGrid";
 import { StyledContainer } from "./styles/StyledContainer";
 import { StyledSearchBar } from "./styles/StyledSearchBar";
 import TextBox from "./TextBox";
@@ -52,7 +51,6 @@ const HoopGrid = () => {
     const { searchVisible22, setSearchVisible22, searchTerm22, setSearchTerm22, searchResults22, setSearchResults22, dropdownVisible22, setDropdownVisible22, guess22, setGuess22 } = useInitialize22();
 
     // ADDS DATA TO THE COOKIES DICTIONARY WITH A KEY AND THEN SETS THE COOKIE
-    // TODO: PROBLEM IS THAT THE COOKIE IS SETTING BEFORE THE USERCOOKIES VARIABLE CAN BE SET ABOVE
     const updateUserAndSetCookie = (key, data) => {
         const cookies = userCookies;
         cookies[key] = data;
@@ -130,8 +128,6 @@ const HoopGrid = () => {
         setSearchTerm22('');
     }
 
-    // TODO: CREATE HANDLE OUTSIDE CLICK FUNCTION
-
     // CHECK IF GUESS IS CORRECT AND SET IT
     const handleDropdownItemClicked = (row, column, result) => {
         console.log(row, column, result);
@@ -188,19 +184,23 @@ const HoopGrid = () => {
     // FUNCTION THAT RUNS ON PROJECT INITIALIZATION
     useEffect(() => {
         //GENERATING GRID & SETTING UI
-        let grid = generateGrid();
-        while (!grid) {
-            grid = generateGrid();
+        const fetchMatrix = async () => {
+            const currentDate = new Date()
+            const month = currentDate.getMonth()+1
+            const response = await fetch('/api/matrix/' + currentDate.getFullYear() + '/' + month + '/' + currentDate.getDate())
+            const json = await response.json()
+            if (!response.ok) {
+                console.log("Error Fetching Matrix")
+            } 
+            else {
+                console.log(json)
+                setSelectedImages(json.images);
+                setSelectedCategories(json.categories);
+                setAnswers(json.answer);
+            }
         }
-        setSelectedImages(images);
-        setSelectedCategories(categories);
-        setAnswers(gridAnswers);
 
-        // PRINTING INFO TO CONSOLE FOR DEBUGGING
-        console.log(images);
-        console.log(categories)
-        console.log(gridAnswers);
-        console.log(grid);
+        fetchMatrix()        
 
         // CHECKING IF THERE ARE ANY COOKIES AND SETTING THEM
         const storedUserCookies = Cookies.get('userData');

@@ -4,10 +4,9 @@ const schoolNames = require('../data/schools')
 const categoriesList = require('../data/categories')
 const jsonData = require('../data/player_data.json')
 
-// GET ALL WORKOUTS
+// GET ALL MATRICES
 const getMatrices = async (req, res) => {
-    // const workouts = await Workout.find({}).sort({createdAt: -1})
-    // res.status(200).json(workouts)
+    
 }
 
 // GET SINGLE MATRIX
@@ -31,10 +30,7 @@ const getMatrix = async (req, res) => {
 }
 
 // CREATE NEW MATRIX
-const createMatrix = async (req, res) => {
-
-    console.log("Create Matrix Called")
-    
+const createMatrix = async (req, res) => {     
     const {month, day, year} = req.body
     let answer = []
     let images = []
@@ -546,32 +542,14 @@ function checkValidAwardsCategory(answer, dataField, schools, numbers, i, needed
     return false;
 }
 
-// DELETE A WORKOUT
+// DELETE A MATRIX
 const deleteMatrix = async (req, res) => {
-    // const { id } = req.params
-    // if(!mongoose.Types.ObjectId.isValid(id)){
-    //     return res.status(404).json({error: 'No such workout'})
-    // }
-    // const workout = await Workout.findOneAndDelete({_id: id})
-    // if(!workout) {
-    //     return res.status(400).json({error: 'No such workout'})
-    // }
-    // res.status(200).json(workout)
+    
 }
 
-// UPDATE A WORKOUT
+// UPDATE A MATRIX
 const updateMatrix = async (req, res) => {
-    // const { id } = req.params
-    // if(!mongoose.Types.ObjectId.isValid(id)){
-    //     return res.status(404).json({error: 'No such workout'})
-    // }
-    // const workout = await Workout.findByIdAndUpdate({_id: id}, {
-    //     ...req.body
-    // })
-    // if(!workout) {
-    //     return res.status(400).json({error: 'No such workout'})
-    // }
-    // res.status(200).json(workout)
+    
 }
 
 module.exports = {
