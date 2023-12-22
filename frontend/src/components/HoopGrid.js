@@ -22,6 +22,8 @@ import { useInitialize02 } from "../states/row0column2";
 import { useInitialize12 } from "../states/row1column2";
 import { useInitialize22 } from "../states/row2column2";
 import { StyledSearchBarContainer } from "./styles/StyledSearchBarContainer";
+import { StyledVictoryMessage} from "./styles/StyledVictoryMessage";
+import ReactDOM from 'react-dom';
 
 const HoopGrid = () => {
     // ARRAY OF IMAGE LINKS
@@ -90,6 +92,26 @@ const HoopGrid = () => {
         }
         if (cookieData.guess22){
             setGuess22(cookieData.guess22);
+        }
+        if (
+            cookieData.guess00 &&
+            cookieData.guess01 &&
+            cookieData.guess02 &&
+            cookieData.guess10 &&
+            cookieData.guess11 &&
+            cookieData.guess12 &&
+            cookieData.guess20 &&
+            cookieData.guess21 &&
+            cookieData.guess22
+        )   {
+            const winMessageElement = document.createElement("div");
+            winMessageElement.id = "victory-message-container";
+            document.body.appendChild(winMessageElement);
+
+            ReactDOM.render(
+                <StyledVictoryMessage>Congratulations! You win!</StyledVictoryMessage>,
+                document.getElementById("victory-message-container")
+            );
         }
     }
 

@@ -4,5 +4,13 @@ export const StyledTopBar = styled.div`
   position: absolute;
   top: -500px;
   left: -910px;
-  transform: scale(0.1); /* Adjust the scale value as needed (e.g., 10% is represented as 0.1) */
+  transform: scale(0.1);
+  font-style: italic;
+  font-family: Georgia, serif;
+  font-size: 35px;
+  font-weight: bold;
+  color: transparent; 
+  background-image: linear-gradient(45deg, #ff6b6b, #3569cf);
+  background-clip: text;
+  -webkit-background-clip: text;
 `;
