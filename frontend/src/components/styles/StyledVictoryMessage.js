@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledVictoryMessage = styled.div`
     position: fixed;
-    top: 175px;
+    top: 180px;
     left: 875px;
     color: red;
     font-style: italic;
