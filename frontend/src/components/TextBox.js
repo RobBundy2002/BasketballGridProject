@@ -1,5 +1,19 @@
 import React from "react";
-import { StyledTextBox } from "./styles/StyledTextBox";
+import styled from 'styled-components';
+
+const StyledTextBox = styled.input`
+    border: none;
+    outline: none;
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    font-size: 16px;
+    font-style: italic;
+  
+    &::placeholder {
+        color: white;
+    }
+`
 
 const TextBox = ({ value, setValue, searchTerms, setSearchResults, setDropdownVisible }) => (
     <StyledTextBox 

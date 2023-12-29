@@ -1,6 +1,13 @@
 import React from "react";
-import { StyledSchoolGrid } from "./styles/StyledSchoolGrid";
 import SchoolImage from "./SchoolBox";
+import styled from 'styled-components';
+
+const StyledSchoolGrid = styled.div`
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    justify-content: center;
+    border-radius: 5%;
+`
 
 const SchoolGrid = ({ schools }) => (
     <StyledSchoolGrid>

@@ -1,6 +1,13 @@
 import React from "react";
-import { StyledCategoryGrid } from "./styles/StyledCategoryGrid";
 import CategoryBox from "./CategoryBox";
+import styled from 'styled-components';
+
+const StyledCategoryGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    border-radius: 5%;
+`
 
 const CategoryGrid = ({ categories }) => (
     <StyledCategoryGrid>
