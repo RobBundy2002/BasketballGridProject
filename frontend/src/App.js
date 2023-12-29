@@ -2,27 +2,23 @@ import './App.css';
 import HoopGrid from './components/HoopGrid';
 import {StyledTopText} from "./components/styles/StyledTopText";
 import {StyledTopBar} from "./components/styles/StyledTopBar";
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Navbar from './components/Navbar'
 
 function App() {
   return (
-      <div className="pop"> <StyledTopBar>
-          <img alt="Basketball Logo" src={process.env.PUBLIC_URL + '/Untitled.ico'} />
-          {/* Content for the top bar */}
-      </StyledTopBar>
-
       <div className="App">
-          <div className='top-bar'>
-              {/* Use the absolute path with the PUBLIC_URL prefix for the image */}
-              {/*<StyledTopBar>*/}
-              {/*<img alt="Basketball Logo" src={process.env.PUBLIC_URL + '/basketball logo 1.ico'} />*/}
-              {/*/!* Content for the top bar *!/*/}
-              {/*</StyledTopBar>*/}
-              <StyledTopText>
-                  College Hoops Matrix Madness
-              </StyledTopText>
-          </div>
-          <HoopGrid></HoopGrid>
-      </div>
+          <BrowserRouter>
+            <Navbar />
+            <div className='pages'>
+              <Routes>
+                  <Route 
+                    path="/"
+                    element={<HoopGrid></HoopGrid>}
+                  />
+              </Routes>
+            </div>
+        </BrowserRouter>
       </div>
   );
 }
