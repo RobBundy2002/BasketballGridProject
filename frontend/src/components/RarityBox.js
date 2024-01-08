@@ -22,7 +22,7 @@ const StyledRarityBox = styled.div`
     height: 150px;
     width: 150px;
     //margin: 5px;
-    margin-top: 400px;
+    margin-top: 300px;
     animation: ${sparkleAnimation} 40s infinite;
 `
 const RarityBox = ({ rarity }) => (

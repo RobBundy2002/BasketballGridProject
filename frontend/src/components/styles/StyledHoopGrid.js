@@ -7,5 +7,5 @@ export const StyledHoopGrid = styled.div`
     align-items: center;
     margin-left: 700px;
     margin-top: -440px;
-    scale: 100%;
+    scale: 115%;
 `

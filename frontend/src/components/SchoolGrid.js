@@ -7,6 +7,7 @@ const StyledSchoolGrid = styled.div`
     grid-template-rows: repeat(3, 1fr);
     justify-content: center;
     border-radius: 5%;
+    margin-top: -400px;
 `
 
 const SchoolGrid = ({ schools }) => (

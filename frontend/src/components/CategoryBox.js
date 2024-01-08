@@ -22,7 +22,7 @@ const StyledCategoryBox = styled.div`
     transition: .3s;
     height: 150px;
     width: 150px;
-  margin-top: 400px;
+  margin-top: 300px;
     animation: ${sparkleAnimation} 40s infinite;
 `
 
