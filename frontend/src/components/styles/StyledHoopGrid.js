@@ -5,6 +5,7 @@ export const StyledHoopGrid = styled.div`
     grid-template-columns: repeat(2, 0.33fr);
     justify-content: center;
     align-items: center;
-    margin-left: 400px;
+    margin-left: 700px;
+    margin-top: 0px;
     scale: 115%;
 `

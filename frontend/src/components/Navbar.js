@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Header = styled.header`
-    background-color: #D3d3d3;
+    background-color: white;
     color: white;
-    max-width: 1480px;
+    max-width: 1550px;
     width: 100%;
     height: 7vh;
 
