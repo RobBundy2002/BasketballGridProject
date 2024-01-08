@@ -6,6 +6,6 @@ export const StyledHoopGrid = styled.div`
     justify-content: center;
     align-items: center;
     margin-left: 700px;
-    margin-top: 0px;
-    scale: 115%;
+    margin-top: -440px;
+    scale: 100%;
 `
