@@ -8,7 +8,6 @@ const Header = styled.header`
     max-width: 1550px;
     width: 100%;
     height: 7vh;
-
     div {
         height: 100%;
         display: flex;
