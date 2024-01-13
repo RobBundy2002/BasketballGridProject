@@ -1,7 +1,5 @@
 import './App.css';
 import HoopGrid from './components/HoopGrid';
-import {StyledTopText} from "./components/styles/StyledTopText";
-import {StyledTopBar} from "./components/styles/StyledTopBar";
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Navbar from './components/Navbar'
 
