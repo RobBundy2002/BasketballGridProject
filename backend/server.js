@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 })
 
 // ROUTES
-app.use('/api/matrix', matrixRoutes)
+app.use('https://matrix-madness-frontend.onrender.com/api/matrix', matrixRoutes)
 
 // CONNECT TO DATABASE
 mongoose.connect(process.env.MONGO_URI)
