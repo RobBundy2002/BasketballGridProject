@@ -31,7 +31,7 @@ app.use('/api/matrix', matrixRoutes)
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         // SCHEDULED FUNCTION AT 11PM
-        cron.schedule('0 14 * * *', () => {
+        cron.schedule('10 14 * * *', () => {
             console.log("Running Daily ", new Date())
             const today = new Date();
             const tomorrow = new Date();
