@@ -4,9 +4,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const matrixRoutes = require('./routes/matrix')
 const cron = require('node-cron');
-const {
-    createMatrix,
-} = require('./controllers/matrixController')
+const cors = require('cors');
+const { createMatrix } = require('./controllers/matrixController')
 
 // EXPRESS APP
 const app = express()
@@ -19,8 +18,14 @@ app.use((req, res, next) => {
     next()
 })
 
+// CORS MIDDLEWARE
+app.use(cors({
+    // SET THE ORIGIN TO YOUR FRONTEND'S URL
+    origin: 'https://matrix-madness-frontend.onrender.com',
+}));
+
 // ROUTES
-app.use('https://matrix-madness-frontend.onrender.com/api/matrix', matrixRoutes)
+app.use('/api/matrix', matrixRoutes)
 
 // CONNECT TO DATABASE
 mongoose.connect(process.env.MONGO_URI)
