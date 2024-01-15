@@ -14,15 +14,14 @@ const StyledCategoryBox = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    font-size: 18px;
+    font-size: 1.5vm;
     font-weight: bold;
     color: white;
     border-radius: 5%;
     transition: .3s;
-    height: 150px;
-    width: 150px;
-  margin-top: 300px;
+    width: 95%;
+    aspect-ratio: 1 / 1;
+    padding: 2.5%;
     animation: ${sparkleAnimation} 40s infinite;
 `
 

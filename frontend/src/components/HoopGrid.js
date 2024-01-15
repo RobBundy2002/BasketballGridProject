@@ -1,17 +1,15 @@
 import React from "react";
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import { StyledHoopGrid } from "./styles/StyledHoopGrid";
+import { StyledRightSide } from "./styles/StyledRightSide";
 import RarityBox from "./RarityBox";
-import CategoryGrid from "./CategoryGrid";
 import InputBox from "./InputBox";
-import SchoolGrid from "./SchoolGrid";
 import { StyledContainer } from "./styles/StyledContainer";
 import { StyledSearchBar } from "./styles/StyledSearchBar";
+import { StyledHoopGrid } from "./styles/StyledHoopGrid";
 import TextBox from "./TextBox";
 import { generateSearchTerms } from "./GetPlayers";
 import Dropdown from "./Dropdown";
-import { StyledInputGrid } from "./styles/StyledInputGrid";
 import { useInitialize00 } from "../states/row0column0";
 import { useInitialize10 } from "../states/row1column0";
 import { useInitialize20 } from "../states/row2column0";
@@ -21,11 +19,14 @@ import { useInitialize21 } from "../states/row2column1";
 import { useInitialize02 } from "../states/row0column2";
 import { useInitialize12 } from "../states/row1column2";
 import { useInitialize22 } from "../states/row2column2";
-import { StyledSearchBarContainer } from "./styles/StyledSearchBarContainer";
+import { StyledLeftSide } from "./styles/StyledLeftSide";
 import { StyledVictoryMessage} from "./styles/StyledVictoryMessage";
 import ReactDOM from 'react-dom';
+import CategoryBox from "./CategoryBox";
+import SchoolBox from "./SchoolBox";
 
 const HoopGrid = () => {
+
     // ARRAY OF IMAGE LINKS
     const [selectedImages, setSelectedImages] = useState([]);
     
@@ -237,7 +238,7 @@ const HoopGrid = () => {
 
     return (
         <StyledContainer>
-            <StyledSearchBarContainer>
+            <StyledLeftSide>
                 {searchVisible00 && (
                     <StyledSearchBar>
                         <TextBox value={searchTerm00} setValue={setSearchTerm00} searchTerms={searchTerms} setSearchResults={setSearchResults00} setDropdownVisible={setDropdownVisible00}></TextBox>
@@ -292,23 +293,27 @@ const HoopGrid = () => {
                         {dropdownVisible22 && searchResults22.length > 0 && (<Dropdown searchResults={searchResults22} handleDropdownItemClicked={handleDropdownItemClicked} row={2} column={2}></Dropdown>)}
                     </StyledSearchBar>
                 )}
-            </StyledSearchBarContainer>
-            <StyledHoopGrid>
-                <RarityBox rarity={"Rarity"}></RarityBox>
-                <CategoryGrid categories={selectedCategories}></CategoryGrid>
-                <SchoolGrid schools={selectedImages}></SchoolGrid>
-                <StyledInputGrid>
+            </StyledLeftSide>
+            <StyledRightSide>
+                <StyledHoopGrid>
+                    <RarityBox rarity={"Rarity"}></RarityBox>
+                    <CategoryBox category={selectedCategories[0]}></CategoryBox>
+                    <CategoryBox category={selectedCategories[1]}></CategoryBox>
+                    <CategoryBox category={selectedCategories[2]}></CategoryBox>
+                    <SchoolBox image={selectedImages[0]}></SchoolBox>
                     <InputBox row={0} column={0} answers={answers[0]} guess={guess00} setSearchVisible={setSearchVisible00} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
                     <InputBox row={0} column={1} answers={answers[1]} guess={guess01} setSearchVisible={setSearchVisible01} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
                     <InputBox row={0} column={2} answers={answers[2]} guess={guess02} setSearchVisible={setSearchVisible02} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <SchoolBox image={selectedImages[1]}></SchoolBox>
                     <InputBox row={1} column={0} answers={answers[0]} guess={guess10} setSearchVisible={setSearchVisible10} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
                     <InputBox row={1} column={1} answers={answers[1]} guess={guess11} setSearchVisible={setSearchVisible11} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
                     <InputBox row={1} column={2} answers={answers[2]} guess={guess12} setSearchVisible={setSearchVisible12} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <SchoolBox image={selectedImages[2]}></SchoolBox>
                     <InputBox row={2} column={0} answers={answers[0]} guess={guess20} setSearchVisible={setSearchVisible20} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
                     <InputBox row={2} column={1} answers={answers[1]} guess={guess21} setSearchVisible={setSearchVisible21} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
                     <InputBox row={2} column={2} answers={answers[2]} guess={guess22} setSearchVisible={setSearchVisible22} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
-                </StyledInputGrid>
-            </StyledHoopGrid>
+                </StyledHoopGrid>
+            </StyledRightSide>
         </StyledContainer>
     );
 }

@@ -6,15 +6,14 @@ const StyledSchoolBox = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    font-size: 18px;
+    font-size: 1.5vm;
     font-weight: bold;
     justify-content: center;
     border-radius: 5%;
     transition: .3s;
-    height: 150px;
-    width: 150px;
-    margin: 5px;
+    width: 95%;
+    aspect-ratio: 1 / 1;
+    padding: 2.5%;
     img {
         max-width: 100%;
         max-height: 100%;
