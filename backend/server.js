@@ -19,10 +19,10 @@ app.use((req, res, next) => {
 })
 
 // CORS MIDDLEWARE
-app.use(cors({
-    // SET THE ORIGIN TO YOUR FRONTEND'S URL
-    origin: 'https://matrix-madness-frontend.onrender.com',
-}));
+// app.use(cors({
+//     // SET THE ORIGIN TO YOUR FRONTEND'S URL
+//     origin: 'https://matrix-madness-frontend.onrender.com',
+// }));
 
 // ROUTES
 app.use('/api/matrix', matrixRoutes)

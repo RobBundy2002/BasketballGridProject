@@ -2,21 +2,22 @@ import React from "react";
 import styled from 'styled-components';
 
 const StyledDropdown = styled.div`
-    left: 0;
-    right: 0;
-    max-height: 212px;
     overflow-y: auto;
+    width: 100%;
 `
 
 const StyledDropdownBox = styled.div`
-    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    width: 100%;
     cursor: pointer;
     font-family: Georgia, serif;
     font-style: italic;
     color: white;
-    border-radius: 5px;
     background: #ff3333;
-    border: 1px solid white;
+    border: 1px solid #cc0000;
 `
 
 const Dropdown = ({ searchResults, handleDropdownItemClicked, row, column}) => (

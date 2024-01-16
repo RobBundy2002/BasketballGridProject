@@ -210,7 +210,8 @@ const HoopGrid = () => {
         const fetchMatrix = async () => {
             const currentDate = new Date()
             const month = currentDate.getMonth()+1
-            const response = await fetch('https://matrix-madness-backend.onrender.com/api/matrix/' + currentDate.getFullYear() + '/' + month + '/' + currentDate.getDate())
+            // const response = await fetch('https://matrix-madness-backend.onrender.com/api/matrix/' + currentDate.getFullYear() + '/' + month + '/' + currentDate.getDate())
+            const response = await fetch('/api/matrix/' + currentDate.getFullYear() + '/' + month + '/' + currentDate.getDate())
             const json = await response.json()
             if (!response.ok) {
                 console.log("Error Fetching Matrix")

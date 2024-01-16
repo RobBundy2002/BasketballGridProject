@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   flex: 1;
+  /* min-width: 624px; */
 }
 html, body {
   margin: 0;

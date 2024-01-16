@@ -2,23 +2,36 @@ import React from "react";
 import styled from 'styled-components';
 
 const StyledTextBox = styled.input`
-    border: none;
-    outline: none;
-    width: 100%;
-    background-color: transparent;
+    display: block;
     color: white;
-    font-size: 16px;
+    background-color: #ff3333;
+    border-radius: 5%;
+    block-size: 5%;
+    outline: none;
+    text-align: center;
+    width: 60%;
+    transition: 0.5s;
+    min-height: 30px;
+    font-family: Georgia, serif;
     font-style: italic;
   
     &::placeholder {
         color: white;
+    }
+
+    &:hover {
+        width: 80%;
+    }
+    
+    &:focus {
+        width: 100%;
     }
 `
 
 const TextBox = ({ value, setValue, searchTerms, setSearchResults, setDropdownVisible }) => (
     <StyledTextBox 
         type="text" 
-        placeholder="Search..."
+        placeholder="Search Player Database..."
         value={value}
         onChange={(e) => {
             const searchTerm = e.target.value;
