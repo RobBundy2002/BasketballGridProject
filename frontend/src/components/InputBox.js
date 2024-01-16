@@ -23,7 +23,7 @@ const InputBox = ({ row, column, answers, guess, searchVisible, setSearchVisible
     const clicked = () => {
         clearSearches();
         hideSearches();
-        setSearchVisible(true);
+        setSearchVisible(!searchVisible);
         console.log(answers[row]);
     };
 
