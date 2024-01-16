@@ -302,17 +302,17 @@ const HoopGrid = () => {
                     <CategoryBox category={selectedCategories[1]}></CategoryBox>
                     <CategoryBox category={selectedCategories[2]}></CategoryBox>
                     <SchoolBox image={selectedImages[0]}></SchoolBox>
-                    <InputBox row={0} column={0} answers={answers[0]} guess={guess00} setSearchVisible={setSearchVisible00} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
-                    <InputBox row={0} column={1} answers={answers[1]} guess={guess01} setSearchVisible={setSearchVisible01} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
-                    <InputBox row={0} column={2} answers={answers[2]} guess={guess02} setSearchVisible={setSearchVisible02} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={0} column={0} answers={answers[0]} guess={guess00} searchVisible={searchVisible00} setSearchVisible={setSearchVisible00} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={0} column={1} answers={answers[1]} guess={guess01} searchVisible={searchVisible01} setSearchVisible={setSearchVisible01} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={0} column={2} answers={answers[2]} guess={guess02} searchVisible={searchVisible02} setSearchVisible={setSearchVisible02} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
                     <SchoolBox image={selectedImages[1]}></SchoolBox>
-                    <InputBox row={1} column={0} answers={answers[0]} guess={guess10} setSearchVisible={setSearchVisible10} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
-                    <InputBox row={1} column={1} answers={answers[1]} guess={guess11} setSearchVisible={setSearchVisible11} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
-                    <InputBox row={1} column={2} answers={answers[2]} guess={guess12} setSearchVisible={setSearchVisible12} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={1} column={0} answers={answers[0]} guess={guess10} searchVisible={searchVisible10} setSearchVisible={setSearchVisible10} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={1} column={1} answers={answers[1]} guess={guess11} searchVisible={searchVisible11} setSearchVisible={setSearchVisible11} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={1} column={2} answers={answers[2]} guess={guess12} searchVisible={searchVisible12} setSearchVisible={setSearchVisible12} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
                     <SchoolBox image={selectedImages[2]}></SchoolBox>
-                    <InputBox row={2} column={0} answers={answers[0]} guess={guess20} setSearchVisible={setSearchVisible20} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
-                    <InputBox row={2} column={1} answers={answers[1]} guess={guess21} setSearchVisible={setSearchVisible21} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
-                    <InputBox row={2} column={2} answers={answers[2]} guess={guess22} setSearchVisible={setSearchVisible22} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={2} column={0} answers={answers[0]} guess={guess20} searchVisible={searchVisible20} setSearchVisible={setSearchVisible20} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={2} column={1} answers={answers[1]} guess={guess21} searchVisible={searchVisible21} setSearchVisible={setSearchVisible21} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
+                    <InputBox row={2} column={2} answers={answers[2]} guess={guess22} searchVisible={searchVisible22} setSearchVisible={setSearchVisible22} clearSearches={clearAllSearches} hideSearches={hideAllSearches}></InputBox>
                 </StyledHoopGrid>
             </StyledRightSide>
         </StyledContainer>

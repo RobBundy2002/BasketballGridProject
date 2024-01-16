@@ -2,7 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 
 const StyledInputBox = styled.div`
-    background-color: #ff3333;
+    background-color: ${props => props.searchVisible ? '#cc0000' : '#ff3333'};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,7 +18,7 @@ const StyledInputBox = styled.div`
     padding: 2.5%;
 `
 
-const InputBox = ({ row, column, answers, guess, setSearchVisible, clearSearches, hideSearches }) => {
+const InputBox = ({ row, column, answers, guess, searchVisible, setSearchVisible, clearSearches, hideSearches }) => {
 
     const clicked = () => {
         clearSearches();
@@ -28,7 +28,7 @@ const InputBox = ({ row, column, answers, guess, setSearchVisible, clearSearches
     };
 
     return (
-        <StyledInputBox onClick={clicked}>{guess}</StyledInputBox>
+        <StyledInputBox searchVisible={searchVisible} onClick={clicked}>{guess}</StyledInputBox>
     );
 };
 
