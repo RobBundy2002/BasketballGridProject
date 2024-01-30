@@ -3,6 +3,7 @@ import HoopGrid from './components/HoopGrid';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Navbar from './components/Navbar'
 import { useEffect, useState } from 'react';
+import Homepage from './components/Homepage';
 
 function App() {
   const [dateList, setDateList] = useState([]);
@@ -28,6 +29,13 @@ function App() {
         currentDate.setDate(currentDate.getDate() + 1);
       }
 
+      const dateObject = {
+        day: today.getDate(),
+        month: today.getMonth() + 1,
+        year: today.getFullYear()
+      }
+      dates.push(dateObject);
+
       setDateList(dates);
     };
 
@@ -40,6 +48,10 @@ function App() {
             <Navbar />
             <div className='pages'>
               <Routes>
+                <Route 
+                  path={`/`}
+                  element={<Homepage></Homepage>}
+                />
                 {dateList.map((date, index) => (
                   <Route 
                     key={index}

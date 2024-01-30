@@ -45,9 +45,8 @@ const Navbar = () => {
     return (
         <Header>
             <div>
-                <img alt="Basketball Logo" src={process.env.PUBLIC_URL + '/MatrixMadnessLogo.png'} />
                 <Link to="/">
-                    Matrix Madness
+                    <img alt="Basketball Logo" src={process.env.PUBLIC_URL + '/MatrixMadnessFullLogo.png'} />
                 </Link>
             </div>
         </Header>
