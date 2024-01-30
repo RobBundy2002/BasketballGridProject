@@ -25,7 +25,7 @@ import ReactDOM from 'react-dom';
 import CategoryBox from "./CategoryBox";
 import SchoolBox from "./SchoolBox";
 
-const HoopGrid = () => {
+const HoopGrid = ({ date }) => {
 
     // ARRAY OF IMAGE LINKS
     const [selectedImages, setSelectedImages] = useState([]);
@@ -208,10 +208,8 @@ const HoopGrid = () => {
     useEffect(() => {
         //GENERATING GRID & SETTING UI
         const fetchMatrix = async () => {
-            const currentDate = new Date()
-            const month = currentDate.getMonth()+1
-            const response = await fetch('https://matrix-madness-backend.onrender.com/api/matrix/' + currentDate.getFullYear() + '/' + month + '/' + currentDate.getDate())
-            // const response = await fetch('/api/matrix/' + currentDate.getFullYear() + '/' + month + '/' + currentDate.getDate())
+            //const response = await fetch('https://matrix-madness-backend.onrender.com/api/matrix/' + currentDate.getFullYear() + '/' + month + '/' + currentDate.getDate())
+            const response = await fetch('/api/matrix/' + date.year + '/' + date.month + '/' + date.day)
             const json = await response.json()
             if (!response.ok) {
                 console.log("Error Fetching Matrix")

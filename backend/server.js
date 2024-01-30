@@ -4,7 +4,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const matrixRoutes = require('./routes/matrix')
 const cron = require('node-cron');
-const cors = require('cors');
+// const cors = require('cors');
 const { createMatrix } = require('./controllers/matrixController')
 
 // EXPRESS APP
@@ -19,10 +19,10 @@ app.use((req, res, next) => {
 })
 
 // CORS MIDDLEWARE
-app.use(cors({
-    // SET THE ORIGIN TO YOUR FRONTEND'S URL
-    origin: 'https://matrix-madness-frontend.onrender.com',
-}));
+// app.use(cors({
+//     // SET THE ORIGIN TO YOUR FRONTEND'S URL
+//     origin: 'https://matrix-madness-frontend.onrender.com',
+// }));
 
 // ROUTES
 app.use('/api/matrix', matrixRoutes)
