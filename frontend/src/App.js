@@ -15,6 +15,7 @@ function App() {
 
       const dates = [];
       let currentDate = startDate;
+      currentDate.setDate(currentDate.getDate() + 1);
 
       while (currentDate <= today) {
         const dateObject = {
@@ -36,7 +37,7 @@ function App() {
       }
       dates.push(dateObject);
 
-      setDateList(dates);
+      setDateList([...dates].reverse());
     };
 
     generateDateList();
@@ -45,7 +46,7 @@ function App() {
   return (
       <div className="App">
           <BrowserRouter>
-            <Navbar />
+            <Navbar dates={dateList}/>
             <div className='pages'>
               <Routes>
                 <Route 
