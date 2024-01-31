@@ -58,13 +58,14 @@ const HoopGrid = ({ date }) => {
         const cookies = userCookies;
         cookies[key] = data;
 
-        const midnight = new Date();
-        midnight.setHours(24, 0, 0, 0);
-        Cookies.set('guesses', JSON.stringify(userCookies), { expires: midnight });
+        const expirationDate = new Date();
+        expirationDate.setMonth(expirationDate.getMonth() + 1); // Set expiration date to be two months from now
+
+        Cookies.set('guesses.' + date.year + '.' + date.month + '.' + date.day, JSON.stringify(userCookies), { expires: expirationDate });
         console.log(userCookies);
     };
 
-    // SET COOKIE DATA
+    // SET COOKIE DATA TO FRONTEND
     const getDataFromCookie = (cookieData) => {
         console.log("Cookies", cookieData);
         if (cookieData.guess00){
@@ -223,12 +224,12 @@ const HoopGrid = ({ date }) => {
                 };
                 setSelectedImages(removeSpaces(json.images));
             }
-        }  
+        }   
 
         fetchMatrix()
         
         // CHECKING IF THERE ARE ANY COOKIES AND SETTING THEM
-        const storedUserCookies = Cookies.get('guesses');
+        const storedUserCookies = Cookies.get('guesses.' + date.year + '.' + date.month + '.' + date.day);
         if(storedUserCookies){
             setUserCookies(JSON.parse(storedUserCookies));
             getDataFromCookie(JSON.parse(storedUserCookies));

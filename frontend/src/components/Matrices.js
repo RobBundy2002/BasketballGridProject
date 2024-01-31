@@ -9,11 +9,12 @@ const Matrices = ({ dates }) => {
   };
 
   const Button = styled.button`
-    background-color: #3498db;
+    background-color: #3569cf;
     color: #fff;
     border: none;
     cursor: pointer;
     height: 75%;
+    border-radius: 10%;
   `;
 
   const Dropdown = styled.div`
@@ -48,7 +49,7 @@ const Matrices = ({ dates }) => {
   return (
     <Entire>
       <Button onClick={toggleDropdown}>
-        Matrices
+        More Days ▼
       </Button>
       {isDropdownOpen && (
         <Dropdown>
