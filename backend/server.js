@@ -30,25 +30,6 @@ app.use('/api/matrix', matrixRoutes)
 // CONNECT TO DATABASE
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
-        // SCHEDULED FUNCTION AT 11PM
-        cron.schedule('0 23 * * *', () => {
-            console.log("Running Daily ", new Date())
-            const today = new Date();
-            const tomorrow = new Date();
-            tomorrow.setDate(today.getDate() + 1)
-            const mockRequest = { body: { month: tomorrow.getMonth()+1, day: tomorrow.getDate(), year: tomorrow.getFullYear() } };
-            const mockResponse = {
-                status: (code) => ({
-                    json: (data) => console.log(`Response: ${code}`, data),
-                }),
-            };
-            try {
-                createMatrix(mockRequest, mockResponse);
-            } catch (error) {
-                console.error("Error in createMatrix:", error);
-            }
-        });
-
         // LISTEN FOR REQUESTS
         app.listen(process.env.PORT, () => {
             console.log('Connected to db & listening on port', process.env.PORT);
