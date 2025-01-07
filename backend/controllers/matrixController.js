@@ -51,8 +51,8 @@ const createMatrix = async (req, res) => {
     
         // SELECT 3 RANDOM SCHOOLS
         const shuffledSchools = schoolNames.sort(() => Math.random() - 0.5)
-        // schools = shuffledSchools.slice(0, 3)
-        schools = ["Virginia", "Duke", "UNC"]
+        schools = shuffledSchools.slice(0, 3)
+        // schools = ["Virginia", "Duke", "UNC"]
     
         // SELECT 3 RANDOM CATEGORIES
         const shuffledAttributes = categoriesList.sort(() => Math.random() - 0.5)
