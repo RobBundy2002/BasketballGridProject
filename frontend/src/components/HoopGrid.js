@@ -298,7 +298,7 @@ const HoopGrid = () => {
             </StyledLeftSide>
             <StyledRightSide>
                 <StyledHoopGrid>
-                    <RarityBox rarity={"Rarity"}></RarityBox>
+                    <RarityBox rarity={""}></RarityBox>
                     <CategoryBox category={selectedCategories[0]}></CategoryBox>
                     <CategoryBox category={selectedCategories[1]}></CategoryBox>
                     <CategoryBox category={selectedCategories[2]}></CategoryBox>
