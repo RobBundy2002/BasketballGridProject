@@ -51,7 +51,8 @@ const createMatrix = async (req, res) => {
     
         // SELECT 3 RANDOM SCHOOLS
         const shuffledSchools = schoolNames.sort(() => Math.random() - 0.5)
-        schools = shuffledSchools.slice(0, 3)
+        // schools = shuffledSchools.slice(0, 3)
+        schools = ["Virginia", "Duke", "UNC"]
     
         // SELECT 3 RANDOM CATEGORIES
         const shuffledAttributes = categoriesList.sort(() => Math.random() - 0.5)
@@ -62,96 +63,96 @@ const createMatrix = async (req, res) => {
             let attribute = attributes[i];
             // SEASON AVERAGES
             if (attribute === "+ Points Per Game (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'points_per_game', numbers, 10, 20, schools, i, 3, 5);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'points_per_game', numbers, 10, 20, schools, i, 3, 25);
             }
             else if (attribute === "+ Rebounds Per Game (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'rebounds_per_game', numbers, 5, 10, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'rebounds_per_game', numbers, 5, 10, schools, i, 25);
             }
             else if (attribute === "+ Assists Per Game (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'assists_per_game', numbers, 4, 10, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'assists_per_game', numbers, 4, 10, schools, i, 25);
             }
             else if (attribute === "+ Blocks Per Game (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'blocks_per_game', numbers, 1, 3, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'blocks_per_game', numbers, 1, 3, schools, i, 25);
             }
             else if (attribute === "+ Steals Per Game (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'steals_per_game', numbers, 1, 3, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'steals_per_game', numbers, 1, 3, schools, i, 25);
             }
             else if (attribute === "+ Minutes Per Game (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'minutes_per_game', numbers, 25, 40, schools, i, 3, 5);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'minutes_per_game', numbers, 25, 40, schools, i, 3, 25);
             }
             else if (attribute === "+ FG Made Per Game (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'fg_per_game', numbers, 4, 8, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'fg_per_game', numbers, 4, 8, schools, i, 25);
             }
             else if (attribute === "%+ FG Percentage (Season)"){
-                invalid = invalid || checkValidStatsCategoryPercentage(answer, 'season_averages', 'fg_percentage', numbers, 45, 60, schools, i, 3, 5);
+                invalid = invalid || checkValidStatsCategoryPercentage(answer, 'season_averages', 'fg_percentage', numbers, 45, 60, schools, i, 3, 25);
             }
             else if (attribute === "+ 3PT Made Per Game (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'three_point_per_game', numbers, 2, 5, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'three_point_per_game', numbers, 2, 5, schools, i, 25);
             }
             else if (attribute === "%+ 3PT Percentage (Season)"){
-                invalid = invalid || checkValidStatsCategoryPercentage(answer, 'season_averages', 'three_point_percentage', numbers, 35, 45, schools, i, 3, 5);
+                invalid = invalid || checkValidStatsCategoryPercentage(answer, 'season_averages', 'three_point_percentage', numbers, 35, 45, schools, i, 3, 25);
             }
             else if (attribute === "+ FT Made Per Game (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'ft_per_game', numbers, 4, 10, schools, i, 3, 2);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'ft_per_game', numbers, 4, 10, schools, i, 3, 25);
             }
             else if (attribute === "%+ FT Percentage (Season)"){
-                invalid = invalid || checkValidStatsCategoryPercentage(answer, 'season_averages', 'ft_percentage', numbers, 75, 90, schools, i, 3, 5);
+                invalid = invalid || checkValidStatsCategoryPercentage(answer, 'season_averages', 'ft_percentage', numbers, 75, 90, schools, i, 3, 25);
             }
             else if (attribute === "+ Turnovers Per Game (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'turnovers_per_game', numbers, 1, 3, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'turnovers_per_game', numbers, 1, 3, schools, i, 25);
             }
             else if (attribute === "+ Fouls Per Game (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'fouls_per_game', numbers, 2, 4, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_averages', 'fouls_per_game', numbers, 2, 4, schools, i, 25);
             }
             // CAREER AVERAGES
             else if (attribute === "+ Minutes Per Game (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'minutes_per_game', numbers, 25, 40, schools, i, 3, 5);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'minutes_per_game', numbers, 25, 40, schools, i, 3, 25);
             }
             else if (attribute === "+ FG Made Per Game (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'fg_per_game', numbers, 4, 8, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'fg_per_game', numbers, 4, 8, schools, i, 25);
             }
             else if (attribute === "%+ FG Percentage (Career)"){
-                invalid = invalid || checkValidStatsCategoryPercentage(answer, 'career_averages', 'fg_percentage', numbers, 45, 60, schools, i, 3, 5);
+                invalid = invalid || checkValidStatsCategoryPercentage(answer, 'career_averages', 'fg_percentage', numbers, 45, 60, schools, i, 3, 25);
             }
             else if (attribute === "+ 3PT Made Per Game (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'three_point_per_game', numbers, 2, 5, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'three_point_per_game', numbers, 2, 5, schools, i, 25);
             }
             else if (attribute === "%+ 3PT Percentage (Career)"){
-                invalid = invalid || checkValidStatsCategoryPercentage(answer, 'career_averages', 'three_point_percentage', 35, 45, schools, i, 3, 5);
+                invalid = invalid || checkValidStatsCategoryPercentage(answer, 'career_averages', 'three_point_percentage', 35, 45, schools, i, 3, 25);
             }
             else if (attribute === "+ FT Made Per Game (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'ft_per_game', numbers, 4, 10, schools, i, 3, 2);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'ft_per_game', numbers, 4, 10, schools, i, 3, 25);
             }
             else if (attribute === "%+ FT Percentage (Career)"){
-                invalid = invalid || checkValidStatsCategoryPercentage(answer, 'career_averages', 'ft_percentage', numbers, 75, 90, schools, i, 3, 5);
+                invalid = invalid || checkValidStatsCategoryPercentage(answer, 'career_averages', 'ft_percentage', numbers, 75, 90, schools, i, 3, 25);
             }
             else if (attribute === "+ Turnovers Per Game (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'turnovers_per_game', numbers, 1, 3, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'turnovers_per_game', numbers, 1, 3, schools, i, 25);
             }
             else if (attribute === "+ Fouls Per Game (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'fouls_per_game', numbers, 2, 4, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'fouls_per_game', numbers, 2, 4, schools, i, 25);
             }
             else if (attribute === "+ Points Per Game (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'points_per_game', numbers, 10, 20, schools, i, 3, 5);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'points_per_game', numbers, 10, 20, schools, i, 3, 25);
             }
             else if (attribute === "+ Rebounds Per Game (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'rebounds_per_game', numbers, 5, 10, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'rebounds_per_game', numbers, 5, 10, schools, i, 25);
             }
             else if (attribute === "+ Assists Per Game (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'assists_per_game', numbers, 4, 10, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'assists_per_game', numbers, 4, 10, schools, i, 25);
             }
             else if (attribute === "+ Blocks Per Game (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'blocks_per_game', numbers, 1, 3, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'blocks_per_game', numbers, 1, 3, schools, i, 25);
             }
             else if (attribute === "+ Steals Per Game (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'steals_per_game', numbers, 1, 3, schools, i, 3);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_averages', 'steals_per_game', numbers, 1, 3, schools, i, 25);
             }
             // SEASON TOTALS
             else if (attribute === "+ Games Played (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_totals', 'games_played', numbers, 30, 40, schools, i, 3, 5);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_totals', 'games_played', numbers, 30, 40, schools, i, 3, 25);
             }
             else if (attribute === "+ Games Started (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_totals', 'games_started', numbers, 30, 40, schools, i, 3, 5);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_totals', 'games_started', numbers, 30, 40, schools, i, 3, 25);
             }
             else if (attribute === "+ Minutes Played (Season)"){
                 invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_totals', 'minutes_played', numbers, 800, 1200, schools, i, 3, 100);
@@ -160,7 +161,7 @@ const createMatrix = async (req, res) => {
                 invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_totals', 'field_goals_made', numbers, 100, 500, schools, i, 3, 100);
             }
             else if (attribute === "+ 3pt Made (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_totals', 'three_point_made', numbers, 50, 100, schools, i, 3, 10);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_totals', 'three_point_made', numbers, 50, 100, schools, i, 3, 25);
             }
             else if (attribute === "+ Free Throws Made (Season)"){
                 invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_totals', 'free_throws_made', numbers, 50, 150, schools, i, 3, 50);
@@ -172,10 +173,10 @@ const createMatrix = async (req, res) => {
                 invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_totals', 'assists', numbers, 150, 300, schools, i, 3, 25);
             }
             else if (attribute === "+ Steals (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_totals', 'steals', numbers, 40, 100, schools, i, 3, 20);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_totals', 'steals', numbers, 40, 100, schools, i, 3, 25);
             }
             else if (attribute === "+ Blocks (Season)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_totals', 'blocks', numbers, 40, 100, schools, i, 3, 20);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_totals', 'blocks', numbers, 40, 100, schools, i, 3, 25);
             }
             else if (attribute === "+ Turnovers (Season)"){
                 invalid = invalid || checkValidStatsCategoryInteger(answer, 'season_totals', 'turnovers', numbers, 50, 100, schools, i, 3, 25);
@@ -188,10 +189,10 @@ const createMatrix = async (req, res) => {
             }
             // CAREER TOTALS
             else if (attribute === "+ Games Played (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_totals', 'games_played', numbers, 30, 40, schools, i, 3, 5);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_totals', 'games_played', numbers, 30, 40, schools, i, 3, 25);
             }
             else if (attribute === "+ Games Started (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_totals', 'games_started', numbers, 30, 40, schools, i, 3, 5);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_totals', 'games_started', numbers, 30, 40, schools, i, 3, 25);
             }
             else if (attribute === "+ Minutes Played (Career)"){
                 invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_totals', 'minutes_played', numbers, 800, 1200, schools, i, 3, 100);
@@ -200,7 +201,7 @@ const createMatrix = async (req, res) => {
                 invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_totals', 'field_goals_made', numbers, 100, 500, schools, i, 3, 100);
             }
             else if (attribute === "+ 3pt Made (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_totals', 'three_point_made', numbers, 50, 100, schools, i, 3, 10);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_totals', 'three_point_made', numbers, 50, 100, schools, i, 3, 25);
             }
             else if (attribute === "+ Free Throws Made (Career)"){
                 invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_totals', 'free_throws_made', numbers, 50, 150, schools, i, 3, 50);
@@ -212,10 +213,10 @@ const createMatrix = async (req, res) => {
                 invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_totals', 'assists', numbers, 150, 300, schools, i, 3, 25);
             }
             else if (attribute === "+ Steals (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_totals', 'steals', numbers, 40, 100, schools, i, 3, 20);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_totals', 'steals', numbers, 40, 100, schools, i, 3, 25);
             }
             else if (attribute === "+ Blocks (Career)"){
-                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_totals', 'blocks', numbers, 40, 100, schools, i, 3, 20);
+                invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_totals', 'blocks', numbers, 40, 100, schools, i, 3, 25);
             }
             else if (attribute === "+ Turnovers (Career)"){
                 invalid = invalid || checkValidStatsCategoryInteger(answer, 'career_totals', 'turnovers', numbers, 50, 100, schools, i, 3, 25);
@@ -371,7 +372,7 @@ const createMatrix = async (req, res) => {
                         const hasDraft = player['drafted'];
                         return hasSchool && hasDraft;
                     })
-                    if (playerOptions.length < 5) {
+                    if (playerOptions.length < 10) {
                         //INVALID GRID
                         invalid = true;
                     }
